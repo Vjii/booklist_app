@@ -1,0 +1,11 @@
+{
+  "name": "booklist_app",
+  "version": "1.0.0",
+  "description": "Web application for sharing one's list of favorite books. ",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jan Pilik",
+  "license": "ISC"
+}
