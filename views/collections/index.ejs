@@ -1,0 +1,21 @@
+<h1>USERS </h1>
+
+<% collections.forEach(function(collection) { %>
+	<div>
+		<h3><%= collection.author.username %>'s Book Collection' </h3>
+		<img src="<%= collection.author.image%>">
+		<p>
+			<a href="/collections/<%= collection._id%>">View the collection</a>
+		</p>
+
+			<!-- <% collection.books.forEach(function(book) { %>
+				<h1><%= book.title%></h1>
+				<img src="<%= book.image %>">
+				<h3><%= book.description%></h3>
+			<% })%> -->
+
+		<p>
+			<%= collection.description%>
+		</p>
+	</div>
+<% }); %>
