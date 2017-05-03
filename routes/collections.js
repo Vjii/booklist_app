@@ -1,7 +1,8 @@
 var express = require("express"),
 router = express.Router(),
 Collection = require("../models/collection"),
-User = require("../models/user");
+User = require("../models/user"),
+Book = require("../models/book");
 
 
 
@@ -17,12 +18,14 @@ router.get("/", function(req, res) {
 });
 
 
-//Collections New Route
-router.get("/new", function(req, res) {
-
-	res.render("collections/new");
-
+//Collections - Show Route
+router.get("/:id", function(req, res) {
+	var id = req.params.id
+	Collection.findById(id).populate("books").exec(function(err, collection){
+		res.render("collections/show", {collection: collection});
+	});
 });
+
 
 
 

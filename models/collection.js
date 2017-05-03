@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
 var User = require("./user");
+var Book = require("./book");
 
 var CollectionSchema = new mongoose.Schema({
 	author: {
@@ -11,8 +12,10 @@ var CollectionSchema = new mongoose.Schema({
 		image: String
 	},
 	books: [
-		{title: String, image: String, description: String}
-
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "Book"
+		}
 	],
 	description: String,
 });

@@ -1,12 +1,21 @@
-<h1>
-	<%= collection.author.username %>'s Book Collection
-	<p><img src="<%= collection.author.image%>"></p>
-</h1>
+<% include ../partials/header %>
+	<h1>
+		<%= collection.author.username %>'s Book Collection
+		<p><img src="<%= collection.author.image%>"></p>
+		<p><a href="/collections/<%= collection._id%>/books/new">Add a new book</a></p>
+	</h1>
 
-<% collection.books.forEach(function(book) { %>
-	<h3><%= book.title %></h3>
-	<img src="<%= book.image %>">
-	<p><%= book.description%></p>
-<% }); %>
+	<% collection.books.forEach(function(book) { %>
+		<h3><%= book.title %></h3>
+		<img src="<%= book.image %>">
+		<p><%= book.description%></p>
+		<a href="/collections/<%= collection._id%>/books/<%= book._id%>/edit">Edit position</a>
+		<form action="/collections/<%= collection._id%>/books/<%= book._id%>?_method=DELETE" method="POST">
+			<button>Delete position</button>
+		</form>
+	<% }); %>
+<% include ../partials/footer %>
+
+
 
 
