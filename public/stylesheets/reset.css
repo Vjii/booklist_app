@@ -46,3 +46,15 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+/*  Custom resets */
+
+button,
+input,
+textarea,
+form {
+	margin: 0;
+	padding: 0;
+	background: none;
+	border: none;
+}

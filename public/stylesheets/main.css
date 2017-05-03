@@ -1,4 +1,125 @@
-.image {
-	width: 100%;
 
+/* ======= "_small" - small modifier value ======= */
+/* ======= "_medium" - medium modifier value ======= */
+/* ======= "_large" - big modifier value ======= */
+
+/* ======= Block - Container ===== */
+
+body {
+	font-family: 'Didact Gothic', sans-serif;
+}
+
+/* ======= Block - Header ======= */
+.header {
+	height: 3rem;
+	padding: 10px;
+}
+
+	.header_background {
+		background: rgb(13,13,13); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(13,13,13,1) 46%, rgba(1,1,1,1) 50%, rgba(10,10,10,1) 53%, rgba(78,78,78,1) 76%, rgba(56,56,56,1) 87%, rgba(5,5,5,1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(13,13,13,1) 46%,rgba(1,1,1,1) 50%,rgba(10,10,10,1) 53%,rgba(78,78,78,1) 76%,rgba(56,56,56,1) 87%,rgba(5,5,5,1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(13,13,13,1) 46%,rgba(1,1,1,1) 50%,rgba(10,10,10,1) 53%,rgba(78,78,78,1) 76%,rgba(56,56,56,1) 87%,rgba(5,5,5,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0d0d0d', endColorstr='#050505',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+	}
+
+/* ======= Block - Image ======= */
+.image {
+	margin: 0 auto;
+	max-height: 250px;
+}
+
+	.image {
+		width: 90%;
+	}
+
+		.image_rounded {
+			border-radius: 5px;
+		}
+
+/* ======= Block - Button ======= */
+.button {
+	width: 12.5rem;
+  padding: 5px;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #239239;
+}
+
+	.button__delete {
+		background-color: red;
+	}
+
+	.button_margin_small {
+		margin: 10px 0;
+	}
+
+/* ======= Block - Form ======= */
+
+	.form {
+		box-shadow: 0 0 5px 2.5px #ccc;
+	}
+
+		.form__input {
+			width: 12.5rem;
+			padding: 5px;
+			border: 1px solid #ccc;
+		}
+
+		.form__button_fit {
+
+				width: calc(8rem);
+			}
+
+			.form_rounded {
+				border-radius: 5px;
+			}
+
+
+
+
+/* ======= Block - Heading ======= */
+
+	.heading__title {
+		font-size: 1.125rem;
+	}
+
+		.heading_margin_small {
+			margin: 10px 0;
+		}
+
+		.heading_center {
+			text-align: center;
+		}
+
+		.heading_size_large {
+			font-size: 1.25rem;
+		}
+
+		.heading_white {
+			color: #fff;
+		}
+
+
+
+/* ======= Modifier - Margin ======= */
+	.vertical_margin_mini {
+		margin: 5px 0;
+	}
+
+	.vertical_margin_small {
+		margin: 10px 0;
+	}
+
+/* ======= Modifier - Padding ======= */
+
+.padding_small {
+		padding: 10px 0;
+	}
+
+
+
+
+@media screen (min-height: 780px) {
+	/* ======= Block - Nav ======= */
 }

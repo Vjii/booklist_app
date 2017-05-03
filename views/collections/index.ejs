@@ -1,21 +1,22 @@
 <% include ../partials/header %>
 
-	<div class="container">
 
 		<div class="row">
 				<% collections.forEach(function(collection) { %>
 					<div class="col">
-					<h3><%= collection.author.username %>'s Book Collection </h3>
-					<img class="image" src="<%= collection.author.image%>">
-					<p>
-						<a href="/collections/<%= collection._id%>">View the collection</a>
-					</p>
-					<p>
-						<%= collection.description%>
-					</p>
+						<h3 class="heading_margin_small"><%= collection.author.username %>'s Book Collection </h3>
+						<img class="image image_rounded" src="<%= collection.author.image%>">
+						<a href="/collections/<%= collection._id%>">
+							<p>
+								<button class="button button_margin_small">View the collection</button>
+							</p>
+						</a>
+						<p>
+							<%= collection.description%>
+						</p>
 					</div>
 				<% }); %>
 		</div>
-	</div>
+
 
 <% include ../partials/footer %>

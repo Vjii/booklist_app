@@ -1,6 +1,12 @@
-<form action="/collections/<%= id%>/books" method="POST">
-	<input type="text" name="book[title]" placeholder="Title of the book">
-	<input type="text" name="book[image]" placeholder="Cover image of the book">
-	<textarea name="book[description]"></textarea>
-	<button>Add book to your collection</button>
-</form>
+<% include ../partials/header %>
+	<div class="row">
+		<div class="col">
+			<form class="form_rounded form padding_small" action="/collections/<%= id%>/books" method="POST">
+				<input class="form__input form_rounded vertical_margin_mini" type="text" name="book[title]" placeholder="Title of the book">
+				<input class="form__input form_rounded vertical_margin_mini" type="text" name="book[image]" placeholder="Cover image of the book">
+				<textarea class="form__input form_rounded vertical_margin_mini" name="book[description]"></textarea>
+				<button class="button form__button_fit vertical_margin_mini">Add book to your collection</button>
+			</form>
+		</div>
+	</div>
+<% include ../partials/footer %>
