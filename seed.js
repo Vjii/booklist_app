@@ -33,7 +33,7 @@ var collections = [
 var books = {
 				title: "Test book title",
 				image: "https://static1.squarespace.com/static/54389d3ae4b089923dc98f19/t/54830a0ce4b0e99ec57464cc/1417873932549/?format=500w",
-				description: "Test book description blah blah blah."
+				description: "Test book description blah blah blah something bla something ble something bleh bleh.Test book description blah blah blah something bla something ble something bleh bleh.Test book description blah blah blah something bla something ble something bleh bleh.Test book description blah blah blah something bla something ble something bleh bleh.Test book description blah blah blah something bla something ble something bleh bleh.Test book description blah blah blah something bla something ble something bleh bleh.Test book description blah blah blah something bla something ble something bleh bleh."
 			}
 
 
@@ -45,6 +45,20 @@ function seedDB() {
 				console.log(err);
 			} else {
 				console.log("Collection created: " + collection.description);
+				Book.create(books, function(err, books) {
+					if (err) {
+						console.log(err);
+					} else {
+						collection.books.push(books);
+						collection.save(function(err, collection) {
+							if (err) {
+								console.log(err);
+							} else {
+								console.log(books + "A D D E D.");
+							}
+						});
+					}
+				});
 				Book.create(books, function(err, books) {
 					if (err) {
 						console.log(err);

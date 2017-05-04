@@ -1,34 +1,53 @@
 <% include ../partials/header %>
 
 		<div class="row">
-			<div class="col">
-				<h1 class="heading_margin_small"><%= collection.author.username %>'s Book Collection</h1>
-				<p><img class="image image_rounded image__small" src="<%= collection.author.image%>"></p>
-				<a href="/collections/<%= collection._id%>/books/new">
-					<p><button class="button button_margin_small">Add a new book</button></p>
-				</a>
+			<div class="col profile">
+
+				<div class="profile__body">
+					<h1 class="heading__title heading_margin-small">My Collection</h1>
+					<p class="paragraph">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+					<h1 class="heading__title heading_margin-small">Comments:</h1>
+				</div>
+
+				<div class="profile__presentation">
+					<h1 class="heading__title heading_margin-small"><%= collection.author.username %></h1>
+					<img class="image image_rounded image-small" src="<%= collection.author.image%>">
+					<a href="/collections/<%= collection._id%>/books/new">
+						<p><button class="button button__full vertical_margin-small">Add a new book</button></p>
+					</a>
+				</div>
+
 			</div>
 		</div>
 
 	<div class="row">
 		<% collection.books.forEach(function(book) { %>
-			<div class="col">
-				<h2 class="heading_margin_small heading__title"><%= book.title %></h2>
-			<img class="image image_rounded" src="<%= book.image %>">
-			<p><%= book.description%></p>
-			<a href="/collections/<%= collection._id%>/books/<%= book._id%>/edit">
-				<p><button class="button button_margin_small">Edit position</button></p>
-			</a>
+			<div class="col book">
+				<div class="book__presentation">
+					<h2 class="heading_margin-small heading__title"><%= book.title %></h2>
+					<img class="image book__image image_rounded" src="<%= book.image %>">
+				</div>
 
-			<form action="/collections/<%= collection._id%>/books/<%= book._id%>?_method=DELETE" method="POST">
-				<button class="button button__delete">Delete position</button>
-			</form>
-		</div>
+				<div class="book__body">
+					<div class="book__description">
+						<h3 class="heading__title vertical_margin-small">Description: </h3>
+						<p class="vertical_margin-small text_justified"><%= book.description%></p>
+					</div>
+
+					<div class="book__buttons">
+						<a href="/collections/<%= collection._id%>/books/<%= book._id%>/edit">
+							<button class="button button_margin-horizontal button_margin-vertical">Edit</button>
+							</a>
+						<form action="/collections/<%= collection._id%>/books/<%= book._id%>?_method=DELETE" method="POST">
+							<button class="button button__delete">Delete</button>
+						</form>
+					</div>
+				</div>
+			</div>
 		<% }); %>
 	</div>
 
 <% include ../partials/footer %>
-
 
 
 

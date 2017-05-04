@@ -3,12 +3,12 @@
 
 		<div class="row">
 				<% collections.forEach(function(collection) { %>
-					<div class="col">
-						<h3 class="heading_margin_small"><%= collection.author.username %>'s Book Collection </h3>
+					<div class="col collection">
+						<h3 class="heading_margin-small"><%= collection.author.username %>'s Book Collection </h3>
 						<img class="image image_rounded" src="<%= collection.author.image%>">
 						<a href="/collections/<%= collection._id%>">
 							<p>
-								<button class="button button_margin_small">View the collection</button>
+								<button class="button button__full vertical_margin-small">View the collection</button>
 							</p>
 						</a>
 						<p>
