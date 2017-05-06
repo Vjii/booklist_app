@@ -1,6 +1,7 @@
 var mongoose = require("mongoose");
 var User = require("./user");
 var Book = require("./book");
+var Comment = require("./comment");
 
 var CollectionSchema = new mongoose.Schema({
 	author: {
@@ -17,7 +18,13 @@ var CollectionSchema = new mongoose.Schema({
 			ref: "Book"
 		}
 	],
-	description: String,
+	comments: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "Comment"
+		}
+	],
+	description: String
 });
 
 module.exports = mongoose.model("Collection", CollectionSchema);

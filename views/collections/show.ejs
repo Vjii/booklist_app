@@ -6,7 +6,6 @@
 				<div class="profile__body">
 					<h1 class="heading__title heading_margin-small">My Collection</h1>
 					<p class="paragraph">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-					<h1 class="heading__title heading_margin-small">Comments:</h1>
 				</div>
 
 				<div class="profile__presentation">
@@ -19,7 +18,6 @@
 
 			</div>
 		</div>
-
 	<div class="row">
 		<% collection.books.forEach(function(book) { %>
 			<div class="col book">
@@ -45,6 +43,26 @@
 				</div>
 			</div>
 		<% }); %>
+	</div>
+	<div class="row">
+		<div class="col">
+
+			<h1><%= collection.comments%></h1>
+
+			<div class="comments">
+				<% collection.comments.forEach(function(comment) { %>
+					<div class="profile__presentation">
+
+					</div>
+					<div class="comments__comment">
+						<h3><%= comment.author.username%></h3>
+						<p class="paragraph"><%= comment.text%></p>
+					</div>
+
+				<% })%>
+			</div>
+
+		</div>
 	</div>
 
 <% include ../partials/footer %>

@@ -21,17 +21,13 @@ router.get("/", function(req, res) {
 //Collections - Show Route
 router.get("/:id", function(req, res) {
 	var id = req.params.id
-	Collection.findById(id).populate("books").exec(function(err, collection){
-		res.render("collections/show", {collection: collection});
-	});
+	Collection.findById(id).populate("books comments").exec(function(err, collection){
+		if(err) {
+
+		} else {
+			res.render("collections/show",{collection: collection})
+		}
+	})
 });
-
-
-
-
-
-
-
-
 
 module.exports = router;

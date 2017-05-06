@@ -24,6 +24,15 @@ body {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0d0d0d', endColorstr='#050505',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 	}
 
+
+/* ======= Block - Comments ======= */
+
+.comments {
+
+}
+
+
+
 /* ======= Block - Image ======= */
 .image {
 	margin: 0 auto;
@@ -44,20 +53,23 @@ body {
 
 /* ======= Block - Button ======= */
 .button {
-	width: 12.5rem;
+	width: 8rem;
   padding: 5px;
   border-radius: 5px;
   color: #fff;
   background-color: #239239;
 }
 
+	.button__add {
+		width: 8rem;
+	}
 
 	.button__delete {
 		background-color: red;
 	}
 
 	.button_margin-horizontal {
-		margin-right: 10px;
+		margin-right: 0;
 	}
 
 	.button_margin-vertical {
@@ -68,9 +80,17 @@ body {
 /* ======= Block - Form ======= */
 
 	.form {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 		box-shadow: 0 0 5px 2.5px #ccc;
 		padding: 10px;
 	}
+
+		.form__container {
+			display: flex;
+			flex-direction: column;
+		}
 
 		.form__input {
 			width: 12.5rem;
@@ -129,6 +149,8 @@ body {
 /* ======= Block - Paragraph ======= */
 
 .paragraph {
+	margin-top: 10px;
+	margin-bottom: 10px
 	text-align: justify;
 }
 
@@ -161,9 +183,11 @@ body {
 
 @media screen and (min-width: 800px) {
 
+	.container {
+		max-width: 1050px;
+	}
 
-
-	/* ======= Block - Image ======= */
+	/* ======= Block - Collection ======= */
 	.collection {
 		flex: none;
 		flex-basis: 25%;
@@ -173,6 +197,7 @@ body {
 	.image {
 		width: 200px;
 		height: 200px;
+		margin: 0;
 	}
 
 
@@ -187,6 +212,7 @@ body {
 		.profile__presentation {
 			display: flex;
 			flex-direction: column;
+			align-items: flex-end;
 			flex: 0 0 20%;
 			padding-left: 20px;
 		}
@@ -194,6 +220,7 @@ body {
 		.profile__body {
 			display: flex;
 			flex-direction: column;
+			align-items: flex-start;
 			flex: 0 0 70%;
 		}
 
@@ -208,14 +235,16 @@ body {
 	 }
 
 	.book__presentation {
+		display: flex;
+		align-items: flex-start;
 		flex-direction: column;
-		flex-basis: 30%;
+		flex: 1;
 	}
 
 	.book__body {
 		display: flex;
 		flex-direction: column;
-		flex-basis: 70%;
+		flex: 4;
 		padding-left: 20px;
 	}
 
@@ -246,16 +275,31 @@ body {
 			width: 200px;
 		}
 
+		.button__add {
+			width: 6rem;
+		}
+
+
+		.button_margin-horizontal {
+			margin-right: 10px;
+		}
+
 		.button_margin-vertical {
 			margin-top: 0;
 			margin-bottom: 0;
 		}
+} /* ======== media up to 800px ======== */
 
 
 
+@media screen and (min-width: 1300px) {
+	.container{
+		max-width: 1200px;
+	}
 
-
-
-
+@media screen and (min-width: 1600px) {
+	.container{
+		max-width: 1300px;
+	}
 
 }

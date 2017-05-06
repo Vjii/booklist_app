@@ -6,6 +6,7 @@ mongoose = require("mongoose"),
 methodOverride = require("method-override"),
 User = require("./models/user"),
 Collection = require("./models/collection"),
+Comment = require("./models/comment"),
 Book = require("./models/book"),
 seedDB = require("./seed");
 
@@ -20,10 +21,12 @@ app.use(express.static("public"));
 //REQUIRE ROUTES
 var collectionsRoutes = require("./routes/collections");
 var booksRoutes = require("./routes/books")
+var commentRoutes = require("./routes/comments");
 
 //ROUTES
 app.use("/collections", collectionsRoutes);
 app.use("/collections", booksRoutes);
+app.use("/collections", commentRoutes)
 
 //SEED DATABASE
 seedDB();
