@@ -40,22 +40,21 @@ var books = {
 
 var comments = [{
 						text: "Test comment blah blah blah blah blah blah. Very awesome comment, real depth, great message, all around top quality extremely useful super mega great fantastic amazing comment.",
-						author: { username: users[0].username}
+						author: { username: users[0].username, image: users[0].image}
 						},
 						{
 						text: "real depth, great message.",
-						author: { username: users[1].username}
+						author: { username: users[1].username, image: users[1].image}
 						},
 						{
 						text: "blah blah blah blah blah blahblah blah blah blah blah blahblah blah blah blah blah blahblah blah blah blah blah blahblah blah blah blah blah blahblah blah blah blah blah blahblah blah blah blah blah blahblah blah blah blah blah blahblah blah blah blah blah blahblah blah blah blah blah blahblah blah blah blah blah blahblah blah blah blah blah blah",
-						author: { username: users[2].username}
+						author: { username: users[2].username, image: users[2].image}
 						},
 						{
 						text: "Test useful super mega great fantast. Top quality extremely useful super mega great fantastic amazing comment.",
-						author: { username: users[2].username}
+						author: { username: users[2].username, image: users[2].image}
 						}
 					]
-
 
 
 
@@ -67,7 +66,7 @@ function seedDB() {
 			if (err) {
 				console.log(err);
 			} else {
-				console.log("Collection created: " + collection.description);
+
 				Book.create(books, function(err, books) {
 					if (err) {
 						console.log(err);
@@ -77,7 +76,7 @@ function seedDB() {
 							if (err) {
 								console.log(err);
 							} else {
-								console.log(books + "A D D E D.");
+
 							}
 						});
 					}
@@ -91,40 +90,27 @@ function seedDB() {
 							if (err) {
 								console.log(err);
 							} else {
-								console.log(books + "A D D E D.");
 							}
 						});
 					}
 				});
+				var y = 0;
+				comments.forEach(function(comment) {
 
-				Comment.create(comments[0], comments[1], comments[2], comments[3], function(err, comment) {
-					if (err) {
-						console.log(err);
-					} else {
-						collection.comments.push(comment);
-						collection.save(function(err, collection) {
-							if(err){
+					Comment.create(comment, function(err, comment) {
+						if (err) {
 
-							} else {
-								console.log(collection.comments)
-							}
-						});
-					}
-
-				})
-
-
-
-
-
-
-
-
-
-
+						} else {
+							y ++;
+							comment.text = comment.text + "NUMBER: " + y;
+							comment.save();
+							collection.comments.push(comment);
+							collection.save();
+						}
+					})
+				});
 				// <--- Create collection/push books & comments into it --->
 			}
-			console.log(collection.books + "- books")
 		});
 	});
 };

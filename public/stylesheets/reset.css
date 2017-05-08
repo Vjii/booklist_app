@@ -48,6 +48,10 @@ table {
 }
 
 /*  Custom resets */
+a {
+	text-decoration: none;
+
+}
 
 button,
 input,

@@ -10,6 +10,7 @@ var CommentSchema = new mongoose.Schema({
 			ref: "User"
 		},
 		username: String,
+		image: String
 	},
 	date: {type: Date, default: Date.now}
 });

@@ -1,6 +1,7 @@
 <% include ../partials/header %>
 
 		<div class="row">
+			<a href="/collections/<%= collection._id%>/comments/new">Add comment</a>
 			<div class="col profile">
 
 				<div class="profile__body">
@@ -8,9 +9,9 @@
 					<p class="paragraph">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
 				</div>
 
-				<div class="profile__presentation">
+				<div class="profile__presentation profile__presentation-vertical">
 					<h1 class="heading__title heading_margin-small"><%= collection.author.username %></h1>
-					<img class="image image_rounded image-small" src="<%= collection.author.image%>">
+					<img class="image image_rounded" src="<%= collection.author.image%>">
 					<a href="/collections/<%= collection._id%>/books/new">
 						<p><button class="button button__full vertical_margin-small">Add a new book</button></p>
 					</a>
@@ -44,25 +45,30 @@
 			</div>
 		<% }); %>
 	</div>
+
+
 	<div class="row">
-		<div class="col">
-
-			<h1><%= collection.comments%></h1>
-
-			<div class="comments">
-				<% collection.comments.forEach(function(comment) { %>
-					<div class="profile__presentation">
-
-					</div>
-					<div class="comments__comment">
-						<h3><%= comment.author.username%></h3>
-						<p class="paragraph"><%= comment.text%></p>
-					</div>
-
-				<% })%>
-			</div>
-
+		<div class="col comments__title">
+			<h1 class="heading__title">Comments</h1>
 		</div>
+			<% collection.comments.forEach(function(comment) { %>
+				<div class="col comments">
+						<div class="profile__presentation">
+							<h3 class="profile__name heading__title vertical_margin-small"><%= comment.author.username%></h3>
+							<img class="image image__thumbnail image_rounded" src="<%= comment.author.image%>">
+						</div>
+						<div class="comments__comment">
+							<p class="paragraph"><%= comment.text%></p>
+							<a href="/collections/<%= collection._id%>/comments/<%= comment._id%>/edit">
+								<button class="button">Edit</button>
+							</a>
+							<form action="/collections/<%= collection._id%>/comments/<%= comment._id%>?_method=DELETE" method="POST">
+								<button class="button button__delete">Delete</button>
+							</form>
+
+						</div>
+				</div>
+			<% })%>
 	</div>
 
 <% include ../partials/footer %>

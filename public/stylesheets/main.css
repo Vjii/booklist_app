@@ -25,31 +25,63 @@ body {
 	}
 
 
+/* ======= Block - Profile ======= */
+
+.profile__presentation {
+	 display: flex;
+   flex-direction: row-reverse;
+   justify-content: flex-end;
+}
+
+	.profile__name {
+		margin-left: 10px;
+		max-width: 100px;
+	}
+
+		.profile__presentation-vertical {
+				flex-direction: column;
+			}
+
+
+
 /* ======= Block - Comments ======= */
 
 .comments {
-
+	flex-direction: column;
+	flex: 0 0 90%;
+	padding: 5px 20px 20px 20px;
+	box-shadow: 0 0 5px 2.5px #eee;
 }
+
+	.comments__title {
+		flex: 0 0 90%;
+		margin: 10px 0 5px;
+		padding: 5px 20px 20px 20px;
+		background-color: #000;
+		color: #fff;
+		box-shadow: 0 0 2px 2.5px #000;
+	}
 
 
 
 /* ======= Block - Image ======= */
 .image {
-	margin: 0 auto;
-	max-height: 250px;
+	width: 250px;
+	width: 250px;
 }
 
-	.image {
-		width: 90%;
+	.image__thumbnail {
+		width: 50px;
+		height: 50px;
 	}
 
-		.image_rounded {
-			border-radius: 5px;
-		}
+	.image_rounded {
+		border-radius: 5px;
+	}
 
-		.image_circular {
-			border-radius: 100%;
-		}
+	.image_circular {
+		border-radius: 100%;
+	}
 
 /* ======= Block - Button ======= */
 .button {
@@ -150,7 +182,7 @@ body {
 
 .paragraph {
 	margin-top: 10px;
-	margin-bottom: 10px
+	margin-bottom: 10px;
 	text-align: justify;
 }
 
@@ -200,6 +232,11 @@ body {
 		margin: 0;
 	}
 
+		.image__thumbnail {
+			width: 75px;
+			height: 75px;
+		}
+
 
 	/* ======= Block - Profile ======= */
 
@@ -211,11 +248,10 @@ body {
 
 		.profile__presentation {
 			display: flex;
-			flex-direction: column;
 			align-items: flex-end;
 			flex: 0 0 20%;
-			padding-left: 20px;
 		}
+
 
 		.profile__body {
 			display: flex;
@@ -223,6 +259,7 @@ body {
 			align-items: flex-start;
 			flex: 0 0 70%;
 		}
+
 
 
 	/* ======= Block - Book ======= */

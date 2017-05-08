@@ -1,0 +1,14 @@
+	<% include ../partials/header %>
+	<div class="row">
+		<div class="col">
+			<div class="form__container">
+				<h1 class="heading__title vertical_margin-small">Add comment</h1>
+				<form class="form form_rounded form padding-small" action="/collections/<%= id%>/comments" method="POST">
+					<textarea class="form__textarea form_rounded vertical_margin-small" name="comment" placeholder="Comment about the book collection"></textarea>
+					<button class="button button__add vertical_margin-small">Add comment</button>
+			  </form>
+			</div>
+		</div>
+	</div>
+<% include ../partials/footer %>
+
