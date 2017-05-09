@@ -102,7 +102,7 @@ function seedDB() {
 
 						} else {
 							y ++;
-							comment.text = comment.text + "NUMBER: " + y;
+							comment.text = comment.text + " NUMBER: " + y;
 							comment.save();
 							collection.comments.push(comment);
 							collection.save();

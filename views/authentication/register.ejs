@@ -1,0 +1,15 @@
+<% include ../partials/header %>
+	<div class="row">
+		<div class="col">
+			<div class="form__container">
+				<h1 class="heading__title vertical_margin-small">Sign Up</h1>
+				<form class="form form_rounded form padding-small" action="/register" method="POST">
+					<input class="form__input form_rounded vertical_margin-small" type="text" name="username" placeholder="user">
+					<input class="form__input form_rounded vertical_margin-small" type="password" name="password" placeholder="password">
+					<input class="form__input form_rounded vertical_margin-small" type="text" name="image" placeholder="Profile image">
+					<button class="button button__add vertical_margin-small">Sign up</button>
+			  </form>
+			</div>
+		</div>
+	</div>
+<% include ../partials/footer %>

@@ -50,7 +50,12 @@ table {
 /*  Custom resets */
 a {
 	text-decoration: none;
+}
 
+a:hover,
+a:visited {
+	text-decoration: none;
+	color: #fff;
 }
 
 button,

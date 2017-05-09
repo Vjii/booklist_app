@@ -29,16 +29,16 @@
 
 				<div class="book__body">
 					<div class="book__description">
-						<h3 class="heading__title vertical_margin-small">Description: </h3>
+						<h3 class="heading__title vertical_margin-small">Notes: </h3>
 						<p class="vertical_margin-small text_justified"><%= book.description%></p>
 					</div>
 
 					<div class="book__buttons">
 						<a href="/collections/<%= collection._id%>/books/<%= book._id%>/edit">
-							<button class="button button_margin-horizontal button_margin-vertical">Edit</button>
+							<button class="button button__edit button_margin-horizontal button_margin-vertical">Edit</button>
 							</a>
 						<form action="/collections/<%= collection._id%>/books/<%= book._id%>?_method=DELETE" method="POST">
-							<button class="button button__delete">Delete</button>
+							<button class="button button__delete button_margin-vertical">Delete</button>
 						</form>
 					</div>
 				</div>
@@ -59,13 +59,14 @@
 						</div>
 						<div class="comments__comment">
 							<p class="paragraph"><%= comment.text%></p>
-							<a href="/collections/<%= collection._id%>/comments/<%= comment._id%>/edit">
-								<button class="button">Edit</button>
-							</a>
-							<form action="/collections/<%= collection._id%>/comments/<%= comment._id%>?_method=DELETE" method="POST">
-								<button class="button button__delete">Delete</button>
-							</form>
-
+							<div class="comments__buttons">
+								<a href="/collections/<%= collection._id%>/comments/<%= comment._id%>/edit">
+								<button class="button button__edit button_margin-horizontal">Edit</button>
+								</a>
+								<form action="/collections/<%= collection._id%>/comments/<%= comment._id%>?_method=DELETE" method="POST">
+									<button class="button button__delete ">Delete</button>
+								</form>
+							</div>
 						</div>
 				</div>
 			<% })%>

@@ -4,6 +4,7 @@ var Book = require("./book");
 var Comment = require("./comment");
 
 var CollectionSchema = new mongoose.Schema({
+	title: String,
 	author: {
 		id: {
 			type: mongoose.Schema.Types.ObjectId,

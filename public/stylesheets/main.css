@@ -25,6 +25,19 @@ body {
 	}
 
 
+
+
+/* ======= Block - Authentication ======= */
+
+	.authentication__container {
+    top: 1rem;
+    right: 1rem;
+    position: absolute;
+    display: flex;
+    justify-content: flex-end;
+	}
+
+
 /* ======= Block - Profile ======= */
 
 .profile__presentation {
@@ -43,6 +56,15 @@ body {
 			}
 
 
+/* ======= Block - Book ======= */
+
+.book__buttons {
+	display: flex;
+	justify-content: flex-end;
+	align-items: flex-end;
+	flex: 1;
+}
+
 
 /* ======= Block - Comments ======= */
 
@@ -56,10 +78,15 @@ body {
 	.comments__title {
 		flex: 0 0 90%;
 		margin: 10px 0 5px;
-		padding: 5px 20px 20px 20px;
+		padding: 20px 20px 20px 20px;
 		background-color: #000;
 		color: #fff;
 		box-shadow: 0 0 2px 2.5px #000;
+	}
+
+	.comments__buttons {
+		display: flex;
+		justify-content: flex-end;
 	}
 
 
@@ -92,16 +119,27 @@ body {
   background-color: #239239;
 }
 
+.button__authentication {
+		border: 1px solid #fff;
+    padding: 5px 10px 7.5px 10px;
+    border-radius: 5px;
+	}
+
 	.button__add {
 		width: 8rem;
 	}
 
+	.button__edit {
+		width: 4rem;
+	}
+
 	.button__delete {
+		width: 4rem;
 		background-color: red;
 	}
 
 	.button_margin-horizontal {
-		margin-right: 0;
+		margin-right: 10px;
 	}
 
 	.button_margin-vertical {
@@ -118,6 +156,10 @@ body {
 		box-shadow: 0 0 5px 2.5px #ccc;
 		padding: 10px;
 	}
+
+		.form__authenticate {
+
+		}
 
 		.form__container {
 			display: flex;
@@ -138,7 +180,7 @@ body {
 		}
 
 		.form__button {
-				width: calc(8rem);
+				width: 8rem;
 				display: block;
 				margin: 5px auto;
 			}
@@ -171,7 +213,7 @@ body {
 		}
 
 		.heading_size-large {
-			font-size: 1.25rem;
+			font-size: 1.5rem;
 		}
 
 		.heading_white {
@@ -290,13 +332,6 @@ body {
 			flex: 1;
 		}
 
-		.book__buttons {
-			display: flex;
-			justify-content: flex-end;
-			align-items: flex-end;
-			flex: 1;
-		}
-
   .book__image {
 		width: 200px;
 		height: 250px;
@@ -308,6 +343,7 @@ body {
 		font-weight: bold;
 	}
 
+
 		.button__full {
 			width: 200px;
 		}
@@ -315,7 +351,6 @@ body {
 		.button__add {
 			width: 6rem;
 		}
-
 
 		.button_margin-horizontal {
 			margin-right: 10px;
