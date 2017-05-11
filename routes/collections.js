@@ -10,30 +10,37 @@ Book = require("../models/book");
 //Collections Index Route
 router.get("/", function(req, res) {
 	Collection.find({}, function(err, collections) {
-		if (err) {
+		if(err) {
 			console.log(err);
 		} else {
+
 			res.render("collections/index", {collections: collections});
+
 		}
 	});
 });
 
-router.get("/new", function(req, res) {
+//Collections New Route - form to add collection
+router.get("/new", index.isLoggedIn, function(req, res) {
 	res.render("collections/new");
 });
 
-
+//Collections Create Route - add collection
 router.post("/", function(req, res) {
 	var title = req.body.title;
-	var user = req.user;
+
 	Collection.create({title: title }, function(err, collection) {
 		if(err) {
 			console.log(err);
 			return res.redirect("/collections/new");
 		}
-		collection.author = user;
+		collection.author.id = req.user.id;
+		collection.author.username = req.user.username;
+		collection.author.image = req.user.image;
+
 		collection.save();
-		console.log(collection.author.username);
+		console.log("USER: " + req.user)
+		console.log("COLLECTION: " + collection)
 		res.redirect("/collections/" + collection.id)
 	});
 });

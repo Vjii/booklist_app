@@ -15,6 +15,12 @@ Comment = require("./models/comment"),
 Book = require("./models/book"),
 seedDB = require("./seed");
 
+//LOCALS
+app.use(function(req, res, next) {
+	res.locals.user = req.user;
+	next();
+
+})
 
 //CONFIG
 mongoose.connect("mongodb://localhost/booklist_app");

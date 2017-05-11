@@ -1,9 +1,20 @@
 var mongoose = require("mongoose");
+var passport = require("passport");
+var LocalStrategy = require("passport-local");
+var passportLocalMongoose = require("passport-local-mongoose");
 var User = require("./models/user");
 var Collection = require("./models/collection");
 var Book = require("./models/book");
 var Comment = require("./models/comment");
 
+
+User.remove({}, function(err) {
+	if(err) {
+		console.log(err);
+	} else {
+		console.log("Collections removed");
+	}
+});
 
 Collection.remove({}, function(err) {
 	if(err) {
@@ -21,14 +32,14 @@ var users = [
 
 var collections = [
 	{
-		image: "https://images.pexels.com/photos/247917/pexels-photo-247917.jpeg?h=350&auto=compress&cs=tinysrgb", description: "Military and psychology books.",
-		author: {username: users[0].username, image: users[0].image}},
+		image: "https://images.pexels.com/photos/247917/pexels-photo-247917.jpeg?h=350&auto=compress&cs=tinysrgb", description: "Military and psychology books."
+	},
 	{
-		image: "https://images.pexels.com/photos/247917/pexels-photo-247917.jpeg?h=350&auto=compress&cs=tinysrgb", description: "Military and psychology books.",
-		author: {username: users[1].username, image: users[1].image}},
+		image: "https://images.pexels.com/photos/247917/pexels-photo-247917.jpeg?h=350&auto=compress&cs=tinysrgb", description: "Military and psychology books."
+	},
 	{
-		image: "https://images.pexels.com/photos/247917/pexels-photo-247917.jpeg?h=350&auto=compress&cs=tinysrgb", description: "Military and psychology books.",
-		author: {username: users[2].username, image: users[2].image} }
+		image: "https://images.pexels.com/photos/247917/pexels-photo-247917.jpeg?h=350&auto=compress&cs=tinysrgb", description: "Military and psychology books."
+	}
 ]
 
 var books = {
@@ -59,59 +70,72 @@ var comments = [{
 
 
 
+var  y = 0
+
 
 function seedDB() {
 	collections.forEach(function(collection) {
-		Collection.create(collection, function(err, collection) {
-			if (err) {
-				console.log(err);
-			} else {
-
-				Book.create(books, function(err, books) {
-					if (err) {
-						console.log(err);
-					} else {
-						collection.books.push(books);
-						collection.save(function(err, collection) {
-							if (err) {
-								console.log(err);
-							} else {
-
-							}
-						});
-					}
-				});
-				Book.create(books, function(err, books) {
-					if (err) {
-						console.log(err);
-					} else {
-						collection.books.push(books);
-						collection.save(function(err, collection) {
-							if (err) {
-								console.log(err);
-							} else {
-							}
-						});
-					}
-				});
-				var y = 0;
-				comments.forEach(function(comment) {
-
-					Comment.create(comment, function(err, comment) {
-						if (err) {
-
-						} else {
-							y ++;
-							comment.text = comment.text + " NUMBER: " + y;
-							comment.save();
-							collection.comments.push(comment);
-							collection.save();
-						}
-					})
-				});
-				// <--- Create collection/push books & comments into it --->
+		User.register(users[0], users[0].password, function(err, user) {
+			if(err){
+				return err;
 			}
-		});
+
+			Collection.create(collection, function(err, collection) {
+				if (err) {
+					console.log(err);
+				} else {
+
+					collection.author.id = user.id
+					collection.author.username = user.username;
+					collection.author.image = user.image;
+
+					Book.create(books, function(err, books) {
+						if (err) {
+							console.log(err);
+						} else {
+							collection.books.push(books);
+							collection.save(function(err, collection) {
+								if (err) {
+									console.log(err);
+								} else {
+
+								}
+							});
+						}
+					});
+
+					Book.create(books, function(err, books) {
+						if (err) {
+							console.log(err);
+						} else {
+							collection.books.push(books);
+							collection.save(function(err, collection) {
+								if (err) {
+									console.log(err);
+								} else {
+								}
+							});
+						}
+					});
+
+					comments.forEach(function(comment) {
+
+						Comment.create(comment, function(err, comment) {
+							if (err) {
+
+							} else {
+								y ++;
+								comment.text = comment.text + " NUMBER: " + y;
+								comment.save();
+								collection.comments.push(comment);
+								collection.save();
+							}
+						})
+					});
+
+				}
+			}); // <--- Create collection/push books & comments into it --->
+		});// User.register
 	});
 };
 

@@ -10,8 +10,8 @@ var CollectionSchema = new mongoose.Schema({
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "User"
 		},
-		username: String,
-		image: String
+	username: String,
+	image: String
 	},
 	books: [
 		{
