@@ -7,7 +7,22 @@
 			<form class="form form_rounded" action="/collections/<%= id%>/books/<%= book._id%>?_method=PUT" method="POST">
 				<input class="form__input form_rounded vertical_margin-small" type="text" name="book[title]" value="<%= book.title%>">
 				<input class="form__input form_rounded vertical_margin-small" type="text" name="book[image]" value="<%= book.image%>">
-				<textarea class=" form__textarea form_rounded vertical_margin-small" name="book[description]"><%= book.description%></textarea>
+
+				<div class="form__ideas__container">
+						<div>
+							<input class="form__input form_rounded vertical_margin-small" type="text" name="book[ideaOne]" value="<%= book.ideaOne%>">
+							<textarea class="form__textarea form_rounded vertical_margin-small" name="book[descriptionOne]" value="<%= book.descriptionOne%>"></textarea>
+						</div>
+						<div>
+							<input class="form__input form_rounded vertical_margin-small" type="text" name="book[ideaTwo]" value="<%= book.ideaTwo%>">
+							<textarea class="form__textarea form_rounded vertical_margin-small" name="book[descriptionTwo]" value="<%= book.descriptionTwo%>"></textarea>
+						</div>
+						<div>
+							<input class="form__input form_rounded vertical_margin-small" type="text" name="book[ideaThree]" value=<%= book.ideaThree%>">
+							<textarea class="form__textarea form_rounded vertical_margin-small" name="book[descriptionThree]" value="<%= book.descriptionThree%>"></textarea>
+						</div>
+					</div>
+
 				<button class="button form__button button__add">Submit changes</button>
 			</form>
 

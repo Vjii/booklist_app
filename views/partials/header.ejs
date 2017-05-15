@@ -11,26 +11,23 @@
 	</head>
 	<body>
 		<header class="header header_background">
-			<div class="row">
-				<div class="col one">
-						<h1 class="heading_center heading_size-large heading_white">Signature Books</h1>
-						<div class="authentication__container">
-							<% if (!user) { %>
-									<a class="button__authentication" href="/register">Register</a>
-									<a class="button__authentication" href="/login">Login</a>
-							<% } %>
-
-							<% if (user) { %>
-								<h3><%= user %></h3>
-								<a class="button__authentication" href="/logout">Logout</a>
-							<% } %>
-
-						</div>
-
-				</div>
+			<div class="header__container">
+				<nav class="navigation navigation__mobile-closed">
+					<h1 class="title header__title heading_white heading_center">Signature books</h1>
+					<ul class="navigation__ul navigation_display">
+						<% if (!currentUser) { %>
+							<li class="navigation__li"><a class="button__authentication" href="/register">Register</a></li>
+							<li class="navigation__li"><a class="button__authentication" href="/login">Login</a></li>
+						<% } else {%>
+							<li class="navigation__li"><h3 class="heading_white authentication__user">Signed in as <strong><%= currentUser.username %></strong></h3></li>
+							<li class="navigation__li"><a class="button__authentication" href="/logout">Logout</a></li>
+						<%} %>
+						<li class="navigation__li"><a href="/">Home</a></li>
+						<li class="navigation__li"><a href="/collections">Collections</a></li>
+					</ul>
+				</nav>
 			</div>
 		</header>
-
 		<div class="container">
 
 

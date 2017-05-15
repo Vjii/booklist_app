@@ -38,13 +38,20 @@ var collections = [
 		image: "https://images.pexels.com/photos/247917/pexels-photo-247917.jpeg?h=350&auto=compress&cs=tinysrgb", description: "Military and psychology books."
 	},
 	{
-		image: "https://images.pexels.com/photos/247917/pexels-photo-247917.jpeg?h=350&auto=compress&cs=tinysrgb", description: "Military and psychology books."
+		image: "https://images-na.ssl-images-amazon.com/images/I/51aicxKv7cL._SY344_BO1,204,203,200_.jpg", description: "Military and psychology books."
 	}
 ]
 
-var books = {
+var book1 = {
 				title: "Test book title",
 				image: "https://static1.squarespace.com/static/54389d3ae4b089923dc98f19/t/54830a0ce4b0e99ec57464cc/1417873932549/?format=500w",
+				description: "Test book description blah blah blah something bla something ble something bleh bleh.Test book description blah blah blah something bla something ble something bleh bleh.Test book description blah blah blah something bla something ble something bleh bleh.Test book description blah blah blah something bla something ble something bleh bleh.Test book description blah blah blah something bla something ble something bleh bleh.Test book description blah blah blah something bla something ble something bleh bleh.Test book description blah blah blah something bla something ble something bleh bleh."
+			}
+
+
+var book2 = {
+				title: "Test book title",
+				image: "https://img1.od-cdn.com/ImageType-400/1493-1/0F9/331/A5/%7B0F9331A5-1584-40D8-B8F4-0967CDFD89D3%7DImg400.jpg",
 				description: "Test book description blah blah blah something bla something ble something bleh bleh.Test book description blah blah blah something bla something ble something bleh bleh.Test book description blah blah blah something bla something ble something bleh bleh.Test book description blah blah blah something bla something ble something bleh bleh.Test book description blah blah blah something bla something ble something bleh bleh.Test book description blah blah blah something bla something ble something bleh bleh.Test book description blah blah blah something bla something ble something bleh bleh."
 			}
 
@@ -89,7 +96,7 @@ function seedDB() {
 					collection.author.username = user.username;
 					collection.author.image = user.image;
 
-					Book.create(books, function(err, books) {
+					Book.create(book1, function(err, books) {
 						if (err) {
 							console.log(err);
 						} else {
@@ -104,7 +111,7 @@ function seedDB() {
 						}
 					});
 
-					Book.create(books, function(err, books) {
+					Book.create(book2, function(err, books) {
 						if (err) {
 							console.log(err);
 						} else {

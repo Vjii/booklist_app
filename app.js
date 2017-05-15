@@ -15,12 +15,6 @@ Comment = require("./models/comment"),
 Book = require("./models/book"),
 seedDB = require("./seed");
 
-//LOCALS
-app.use(function(req, res, next) {
-	res.locals.user = req.user;
-	next();
-
-})
 
 //CONFIG
 mongoose.connect("mongodb://localhost/booklist_app");
@@ -42,6 +36,12 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+
+//LOCALS
+app.use(function(req, res, next) {
+	res.locals.currentUser = req.user;
+	next();
+});
 
 
 //REQUIRE ROUTES
