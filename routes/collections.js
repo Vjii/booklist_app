@@ -13,9 +13,7 @@ router.get("/", function(req, res) {
 		if(err) {
 			console.log(err);
 		} else {
-
 			res.render("collections/index", {collections: collections});
-
 		}
 	});
 });
@@ -45,15 +43,14 @@ router.post("/", function(req, res) {
 	});
 });
 
-
-
 //Collections - Show Route
 router.get("/:id", function(req, res) {
 	var id = req.params.id
-	Collection.findById(id).populate("books comments").exec(function(err, collection){
+	Collection.findById(id).populate("comments").exec(function(err, collection){
 		if(err) {
 
 		} else {
+			console.log("COLLECTION.BOOKS: " + collection.books)
 			res.render("collections/show",{collection: collection})
 		}
 	})

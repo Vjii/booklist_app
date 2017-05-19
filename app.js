@@ -1,6 +1,6 @@
 //SETUP
 var express = require("express"),
-app = express(),
+app = module.exports = express(),
 bodyParser = require("body-parser"),
 mongoose = require("mongoose"),
 methodOverride = require("method-override"),
@@ -8,6 +8,7 @@ passport = require("passport"),
 LocalStrategy = require("passport-local"),
 passportLocalMongoose = require("passport-local-mongoose"),
 session = require("express-session"),
+back = require("express-back"),
 index = require("./middleware/index"),
 User = require("./models/user"),
 Collection = require("./models/collection"),
@@ -28,6 +29,7 @@ app.use(session({
 	resave: false,
 	saveUninitialized: false
 }));
+app.use(back());
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -49,12 +51,14 @@ var collectionsRoutes = require("./routes/collections");
 var booksRoutes = require("./routes/books")
 var commentRoutes = require("./routes/comments");
 var indexRoutes = require("./routes/index");
+var ideaRoutes = require("./routes/ideas");
 
 //ROUTES
 app.use("/collections", collectionsRoutes);
 app.use("/collections", booksRoutes);
 app.use("/collections", commentRoutes);
 app.use("/", indexRoutes);
+app.use("/collections", ideaRoutes);
 
 //SEED DATABASE
 seedDB();

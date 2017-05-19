@@ -20,17 +20,7 @@ body {
 	.navigation__li {
 		text-align: center;
 		padding: 25px 10px;
-
 	}
-
-	/*.navigation__li:first-child {
-		box-shadow: 0 3px 6px 6px inset;
-	}
-
-	.navigation__li:last-child {
-		box-shadow: 0 -3px 6px 6px inset;
-	}*/
-
 
 	.navigation__mobile-closed:before {
 	  content: "";
@@ -93,8 +83,6 @@ body {
 
 
 
-
-
 /* ======= Block - Authentication ======= */
 
 	.authentication__container {
@@ -120,6 +108,10 @@ body {
    justify-content: flex-end;
 }
 
+.profile__body {
+	max-width: 250px;
+}
+
 	.profile__name {
 		margin-left: 10px;
 		max-width: 100px;
@@ -132,12 +124,16 @@ body {
 
 /* ======= Block - Book ======= */
 
-.book__buttons {
-	display: flex;
-	justify-content: flex-end;
-	align-items: flex-end;
-	flex: 1;
-}
+	.book {
+		box-shadow: 0 0 5px 2.5px #eee;
+	}
+
+
+	.book__buttons {
+    margin-top: 20px;
+    padding: 5px 0;
+    border-top: 1px solid #eee;
+	}
 
 
 /* ======= Block - Comments ======= */
@@ -145,13 +141,12 @@ body {
 .comments {
 	flex-direction: column;
 	flex: 0 0 90%;
-	padding: 5px 20px 20px 20px;
+	padding: 15px;
 	box-shadow: 0 0 5px 2.5px #eee;
 }
 
 	.comments__title {
 		flex: 0 0 90%;
-		margin: 10px 0 5px;
 		padding: 20px 20px 20px 20px;
 		background-color: #000;
 		color: #fff;
@@ -193,7 +188,7 @@ body {
   background-color: #239239;
 }
 
-.button__authentication {
+	.button__authentication {
     padding: 5px 10px 7.5px 10px;
     border-radius: 5px;
 	}
@@ -203,11 +198,11 @@ body {
 	}
 
 	.button__edit {
-		width: 4rem;
+		width: 5rem;
 	}
 
 	.button__delete {
-		width: 4rem;
+		width: 5rem;
 		background-color: red;
 	}
 
@@ -220,6 +215,10 @@ body {
 		margin-bottom: 10px
 	}
 
+	.button--horizontal {
+		display: inline-block;
+	}
+
 /* ======= Block - Form ======= */
 
 	.form {
@@ -229,10 +228,6 @@ body {
 		box-shadow: 0 0 5px 2.5px #ccc;
 		padding: 10px;
 	}
-
-		.form__authenticate {
-
-		}
 
 		.form__container {
 			display: flex;
@@ -246,7 +241,12 @@ body {
 		}
 
 		.form__ideas__container {
-			text-align: center;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			padding: 20px;
+			display: flex;
+			justify-content: center;
+			flex-direction: column;
 		}
 
 		.form__textarea {
@@ -265,7 +265,6 @@ body {
 			.form_rounded {
 				border-radius: 5px;
 			}
-
 
 
 
@@ -382,7 +381,7 @@ body {
 		.profile__presentation {
 			display: flex;
 			align-items: flex-end;
-			flex: 0 0 20%;
+	    flex: 0 0 30%;
 		}
 
 
@@ -390,7 +389,8 @@ body {
 			display: flex;
 			flex-direction: column;
 			align-items: flex-start;
-			flex: 0 0 70%;
+			flex: 0 0 60%;
+			max-width: none;
 		}
 
 
@@ -398,9 +398,9 @@ body {
 	/* ======= Block - Book ======= */
 
 	.book {
-		display: flex;
 		justify-content: space-between;
 		flex: 0 0 90%;
+		padding: 15px;
 		box-shadow: 0 0 5px 2.5px #eee;
 	 }
 
@@ -418,10 +418,14 @@ body {
 		padding-left: 20px;
 	}
 
-		.book__description {
+
+
+		.book__ideas {
 			text-align: left;
 			flex: 1;
 		}
+
+
 
   .book__image {
 		width: 200px;
@@ -429,11 +433,11 @@ body {
   }
 
 /* ======= Block - Button ======= */
+
 	.button {
-		width: 4rem;
+		width: 5rem;
 		font-weight: bold;
 	}
-
 
 		.button__full {
 			width: 200px;
@@ -451,6 +455,9 @@ body {
 			margin-top: 0;
 			margin-bottom: 0;
 		}
+
+
+
 } /* ======== media up to 800px ======== */
 
 

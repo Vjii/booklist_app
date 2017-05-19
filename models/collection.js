@@ -13,19 +13,13 @@ var CollectionSchema = new mongoose.Schema({
 	username: String,
 	image: String
 	},
-	books: [
-		{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: "Book"
-		}
-	],
+	books: [Book.schema],
 	comments: [
 		{
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "Comment"
 		}
-	],
-	description: String
+	]
 });
 
 module.exports = mongoose.model("Collection", CollectionSchema);

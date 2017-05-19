@@ -1,16 +1,15 @@
 var mongoose = require("mongoose");
-var User = require("./user");
-var Collection = require("./collection")
+var Idea = require("./idea");
 
 var BookSchema = new mongoose.Schema({
 	title: String,
   image: String,
-	ideaOne: String,
-	descriptionOne: String,
-	ideaTwo: String,
-	descriptionTwo: String,
-	ideaThree: String,
-	descriptionThree: String
+	ideas: [Idea.schema]
 });
 
-module.exports = mongoose.model("Book", BookSchema);
+var Book = mongoose.model("Book", BookSchema);
+
+module.exports = {
+	model: Book,
+	schema: BookSchema
+}
