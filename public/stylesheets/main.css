@@ -11,6 +11,7 @@ body {
 
 /* ======= Block - Navigation ======= */
 
+
 	.navigation__ul {
 		width: 100%;
 		margin-top: 3rem;
@@ -339,7 +340,7 @@ body {
 	}
 
 	.header__container {
-		max-width: 1050px;
+		max-width: 960px;
 	}
 
 	/* ======= Block - Collection ======= */
@@ -499,8 +500,8 @@ body {
 		flex: 0 0 60%;
 	}
 
-	.navigation:before,
-	.navigation:after {
+	.navigation__hamburger:before,
+	.navigation__hamburger:after {
 		display: none;
 	}
 
