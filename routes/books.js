@@ -7,14 +7,15 @@ Book = require("../models/book"),
 index = require("../middleware/index");
 
 // New route - show form to add a new book
-router.get("/:id/books/new", index.isLoggedIn, function(req, res) {
+router.get("/:id/books/new", index.checkOwnership, function(req, res) {
+	console.log(req);
 	var id = req.params.id
 	var book_id;
 	res.render("books/new", {id: id, book_id: book_id});
 });
 
 // Create route - add a new book to books collection
-router.post("/:id/books", index.isLoggedIn,function(req, res) {
+router.post("/:id/books", index.checkOwnership, function(req, res) {
 	var id = req.params.id
 	var book = req.body.book
 	Collection.findById(id, function(err, collection) {
@@ -44,7 +45,7 @@ router.post("/:id/books", index.isLoggedIn,function(req, res) {
 });
 
 // Edit route - show form to edit a book
-router.get("/:id/books/:book_id/edit", index.isLoggedIn, function(req, res) {
+router.get("/:id/books/:book_id/edit", index.checkOwnership, function(req, res) {
 	var id = req.params.id
 	var book_id = req.params.book_id
 
@@ -58,7 +59,7 @@ router.get("/:id/books/:book_id/edit", index.isLoggedIn, function(req, res) {
 });
 
 // Update route - modify a book in the collection
-router.put("/:id/books/:book_id",  index.isLoggedIn, function(req, res) {
+router.put("/:id/books/:book_id",  index.checkOwnership, function(req, res) {
 	var id = req.params.id
 	var book_id = req.params.book_id;
 	var book = req.body.book;
@@ -71,13 +72,11 @@ router.put("/:id/books/:book_id",  index.isLoggedIn, function(req, res) {
 		bookFound.image = req.body.book.image
 		bookFound.save();
 		collection.save();
-		res.redirect(req.prevPrevPath);
-
 	});
 });
 
 // Destroy route - delete a book from the collection
-router.delete("/:id/books/:book_id",  index.isLoggedIn, function(req, res) {
+router.delete("/:id/books/:book_id",  index.checkOwnership, function(req, res) {
 	var id = req.params.id
 	var book_id = req.params.book_id
 

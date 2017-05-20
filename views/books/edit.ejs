@@ -11,9 +11,12 @@
 				<input class="form__input form_rounded vertical_margin-small" type="text" name="book[image]" value="<%= book.image%>">
 				<button class="button form__button button__add">Submit changes</button>
 			</form>
+			<a class="vertical_margin-small" href="/collections/<%= id%>">
+					<button class="button button__add">Done</button>
+			</a>
 
 			<% var ideaCount = 1; %>
-	  	<h1 class="heading__title vertical_margin-small">Edit idea notes</h1>
+	  	<h1 class="heading__title vertical_margin-small">Edit noted ideas</h1>
 	  	<% book.ideas.forEach(function(idea) { %>
 	  		<h3>Idea #<%= ideaCount%></h3>
 	  		<% ideaCount++%>

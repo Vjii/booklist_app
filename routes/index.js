@@ -8,11 +8,11 @@ index = require("../middleware/index");
 
 
 
-router.get("/register", index.checkLoggedIn, function(req, res) {
+router.get("/register", index.alreadyLoggedIn, function(req, res) {
 	res.render("authentication/register");
 })
 
-router.post("/register", index.checkLoggedIn,  function(req, res) {
+router.post("/register", index.alreadyLoggedIn,  function(req, res) {
 
 	User.register(new User({username: req.body.username, image: req.body.image}), req.body.password, function(err, user) {
 		if(err) {
@@ -29,11 +29,11 @@ router.post("/register", index.checkLoggedIn,  function(req, res) {
 });
 
 
-router.get("/login", index.checkLoggedIn, function(req, res) {
+router.get("/login", index.alreadyLoggedIn, function(req, res) {
 	res.render("authentication/login");
 });
 
-router.post('/login', index.checkLoggedIn, passport.authenticate('local',
+router.post('/login', index.alreadyLoggedIn, passport.authenticate('local',
 	{ successRedirect: '/collections',
     failureRedirect: '/login' })
 );

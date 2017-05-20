@@ -3,16 +3,17 @@ var router = express.Router();
 Collection = require("../models/collection"),
 User = require("../models/user"),
 Book = require("../models/book"),
-Comment = require("../models/comment");
+Comment = require("../models/comment"),
+index = require("../middleware/index");
 
 
-router.get("/:id/comments/new", function(req, res) {
+router.get("/:id/comments/new", index.checkLoggedIn,  function(req, res) {
 	var id = req.params.id;
 	res.render("comments/new", {id: id});
 });
 
 
-router.post("/:id/comments", function(req, res) {
+router.post("/:id/comments", index.checkOwnership,  function(req, res) {
 
 	var id = req.params.id
 
@@ -36,7 +37,7 @@ router.post("/:id/comments", function(req, res) {
 });
 
 
-router.get("/:id/comments/:comment_id/edit", function(req, res) {
+router.get("/:id/comments/:comment_id/edit", index.checkOwnership,  function(req, res) {
 	var id = req.params.id
 	var comment_id = req.params.comment_id
 
@@ -51,7 +52,7 @@ router.get("/:id/comments/:comment_id/edit", function(req, res) {
 })
 
 
-router.put("/:id/comments/:comment_id", function(req, res) {
+router.put("/:id/comments/:comment_id", index.checkOwnership, function(req, res) {
 	var id = req.params.id;
 	var comment_id = req.params.comment_id;
 	var text = req.body.comment;
@@ -65,7 +66,7 @@ router.put("/:id/comments/:comment_id", function(req, res) {
 	})
 });
 
-router.delete("/:id/comments/:comment_id", function(req, res) {
+router.delete("/:id/comments/:comment_id", index.checkOwnership, function(req, res) {
 	var id = req.params.id;
 	var comment_id = req.params.comment_id;
 

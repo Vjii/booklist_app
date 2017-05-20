@@ -8,7 +8,9 @@ passport = require("passport"),
 LocalStrategy = require("passport-local"),
 passportLocalMongoose = require("passport-local-mongoose"),
 session = require("express-session"),
+acl = require("acl"),
 back = require("express-back"),
+// SETUP - Models
 index = require("./middleware/index"),
 User = require("./models/user"),
 Collection = require("./models/collection"),
@@ -19,6 +21,7 @@ seedDB = require("./seed");
 
 //CONFIG
 mongoose.connect("mongodb://localhost/booklist_app");
+
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
@@ -41,7 +44,11 @@ passport.deserializeUser(User.deserializeUser());
 
 //LOCALS
 app.use(function(req, res, next) {
-	res.locals.currentUser = req.user;
+	if (req.user) {
+		res.locals.currentUser = req.user;
+	} else {
+		res.locals.currentUser = null;
+	}
 	next();
 });
 

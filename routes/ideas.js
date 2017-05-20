@@ -9,7 +9,7 @@ index = require("../middleware/index");
 
 // REMOVE ALL THESE VARS LATER, IT LOOKS MESSY AF
 
-router.get("/:id/books/:book_id/ideas", index.isLoggedIn, function(req, res) {
+router.get("/:id/books/:book_id/ideas", index.checkOwnership, function(req, res) {
 	var id = req.params.id
 	var book_id = req.params.book_id;
 	Idea.model.find({}, function(err, ideas) {
@@ -27,7 +27,7 @@ router.get("/:id/books/:book_id/ideas", index.isLoggedIn, function(req, res) {
 
 
 // New Route
-router.get("/:id/books/:book_id/ideas/new", function(req, res) {
+router.get("/:id/books/:book_id/ideas/new", index.checkOwnership, function(req, res) {
 	Collection.findById(req.params.id, function(err, collection) {
 		if (err) {return console.log(err); }
 		var book = collection.books.id(req.params.book_id);
@@ -37,7 +37,7 @@ router.get("/:id/books/:book_id/ideas/new", function(req, res) {
 
 
 // Create Route
-router.post("/:id/books/:book_id/ideas", function(req, res) {
+router.post("/:id/books/:book_id/ideas", index.checkOwnership, function(req, res) {
 	var id = req.params.id
 	var book_id = req.params.book_id;
 	var idea = req.body.idea;
@@ -55,7 +55,7 @@ router.post("/:id/books/:book_id/ideas", function(req, res) {
 });
 
 // Edit Route
-router.get("/:id/books/:book_id/ideas/:idea_id/edit", function(req, res) {
+router.get("/:id/books/:book_id/ideas/:idea_id/edit", index.checkOwnership,  function(req, res) {
 	var id = req.params.id;
 	var book_id = req.params.book_id;
 	var idea_id = req.params.idea_id;
@@ -71,7 +71,7 @@ router.get("/:id/books/:book_id/ideas/:idea_id/edit", function(req, res) {
 });
 
 // Update Route
-router.put("/:id/books/:book_id/ideas/:idea_id", function(req, res) {
+router.put("/:id/books/:book_id/ideas/:idea_id", index.checkOwnership, function(req, res) {
 	var id = req.params.id
 	var book_id = req.params.book_id;
 	var idea_id = req.params.idea_id
@@ -86,13 +86,12 @@ router.put("/:id/books/:book_id/ideas/:idea_id", function(req, res) {
 		idea.save();
 		book.save();
 		collection.save();
-		res.redirect(req.prevPrevPath);
 	});
 });
 
 
-// Update Route
-router.delete("/:id/books/:book_id/ideas/:idea_id", function(req, res) {
+// Delete Route
+router.delete("/:id/books/:book_id/ideas/:idea_id", index.checkOwnership, function(req, res) {
 	var id = req.params.id;
 	var book_id = req.params.book_id;
 	var idea_id = req.params.idea_id;

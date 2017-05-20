@@ -19,22 +19,24 @@ router.get("/", function(req, res) {
 });
 
 //Collections New Route - form to add collection
-router.get("/new", index.isLoggedIn, function(req, res) {
+router.get("/new", index.checkLoggedIn, function(req, res) {
 	res.render("collections/new");
 });
 
 //Collections Create Route - add collection
-router.post("/", function(req, res) {
-	var title = req.body.title;
+router.post("/", index.checkLoggedIn, function(req, res) {
 
-	Collection.create({title: title }, function(err, collection) {
+	Collection.create({}, function(err, collection) {
 		if(err) {
 			console.log(err);
 			return res.redirect("/collections/new");
 		}
-		collection.author.id = req.user.id;
-		collection.author.username = req.user.username;
-		collection.author.image = req.user.image;
+		collection.title = req.body.title;
+		collection.author = {
+			id: req.user._id,
+			username: req.user.username,
+			image: req.user.image
+		}
 
 		collection.save();
 		console.log("USER: " + req.user)
@@ -51,7 +53,7 @@ router.get("/:id", function(req, res) {
 
 		} else {
 			console.log("COLLECTION.BOOKS: " + collection.books)
-			res.render("collections/show",{collection: collection})
+			res.render("collections/show", {collection: collection})
 		}
 	})
 });
