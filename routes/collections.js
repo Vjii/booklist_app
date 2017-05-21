@@ -5,8 +5,6 @@ Collection = require("../models/collection"),
 User = require("../models/user"),
 Book = require("../models/book");
 
-
-
 //Collections Index Route
 router.get("/", function(req, res) {
 	Collection.find({}, function(err, collections) {

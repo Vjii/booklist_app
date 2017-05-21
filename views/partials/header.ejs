@@ -20,7 +20,11 @@
 							<li class="navigation__li"><a class="button__authentication" href="/register">Register</a></li>
 							<li class="navigation__li"><a class="button__authentication" href="/login">Login</a></li>
 						<% } else {%>
-							<li class="navigation__li"><h3 class="heading_white authentication__user">Signed in as <strong><%= currentUser.username %></strong></h3></li>
+							<li class="navigation__li">
+							<a class="authentication__user-link" href="/users/<%=currentUser._id%>">
+								<h3 class="heading_white authentication__user">Signed in as <strong><%= currentUser.username %></strong>
+								</h3></li>
+							</a>
 							<li class="navigation__li"><a class="button__authentication" href="/logout">Logout</a></li>
 						<%} %>
 						<li class="navigation__li"><a href="/">Home</a></li>

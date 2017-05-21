@@ -1,0 +1,20 @@
+<% include ../partials/header %>
+
+		<div class="row">
+			<div class="col">
+				<a class="button" href="/collections/new">Create your own collection</a>
+			</div>
+		</div>
+		<div class="row">
+					<div class="col">
+						<div class="names">
+							<h3 class="heading_margin-small"><%= user.username %></h3>
+						</div>
+
+						<div class="profiles">
+							<img class="image image_rounded" src="<%= user.image%>">
+						</div>
+					</div>
+		</div>
+
+<% include ../partials/footer %>

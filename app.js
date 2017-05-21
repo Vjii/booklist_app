@@ -59,6 +59,7 @@ var booksRoutes = require("./routes/books")
 var commentRoutes = require("./routes/comments");
 var indexRoutes = require("./routes/index");
 var ideaRoutes = require("./routes/ideas");
+var usersRoutes = require("./routes/users");
 
 //ROUTES
 app.use("/collections", collectionsRoutes);
@@ -66,6 +67,7 @@ app.use("/collections", booksRoutes);
 app.use("/collections", commentRoutes);
 app.use("/", indexRoutes);
 app.use("/collections", ideaRoutes);
+app.use("/users", usersRoutes);
 
 //SEED DATABASE
 seedDB();
