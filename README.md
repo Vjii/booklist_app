@@ -1,1 +1,1 @@
-Web app for composing and sharing one's list of most useful books, along with descriptions and justification of their value. 
+Work in progress. Estimated completion date - 30.05. 
