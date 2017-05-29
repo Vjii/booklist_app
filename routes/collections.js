@@ -46,13 +46,13 @@ router.post("/", index.checkLoggedIn, function(req, res) {
 //Collections - Show Route
 router.get("/:id", function(req, res) {
 	var id = req.params.id
-	Collection.findById(id).populate("comments").exec(function(err, collection){
-		if(err) {
+	Collection.findById(id).populate("books comments").exec(function(err, collection){
+		if (err) {return console.log(err);}
 
-		} else {
-			console.log("COLLECTION.BOOKS: " + collection.books)
-			res.render("collections/show", {collection: collection})
-		}
+
+		console.log("COLLECTION.BOOKS: " + collection.books)
+		res.render("collections/show", {collection: collection})
+
 	})
 });
 

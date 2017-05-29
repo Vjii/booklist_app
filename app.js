@@ -18,6 +18,8 @@ Comment = require("./models/comment"),
 Book = require("./models/book"),
 seedDB = require("./seed");
 
+//SEED DATABASE
+seedDB();
 
 //CONFIG
 mongoose.connect("mongodb://localhost/booklist_app");
@@ -69,12 +71,11 @@ app.use("/", indexRoutes);
 app.use("/collections", ideaRoutes);
 app.use("/users", usersRoutes);
 
-//SEED DATABASE
-seedDB();
 
 app.get("/", function(req, res) {
 	res.render("landing");
 });
+
 
 app.listen(3000, function() {
 	console.log("Booklist app server listening.")

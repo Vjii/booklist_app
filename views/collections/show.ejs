@@ -1,7 +1,7 @@
 <% include ../partials/header %>
 
 		<div class="row profile">
-
+				<div class="profile__background"></div>
 				<div class="col profile__body">
 					<h1 class="heading__title heading_margin-small">My list of ideas - <%= collection.title%></h1>
 					<p class="paragraph">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
@@ -10,7 +10,7 @@
 				<div class="col profile__presentation profile__presentation-vertical">
 					<div>
 						<h1 class="heading__title heading_margin-small"><%= collection.author.username %></h1>
-						<img class="image image_rounded" src="<%= collection.author.image%>">
+						<img class="image image_rounded" src"<%= collection.author.image%>">
 
 						<% if (currentUser && collection.author.id.equals(currentUser._id)) { %>
 							<a href="/collections/<%= collection._id%>/books/new">
@@ -22,9 +22,9 @@
 				</div>
 		</div>
 
+	<section class="book__container">
 	<% collection.books.forEach(function(book) { %>
 		<div class="row book">
-
 				<div class="col book__presentation">
 					<h2 class="heading_margin-small heading__title"><%= book.title %></h2>
 					<img class="image book__image image_rounded" src="<%= book.image %>">
@@ -54,6 +54,7 @@
 					<% }) %>
 				<% } %>
 
+
 				<% if (currentUser && collection.author.id.equals(currentUser._id)) { %>
 					<div class="book__buttons">
 						<a class="button--horizontal" href="/collections/<%= collection._id%>/books/<%= book._id%>/ideas/new">
@@ -71,7 +72,7 @@
 
 		</div>
 	<% }); %>
-
+	</section>
 
 	<div class="row comments__title">
 		<div class="col">
@@ -81,25 +82,27 @@
 
 	<% collection.comments.forEach(function(comment) { %>
 		<div class="row comments">
-			<div class="col">
-				<div class="profile__presentation">
-					<h3 class="profile__name heading__title vertical_margin-small"><%= comment.author.username%></h3>
-					<img class="image image__thumbnail image_rounded" src="<%= comment.author.image%>">
-				</div>
-				<div class="comments__comment">
-					<p class="paragraph"><%= comment.text%></p>
-
-					<% if (currentUser && collection.author.id.equals(currentUser._id)) { %>
-						<div class="comments__buttons">
-							<a href="/collections/<%= collection._id%>/comments/<%= comment._id%>/edit">
-							<button class="button button__edit button_margin-horizontal">Edit</button>
-							</a>
-							<form action="/collections/<%= collection._id%>/comments/<%= comment._id%>?_method=DELETE" method="POST">
-								<button class="button button__delete ">Delete</button>
-							</form>
-						</div>
-					<% } %>
-				</div>
+			<div class="col profile__presentation--comments">
+				<h3 class="profile__name--comments heading__title"><%= comment.author.username%></h3>
+				<img class="image image__thumbnail image_rounded" src="<%= comment.author.image%>">
+			</div>
+			<div class="col profile__presentation--date">
+				<p>Posted on
+				<%= comment.date.toUTCString() %>
+				</p>
+			</div>
+			<div class="col comments__comment">
+				<p class="paragraph"><%= comment.text%></p>
+				<% if (currentUser && collection.author.id.equals(currentUser._id)) { %>
+					<div class="comments__buttons">
+						<a href="/collections/<%= collection._id%>/comments/<%= comment._id%>/edit">
+						<button class="button button__edit button_margin-horizontal">Edit</button>
+						</a>
+						<form action="/collections/<%= collection._id%>/comments/<%= comment._id%>?_method=DELETE" method="POST">
+							<button class="button button__delete ">Delete</button>
+						</form>
+					</div>
+				<% } %>
 			</div>
 		</div>
 	<% })%>

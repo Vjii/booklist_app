@@ -12,7 +12,7 @@ var CommentSchema = new mongoose.Schema({
 		username: String,
 		image: String
 	},
-	date: {type: Date, default: Date.now}
+	date: {type: Date, default: Date.now()}
 });
 
 module.exports = mongoose.model("Comment", CommentSchema);

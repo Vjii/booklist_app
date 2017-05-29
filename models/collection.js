@@ -13,7 +13,12 @@ var CollectionSchema = new mongoose.Schema({
 	username: String,
 	image: String
 	},
-	books: [Book.schema],
+	books: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "Book"
+		}
+	],
 	comments: [
 		{
 			type: mongoose.Schema.Types.ObjectId,
