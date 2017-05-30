@@ -5,34 +5,35 @@
 		 <meta name="viewport" content="width=device-width">
 		<title>Collection of one's favorite books</title>
 		<link href="https://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet">
-		<link rel="stylesheet" href="/stylesheets/reset.css">
+		<link rel="stylesheet" href="/stylesheets/normalize.css">
 		<link rel="stylesheet" href="/stylesheets/grid.css">
 		<link rel="stylesheet" href="/stylesheets/main.css">
 	</head>
 	<body>
-		<header class="header header_background">
-			<div class="header__container">
+		<header class="grid__row--margin-none header">
+			<h1 class="header__title">I-Hub</h1>
+
 				<nav class="navigation">
 					<button class="navigation__hamburger navigation__mobile-closed "></button>
-					<h1 class="title header__title heading_white heading_center">Signature books</h1>
 					<ul class="navigation__ul navigation_display">
 						<% if (!currentUser) { %>
-							<li class="navigation__li"><a class="button__authentication" href="/register">Register</a></li>
-							<li class="navigation__li"><a class="button__authentication" href="/login">Login</a></li>
+							<li class="navigation__li"><a class="navigation__link button__authentication" href="/register">Register</a></li>
+							<li class="navigation__li"><a class="navigation__link button__authentication" href="/login">Login</a></li>
 						<% } else {%>
 							<li class="navigation__li">
 							<a class="authentication__user-link" href="/users/<%=currentUser._id%>">
 								<h3 class="heading_white authentication__user">Signed in as <strong><%= currentUser.username %></strong>
 								</h3></li>
 							</a>
-							<li class="navigation__li"><a class="button__authentication" href="/logout">Logout</a></li>
+							<li class="navigation__li"><a class="navigation__link button__authentication" href="/logout">Logout</a></li>
 						<%} %>
-						<li class="navigation__li"><a href="/">Home</a></li>
-						<li class="navigation__li"><a href="/collections">Collections</a></li>
+						<li class="navigation__li"><a class="navigation__link" href="/">Home</a></li>
+						<li class="navigation__li"><a class="navigation__link" href="/collections">Collections</a></li>
 					</ul>
 				</nav>
-			</div>
+
 		</header>
+
 		<div class="container">
 
 
