@@ -50,6 +50,10 @@ input:active {
 			margin: 0;
 		}
 
+		.grid__row--padding-none {
+			padding: 0;
+		}
+
 
 
 
@@ -79,24 +83,23 @@ input:active {
 	.navigation__ul {
 		position: absolute;
 		width: 100%;
-		max-height: 0;
+		height: 0;
 		margin-top: 4.688rem;
 		padding: 0;
 		overflow: hidden;
-		background: rgba(13, 12, 13, .7);
+		background: rgba(13, 12, 13, .5);
 		border-bottom: 1px solid #717171;
-		-webkit-transition: max-height 1.5s, background 1.25s ease-out;
-		-moz-transition: max-height 1.5s, background 1.25s ease-out;
-		-o-transition: max-height 1.5s, background 1.25s ease-out;
-		-ms-transition: max-height 1.5s, background 1.25s ease-out;
-		transition: max-height 1.5s, background 1.25s ease-out, padding 2s ease-out;
-
+		-webkit-transition: height 1.25s, background 1.25s ease-out, padding 1.5s ease-out;
+		-moz-transition: height 1.25s, background 1.25s ease-out, padding 1.5s ease-out;
+		-o-transition: height 1.25s, background 1.25s ease-out, padding 1.5s ease-out;
+		-ms-transition: height 1.25s, background 1.25s ease-out, padding 1.5s ease-out;
+		transition: height 1.25s, background 1.25s ease-out, padding 1.5s ease-out;
 	}
+
 		.navigation__ul--show {
-			border-top: 1px solid #717171;
-			max-height: 90vh;
-			background: rgba(13, 12, 13, .95);
-			padding-bottom: 3rem;
+			height: calc(100vh - 4.688rem);
+			background: rgba(13, 12, 13, .9);
+			z-index: 1000;
 		}
 
 	.navigation__li {
@@ -153,7 +156,7 @@ input:active {
 	width: 100%;
 	min-height: 4.688rem;
 	box-shadow: 0 0 1px 1px #717171;
-	background: rgba(13, 12, 13, .7);
+	background: rgba(13, 12, 13, .9);
 }
 
 	.header__title {
@@ -213,39 +216,91 @@ input:active {
 
 /* ======= Block - Profile ======= */
 
-.profile__presentation {
-	 display: flex;
-   flex-direction: row-reverse;
-   justify-content: flex-end;
-   background-size: contain;
+.profile {
+
 }
 
-.profile__presentation--background-gray {
-   margin: -15px -15px 0 -15px;
-	 padding: 15px;
+.profile--theme-dark {
+	background: rgba(13, 12, 13, 0.9);
+	border: 1px solid #717171;
+	border-radius: 5px;
+}
+
+.profile--theme-light {
    background: rgba(255, 255, 255, 0.1);
 }
+
+
+.profile--shape-circular {
+	position: relative;
+	width: 80%;
+	margin: 0 auto;
+	padding: 2rem 0;
+  border-radius: 100%;
+}
+
+.profile--shape-circular:after {
+	content: " ";
+	position: absolute;
+	display: block;
+	left: 7.5%;
+	top: 20%;
+	bottom: 20%;
+	right: 7.5%;
+	padding:  0;
+	border: 1px solid #717171;
+	border-radius: 100%;
+	background: rgba(255, 255, 255, 0.1);
+}
+
+
+.profile__content--encircled {
+	position: absolute;
+	width: 60%;
+	height: 60%;
+	top: 20%;
+	left: 20%;
+	border-top-right-radius: 100vh;
+	border-top-left-radius: 100vh;
+}
+
+
+.profile__presentation {
+	width: 75%;
+	margin: 0 auto;
+}
+
+.profile__name {
+	margin: 0;
+
+}
+
+
+	.profile__name--align-center {
+		text-align: center;
+	}
+
+	.profile__name--adjust-encircled {
+		position: absolute;
+    left: 0;
+    right: 0;
+	}
+
+	.profile__name--margin-none {
+
+	}
 
 
 .profile__body {
 	max-width: 250px;
 }
 
-	.profile__name {
-		margin-left: 10px;
-		max-width: 100px;
-	}
 
-
-		.profile__presentation-vertical {
-				flex-direction: column;
-			}
 
 
 /* ======= Block - Book ======= */
 
 	.book {
-		position: relative;
     background: rgba(13, 12, 13, 0.7);
 		border: 1px solid #717171;
 	}
@@ -292,9 +347,51 @@ input:active {
 
 /* ======= Block - Image ======= */
 .image {
-	width: 250px;
-	width: 250px;
+	position: absolute;
+	width: 100%;
+	height: 100%;
 }
+
+	.image--width-thin {
+			width: 80%;
+		}
+
+
+	.image__container {
+		position: relative;
+		overflow: hidden;
+		width: 50%;
+		padding-bottom: 50%;
+		border-radius: 5px;
+	}
+
+		.image__container--size-small {
+			width: 30%;
+			padding-bottom: 30%;
+		}
+
+		.image__container--size-thumbnail {
+			width: 15%;
+			padding-bottom: 15%;
+		}
+
+		.image__container--square-center {
+			margin: 0 auto;
+		}
+
+		.image__container--circle-center {
+			position: absolute;
+	    left: 35%;
+	    top: 35%;
+	    border: 1px solid #717171;
+		}
+
+		.image__container--thin-center {
+			margin-right: 20%;
+		}
+
+
+
 
 	.image__thumbnail {
 		width: 50px;
@@ -531,6 +628,10 @@ input:active {
 			max-width: none;
 		}
 
+		.profile--shape-circular {
+			flex: 0 0 80%;
+		  padding: 4rem 0;
+		}
 
 
 	/* ======= Block - Book ======= */
@@ -638,7 +739,7 @@ input:active {
 
 	.navigation__ul {
 		position: static;
-		max-height: 100%;
+		height: 100%;
 		margin: 0;
 		border: none;
 	}
@@ -649,9 +750,6 @@ input:active {
 
 		}
 
-			.navigation__link {
-
-			}
 
 	.navigation_display {
 		display: flex;

@@ -1,33 +1,48 @@
 <% include ../partials/header %>
 
-		<div class="grid__row profile">
-				<div class="profile__background"></div>
-				<div class="col profile__body">
+	<section>
+		<div class="grid__row  profile__container--shape-circular">
+			<div class="col profile--shape-circular profile--theme-dark">
+					<h3 class="profile__name profile__name--align-center"><%= collection.author.username %></h3>
+
+			</div>
+		</div>
+
+		<div class="grid__row profile--theme-dark">
+			<div class="col ">
+				<div class="image__container image__container--size-small ">
+					<img class="image image_rounded" src="<%= collection.author.image %>">
+
+					<% if (currentUser && collection.author.id.equals(currentUser._id)) { %>
+					<a href="/collections/<%= collection._id%>/books/new">
+					<p><button class="button button__full vertical_margin-small">Add a new book</button>
+					</p>
+					</a>
+					<% } %>
+				</div>
+			</div>
+
+
+			<div class="col profile--theme-dark">
+				<div class="profile__body">
 					<h1 class="heading__title heading_margin-small">My list of ideas - <%= collection.title%></h1>
 					<p class="paragraph">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
 				</div>
-
-				<div class="col profile__presentation profile__presentation-vertical">
-					<div>
-						<h1 class="heading__title heading_margin-small"><%= collection.author.username %></h1>
-						<img class="image image_rounded" src"<%= collection.author.image%>">
-
-						<% if (currentUser && collection.author.id.equals(currentUser._id)) { %>
-							<a href="/collections/<%= collection._id%>/books/new">
-								<p><button class="button button__full vertical_margin-small">Add a new book</button></p>
-							</a>
-						<% } %>
-
-					</div>
-				</div>
+			</div>
 		</div>
+
+	</section>
+
 
 	<section class="book__container">
 	<% collection.books.forEach(function(book) { %>
 		<div class="grid__row book">
 				<div class="col book__presentation">
 					<h2 class="heading_margin-small heading__title"><%= book.title %></h2>
-					<img class="image book__image image_rounded" src="<%= book.image %>">
+					<div class="image__container image__container--thin-center">
+						<img class="image image--width-thin book__image image_rounded" src="<%= book.image %>">
+					</div>
+
 				</div>
 
 			<div class="col book__body">
@@ -82,10 +97,12 @@
 
 	<% collection.comments.forEach(function(comment) { %>
 		<div class="grid__row comment">
-			<div class="profile">
-				<div class="col profile__presentation profile__presentation--background-gray">
+			<div class="">
+				<div class="col profile__presentation profile__presentation--theme-light">
+					<div class="image__container image__container--size-thumbnail">
+						<img class="image image_rounded" src="<%= comment.author.image%>">
+					</div>
 					<h3 class="profile__name"><%= comment.author.username%></h3>
-					<img class="image image__thumbnail image_rounded" src="<%= comment.author.image%>">
 				</div>
 			</div>
 
