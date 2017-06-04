@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html>
-	<head lang="en">
+<html lang="en">
+	<head>
 		<meta charset="utf-8">
 		 <meta name="viewport" content="width=device-width">
 		<title>Collection of one's favorite books</title>
@@ -10,29 +10,48 @@
 		<link rel="stylesheet" href="/stylesheets/main.css">
 	</head>
 	<body>
-		<header class="grid__row grid__row--margin-none grid__row--padding-none header">
-			<h1 class="header__title">I-Hub</h1>
 
-				<nav class="navigation">
-					<button class="navigation__hamburger navigation__mobile-closed "></button>
-					<ul class="navigation__ul navigation_display">
-						<% if (!currentUser) { %>
-							<li class="navigation__li"><a class="navigation__link button__authentication" href="/register">Register</a></li>
-							<li class="navigation__li"><a class="navigation__link button__authentication" href="/login">Login</a></li>
-						<% } else {%>
-							<li class="navigation__li">
-							<a class="authentication__user-link" href="/users/<%=currentUser._id%>">
-								<h3 class="heading_white authentication__user">Signed in as <strong><%= currentUser.username %></strong>
-								</h3></li>
+		<div class="site-head">
+			<div class="grid__row">
+				<div class="grid__col">
+					<header class="header">
+						<div class="header__presenters">
+							<a class="header__logo-container" href="/">
+								<img class="header__logo" src="../images/logo-full.png" alt="Cerebrate">
 							</a>
-							<li class="navigation__li"><a class="navigation__link button__authentication" href="/logout">Logout</a></li>
-						<%} %>
-						<li class="navigation__li"><a class="navigation__link" href="/">Home</a></li>
-						<li class="navigation__li"><a class="navigation__link" href="/collections">Collections</a></li>
-					</ul>
-				</nav>
+							<button class="navigation__mobile-switch">
+								<span class="navigation__mobile-hamburger"></span>
+							</button>
+						</div>
 
-		</header>
+						<nav class="navigation">
+							<ul class="navigation__list">
+								<% if (!currentUser) { %>
+									<li class="navigation__item"><a class="navigation__item-link button__authentication" href="/register">Register</a></li>
+									<li class="navigation__item"><a class="navigation__item-link button__authentication" href="/login">Login</a></li>
+								<% } else {%>
+									<li class="navigation__item">
+									<a class="authentication__user-link" href="/users/<%=currentUser._id%>">
+										<h3 class="heading_white authentication__user">Signed in as <strong><%= currentUser.username %></strong>
+										</h3></li>
+									</a>
+									<li class="navigation__item"><a class="navigation__item-link button__authentication" href="/logout">Logout</a></li>
+								<%} %>
+								<li class="navigation__item"><a class="navigation__item-link" href="/">Home</a></li>
+								<li class="navigation__item"><a class="navigation__item-link" href="/collections">Collections</a></li>
+							</ul>
+						</nav>
+
+
+
+
+					</header>
+				</div>
+			</div>
+		</div>
+
+
+
 
 		<div class="container">
 

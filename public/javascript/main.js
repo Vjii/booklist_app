@@ -1,33 +1,12 @@
-// ===================== Re-usable components =====================
+document.addEventListener("DOMContentLoaded", function(event) {
 
+	var buttonMobileMenu = document.getElementsByClassName("navigation__mobile-switch");
 
+	if (buttonMobileMenu[0]) {
+		buttonMobileMenu[0].addEventListener("click", function() {
+			document.getElementsByClassName("navigation__mobile-hamburger")[0].classList.toggle("navigation__mobile-switch--open");
+			document.getElementsByClassName("navigation")[0].classList.toggle("navigation__mobile--open")
+		});
+	}
 
-// ======= Toggle Visibility =======
-
-
-function toggleVisibility(catchElement, className) {
-   var element = document.getElementsByClassName(catchElement);
-   element[0].classList.toggle(className);
-}
-
-// ======= Toggle a Class =======
-
-function toggleClass(catchElement, className) {
-	var element = document.getElementsByClassName(catchElement);
-	element[0].classList.toggle(className);
-}
-
-
-
-// ===================== Implementions =====================
-
-
-
-// ======= Navigation - Toggle Visibility =======
-
-var navigation = document.getElementsByClassName("navigation__hamburger");
-
-navigation[0].addEventListener("click", function() {
-	toggleVisibility("navigation__ul", "navigation__ul--show");
-	toggleClass("navigation__hamburger", "navigation__mobile-open")
 });
