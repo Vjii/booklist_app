@@ -5,27 +5,59 @@
 	  	<h1 class="heading__title vertical_margin-small">Add ideas to "<%= book.title%>"</h1>
 
 			<div class="form__ideas__container">
-				<form class="form form_rounded" action="/collections/<%= id %>/books/<%= book._id %>/ideas" method="POST">
+				<form class="form form_rounded" action="/collections/<%= collection._id %>/books/<%= book._id %>/ideas" method="POST">
 					<input class="form__input form_rounded vertical_margin-small" type="text" name="idea[name]" placeholder="Name the idea">
 					<textarea class="form__textarea form_rounded vertical_margin-small" name="idea[description]" placeholder="Make notes about the idea"></textarea>
-					<button class="button button__add vertical_margin-small">Submit</button>
+					<button class="">Submit</button>
 				</form>
-				<a class="vertical_margin-small" href="/collections/<%= id%>">
-					<button class="button button__add">Done</button>
+				<a class="vertical_margin-small" href="/collections/<%= collection._id %>">
+					<button class="">Done</button>
 				</a>
 			</div>
 
 			<% if (book.ideas) { %>
-			<h1 class="heading__title vertical_margin-small">Ideas added:</h1>
-				<% book.ideas.forEach(function(idea) { %>
-					<div class="book__ideas">
-						<h3 class="heading__title vertical_margin-small"><%= idea.name%></h3>
-						<p class="vertical_margin-small text_justified"><%= idea.description%></p>
 
-						<a href="/collections/<%= id %>/books/<%= book._id%>/ideas/<%= idea._id%>/edit">
-							<button class="button button__edit button_margin-horizontal button_margin-vertical">Edit idea</button>
-						</a>
+			<div class="row">
+				<div class="grid__col">
+					<h1>Edit existing ideas: </h1>
 				</div>
+
+
+				<% book.ideas.forEach(function(idea) { %>
+
+
+						<div class="grid__col">
+					  	<h1 class="heading__title vertical_margin-small">Edit idea notes</h1>
+
+							<div class="form__ideas__container">
+									<form class="form form_rounded" action="/collections/<%= collection._id%>/books/<%= book._id %>/ideas/<%= idea._id%>?_method=PUT" method="POST">
+										<input class="form__input form_rounded vertical_margin-small" type="text" name="idea[name]" value="<%= idea.name%>">
+										<textarea class="form__textarea form_rounded vertical_margin-small" name="idea[description]"><%= idea.description %></textarea>
+										<button class="button button__add vertical_margin-small">Submit changes</button>
+									</form>
+									<a class="vertical_margin-small" href="/collections/<%= collection._id%>">
+										<button class="button button__add">Done</button>
+									</a>
+								</div>
+
+							<a href="/collections/<%= collection._id %>/books/<%= book._id%>/ideas/<%= idea._id%>">
+								<button class="">Submit changes</button>
+							</a>
+
+						</div>
+					</div>
+
+
+
+
+
+
+
+
+
+
+
+
 				<% }) %>
 			<% } %>
 

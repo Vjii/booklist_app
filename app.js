@@ -11,11 +11,12 @@ session = require("express-session"),
 acl = require("acl"),
 back = require("express-back"),
 // SETUP - Models
-index = require("./middleware/index"),
 User = require("./models/user"),
-Collection = require("./models/collection"),
-Comment = require("./models/comment"),
+Idea = require("./models/idea"),
 Book = require("./models/book"),
+Comment = require("./models/comment"),
+Collection = require("./models/collection"),
+index = require("./middleware/index"),
 seedDB = require("./seed");
 
 //SEED DATABASE
@@ -56,12 +57,13 @@ app.use(function(req, res, next) {
 
 
 //REQUIRE ROUTES
-var collectionsRoutes = require("./routes/collections");
-var booksRoutes = require("./routes/books")
+
 var commentRoutes = require("./routes/comments");
-var indexRoutes = require("./routes/index");
-var ideaRoutes = require("./routes/ideas");
 var usersRoutes = require("./routes/users");
+var ideaRoutes = require("./routes/ideas");
+var booksRoutes = require("./routes/books");
+var collectionsRoutes = require("./routes/collections");
+var indexRoutes = require("./routes/index");
 
 //ROUTES
 app.use("/collections", collectionsRoutes);

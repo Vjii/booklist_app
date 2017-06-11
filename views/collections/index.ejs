@@ -13,7 +13,7 @@
 							<h3 class="heading_margin-small"><%= collection.author.username %></h3>
 						</div>
 						<div class="profiles">
-							<img class="image image_rounded" src="<%= collection.author.image%>">
+
 							<a href="/collections/<%= collection._id%>">
 								<p>
 									<button class="button button__full vertical_margin-small">View the collection</button>
@@ -21,8 +21,10 @@
 							</a>
 							<p>
 								<%= collection.description%>
+								<img class="image " src="<%= collection.author.image%>">
 							</p>
 						</div>
+
 					</div>
 
 				<% }); %>
