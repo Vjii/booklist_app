@@ -1,22 +1,22 @@
 var express = require("express"),
 app = require("../app"),
 router = express.Router(),
-Collection = require("../models/collection"),
 User = require("../models/user"),
-Book = require("../models/book"),
 Idea = require("../models/idea"),
-index = require("../middleware/index");
+Collection = require("../models/collection"),
+middleware = require("../middleware/index");
 
 // REMOVE ALL THESE VARS LATER, IT LOOKS MESSY AF
 
-router.get("/:id/books/:book_id/ideas", index.checkOwnership, function(req, res) {
+//Index route
+router.get("/:id/books/:book_id/ideas", middleware.checkOwnership, function(req, res) {
 	var id = req.params.id
 	var book_id = req.params.book_id;
-	Idea.model.find({}, function(err, ideas) {
+	Idea.find({}, function(err, ideas) {
 		if (err){
 			return console.log(err);
 		}
-		Book.model.findById(book_id, function(err, book){
+		Book.findById(book_id, function(err, book){
 			if(err) {
 				return console.log(err);
 			}
@@ -27,17 +27,20 @@ router.get("/:id/books/:book_id/ideas", index.checkOwnership, function(req, res)
 
 
 // New Route
-router.get("/:id/books/:book_id/ideas/new", index.checkOwnership, function(req, res) {
-	Collection.findById(req.params.id, function(err, collection) {
-		if (err) {return console.log(err); }
-		var book = collection.books.id(req.params.book_id);
-		res.render("ideas/new", {id: req.params.id, book: book})
-	});
+router.get("/:id/books/:book_id/ideas/new", middleware.checkOwnership, function(req, res) {
+
+		Collection.findById(req.params.id, function(err, collection) {
+			if (err) {return console.log(err);}
+
+			var book = collection.books.id(req.params.book_id);
+
+			res.render("ideas/new", {collection: collection, book: book});
+		});
 });
 
 
 // Create Route
-router.post("/:id/books/:book_id/ideas", index.checkOwnership, function(req, res) {
+router.post("/:id/books/:book_id/ideas", middleware.checkOwnership, function(req, res) {
 	var id = req.params.id
 	var book_id = req.params.book_id;
 	var idea = req.body.idea;
@@ -55,32 +58,23 @@ router.post("/:id/books/:book_id/ideas", index.checkOwnership, function(req, res
 });
 
 // Edit Route
-router.get("/:id/books/:book_id/ideas/:idea_id/edit", index.checkOwnership,  function(req, res) {
-	var id = req.params.id;
-	var book_id = req.params.book_id;
-	var idea_id = req.params.idea_id;
-	console.log('IDEA ID: '  + idea_id);
+router.get("/:id/books/:book_id/ideas/:idea_id/edit", middleware.checkOwnership,  function(req, res) {
 
-	Collection.findById(id, function(err, collection) {
+	Collection.findById(req.params.id, function(err, collection) {
 		if(err) {return console.log(err);}
-
-		var book = collection.books.id(book_id);
-		var idea = book.ideas.id(idea_id);
-		res.render("ideas/edit", {id: collection.id, book_id: book.id, idea: idea});
+		var book = collection.books.id(req.params.book_id);
+		var idea = book.ideas.id(req.params.idea_id);
+		res.render("ideas/edit", {id: req.params.id, book: book, idea: idea});
 	});
 });
 
 // Update Route
-router.put("/:id/books/:book_id/ideas/:idea_id", index.checkOwnership, function(req, res) {
-	var id = req.params.id
-	var book_id = req.params.book_id;
-	var idea_id = req.params.idea_id
-	console.log(idea_id);
+router.put("/:id/books/:book_id/ideas/:idea_id", middleware.checkOwnership, function(req, res) {
 
-	Collection.findById(id, function(err, collection) {
+	Collection.findById(req.params.id, function(err, collection) {
 		if(err) { return console.log(err); }
-		var book = collection.books.id(book_id);
-		var idea = book.ideas.id(idea_id);
+		var book = collection.books.id(req.params.book_id);
+		var idea = book.ideas.id(req.params.idea_id);
 		idea.name = req.body.idea.name;
 		idea.description = req.body.idea.description;
 		idea.save();
@@ -91,16 +85,13 @@ router.put("/:id/books/:book_id/ideas/:idea_id", index.checkOwnership, function(
 
 
 // Delete Route
-router.delete("/:id/books/:book_id/ideas/:idea_id", index.checkOwnership, function(req, res) {
-	var id = req.params.id;
-	var book_id = req.params.book_id;
-	var idea_id = req.params.idea_id;
+router.delete("/:id/books/:book_id/ideas/:idea_id", middleware.checkOwnership, function(req, res) {
 
-	Collection.findById(id, function(err, collection) {
+	Collection.findById(req.params.id, function(err, collection) {
 		if (err) { return console.log(err); }
 
-		var book = collection.books.id(book_id);
-		var idea = book.ideas.id(idea_id);
+		var book = collection.books.id(req.params.book_id);
+		var idea = book.ideas.id(req.params.idea_id);
 		book.ideas.pull(idea);
 		book.save();
 		collection.save();

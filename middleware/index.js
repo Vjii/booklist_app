@@ -4,7 +4,7 @@ mongoose = require("mongoose"),
 passport = require("passport"),
 passportLocalMongoose = require("passport-local-mongoose");
 
-var index = {
+var middleware = {
 	checkLoggedIn: function(req, res, next) {
 
 		if (req.isAuthenticated()) {
@@ -43,4 +43,4 @@ var index = {
 
 }
 
-module.exports = index;
+module.exports = middleware;

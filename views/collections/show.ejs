@@ -16,7 +16,7 @@
 
 				<div class="grid__col grid__col--desktop-flex-1 grid__col--no-padding">
 					<div class="profile__body">
-						<h2 class="profile__title">Favorite ideas: <%= collection.title%></h2>
+						<h2 class="profile__title">Favorite ideas: <%= collection.title %></h2>
 						<% if (collection.books !== null) { %>
 							<ul class="profile__list">
 								<% collection.books.forEach(function(book) {%>
@@ -31,10 +31,9 @@
 					</div>
 
 					<% if (currentUser && collection.author.id.equals(currentUser._id)) { %>
-					<a href="/collections/<%= collection._id%>/books/new">
-					<p><button class="button button__full vertical_margin-small">Add a new book</button>
-					</p>
-					</a>
+						<a href="/collections/<%= collection._id%>/books/new">
+							<button class="button">Add a new book</button>
+						</a>
 					<% } %>
 				</div>
 			</div>
@@ -46,9 +45,23 @@
 			<div class="layout__row book">
 					<div class="col book__presentation">
 						<h2 class="heading_margin-small heading__title"><%= book.title %></h2>
-						<div class="image__container image__container--thin-center">
-							<img class="image image--width-thin book__image image_rounded" src="<%= book.image %>">
+						<div class="image__container--thin-center">
+							<img class="" src="<%= book.image %>">
 						</div>
+
+						<% if (currentUser && collection.author.id.equals(currentUser._id)) { %>
+						<div class="book__buttons">
+							<a class="button--horizontal" href="/collections/<%= collection._id%>/books/<%= book._id%>/ideas/new">
+								<button class="button button__edit button_margin-horizontal button_margin-vertical">Add ideas</button>
+							</a>
+							<a class="button--horizontal" href="/collections/<%= collection._id%>/books/<%= book._id%>/edit">
+								<button class="button button__edit button--horizontal button_margin-horizontal button_margin-vertical">Edit book</button>
+							</a>
+							<form class="form--delete" action="/collections/<%= collection._id%>/books/<%= book._id%>?_method=DELETE" method="POST">
+								<button>Delete</button>
+							</form>
+						</div>
+					<% } %>
 
 					</div>
 
@@ -62,11 +75,11 @@
 								<% if (currentUser && collection.author.id.equals(currentUser._id)) { %>
 									<div class="button__container">
 										<a class="button--horizontal" href="/collections/<%= collection._id %>/books/<%= book._id%>/ideas/<%= idea._id%>/edit">
-										<button class="button button__edit button_margin-horizontal button_margin-vertical">Edit idea
-										</button>
+											<button class="button button__edit button_margin-horizontal button_margin-vertical">Edit
+											</button>
 										</a>
 										<form class="button--horizontal" action="/collections/<%= collection._id%>/books/<%= book._id%>/ideas/<%= idea._id%>?_method=DELETE" method="POST">
-											<button class="button button__delete button_margin-vertical">Delete idea
+											<button>Delete
 											</button>
 										</form>
 									</div>
@@ -77,19 +90,6 @@
 					<% } %>
 
 
-					<% if (currentUser && collection.author.id.equals(currentUser._id)) { %>
-						<div class="book__buttons">
-							<a class="button--horizontal" href="/collections/<%= collection._id%>/books/<%= book._id%>/ideas/new">
-								<button class="button button__edit button_margin-horizontal button_margin-vertical">Add ideas</button>
-							</a>
-							<a class="button--horizontal" href="/collections/<%= collection._id%>/books/<%= book._id%>/edit">
-								<button class="button button__edit button--horizontal button_margin-horizontal button_margin-vertical">Edit book</button>
-							</a>
-							<form class="button--horizontal" action="/collections/<%= collection._id%>/books/<%= book._id%>?_method=DELETE" method="POST">
-								<button class="button button__delete button_margin-vertical">Delete</button>
-							</form>
-						</div>
-					<% } %>
 				</div>
 
 			</div>
@@ -129,7 +129,7 @@
 								<button class="button button__edit button_margin-horizontal">Edit</button>
 								</a>
 								<form action="/collections/<%= collection._id%>/comment/<%= comment._id%>?_method=DELETE" method="POST">
-									<button class="button button__delete ">Delete</button>
+									<button class="button button__delete  button--delete">Delete</button>
 								</form>
 							</div>
 						<% } %>

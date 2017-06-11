@@ -1,9 +1,9 @@
 var express = require("express"),
 router = express.Router(),
-index = require("../middleware/index"),
-Collection = require("../models/collection"),
 User = require("../models/user"),
-Book = require("../models/book");
+Collection = require("../models/collection"),
+middleware = require("../middleware/index");
+
 
 //Collections Index Route
 router.get("/", function(req, res) {
@@ -17,12 +17,12 @@ router.get("/", function(req, res) {
 });
 
 //Collections New Route - form to add collection
-router.get("/new", index.checkLoggedIn, function(req, res) {
+router.get("/new", middleware.checkLoggedIn, function(req, res) {
 	res.render("collections/new");
 });
 
 //Collections Create Route - add collection
-router.post("/", index.checkLoggedIn, function(req, res) {
+router.post("/", middleware.checkLoggedIn, function(req, res) {
 
 	Collection.create({}, function(err, collection) {
 		if(err) {
@@ -37,23 +37,19 @@ router.post("/", index.checkLoggedIn, function(req, res) {
 		}
 
 		collection.save();
-		console.log("USER: " + req.user)
-		console.log("COLLECTION: " + collection)
-		res.redirect("/collections/" + collection.id)
+		res.redirect("/collections/" + collection.id);
 	});
 });
 
 //Collections - Show Route
 router.get("/:id", function(req, res) {
-	var id = req.params.id
-	Collection.findById(id).populate("books comments").exec(function(err, collection){
-		if (err) {return console.log(err);}
 
+	Collection.findById(req.params.id).populate("books comments").exec(function(err, collection) {
+		if(err) {return console.log(err);}
 
-		console.log("COLLECTION.BOOKS: " + collection.books)
-		res.render("collections/show", {collection: collection})
+		res.render("collections/show", {collection: collection});
+	});
 
-	})
 });
 
 module.exports = router;

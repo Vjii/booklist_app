@@ -7,9 +7,9 @@ var IdeaSchema = new mongoose.Schema(
 	}
 );
 
-var Idea = mongoose.model("Idea", IdeaSchema);
-
-module.exports = {
-	model: Idea,
-	schema: IdeaSchema
+var Idea = {
+	schema: IdeaSchema,
+	model: mongoose.model("Idea", IdeaSchema)
 }
+
+module.exports = Idea;

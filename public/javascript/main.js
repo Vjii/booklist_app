@@ -9,4 +9,23 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		});
 	}
 
+
+	var buttonsDelete = document.getElementsByClassName("form--delete");
+
+	if(buttonsDelete.length > 0) {
+
+		for (var i = 0; i < buttonsDelete.length; i++) {
+			buttonsDelete[i].addEventListener("submit", function(event) {
+				if (!window.confirm("You are about to permanently delete this position and all its contents. Are you sure?")) {
+						event.preventDefault();
+						return false;
+						console.log("Form submission cancelled.")
+				}
+			});
+		}
+	}
+
+
+
+
 });

@@ -1,15 +1,21 @@
 var mongoose = require("mongoose");
 var Idea = require("./idea");
 
+var Idea = Idea.schema;
+
 var BookSchema = new mongoose.Schema({
 	title: String,
   image: String,
-	ideas: [Idea.schema]
+	ideas: [
+		{
+			name: String,
+			description: String
+		}
+	]
 });
 
-var Book = mongoose.model("Book", BookSchema);
-
-module.exports = {
-	model: Book,
-	schema: BookSchema
+var Book = {
+	schema: BookSchema,
+	model: mongoose.model("Book", BookSchema)
 }
+module.exports = Book;
