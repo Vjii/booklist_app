@@ -185,9 +185,6 @@ input:active {
 	border-bottom: 1px solid #717171;
 }
 
-
-
-
 .navigation {
 	position: absolute;
 	left: 0;
@@ -252,7 +249,7 @@ input:active {
 			.navigation__list {
 				display: -webkit-box;
 				display: -ms-flexbox;
-				display: flex;
+				display: flex
 				-webkit-box-orient: horizontal;
 				-webkit-box-direction: reverse;
 				    -ms-flex-direction: row-reverse;
@@ -645,12 +642,6 @@ input:active {
 	}
 
 
-
-
-
-
-
-
 	.form {
 		display: flex;
 		flex-direction: column;
@@ -695,6 +686,5 @@ input:active {
 			.form_rounded {
 				border-radius: 5px;
 			}
-
 
 
