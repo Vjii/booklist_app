@@ -5,6 +5,8 @@ var Idea = Idea.schema;
 
 var BookSchema = new mongoose.Schema({
 	title: String,
+	description: String,
+	authors: String,
   image: String,
 	ideas: [
 		{

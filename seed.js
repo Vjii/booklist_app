@@ -52,18 +52,24 @@ var ideas = [
 
 var books = [
 	{
-		title: "The Art of Learning - Josh Waitzkin",
-		image: "https://www.neilstrauss.com/wp-content/uploads/The-art-of-Learning.jpg",
+		title: "The Art of Learning",
+		description: "The Inner Journey to optimal performance",
+		authors: "Josh Waitzkin",
+		image: "https://www.neilstrauss.com/wp-content/uploads/The-art-of-Learning.jpg"
 	},
 
 	{
-		title: "Extreme ownership - Jocko Willink",
-		image: "https://images-na.ssl-images-amazon.com/images/I/41cmM6UedGL._SX331_BO1,204,203,200_.jpg",
+		title: "Extreme ownership",
+		description: "How U.S Navy Seals lead and win",
+		authors: "Jocko Willink",
+		image: "https://images-na.ssl-images-amazon.com/images/I/41cmM6UedGL._SX331_BO1,204,203,200_.jpg"
 	},
 
 	{
-		title: "Extreme ownership - Jocko Willink and Leif Babin",
-		image: "https://images-na.ssl-images-amazon.com/images/I/41cmM6UedGL._SX331_BO1,204,203,200_.jpg",
+		title: "How to win friends and influence people",
+		description: "Psychology of human interactions and effective behavioral intelligence",
+		authors: "Dale Carnegie",
+		image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi0WXE9SayRQhgsDSXFKYJiiNtaRxugw__fqGRMopG6uHkEsz6"
 	}
 ]
 

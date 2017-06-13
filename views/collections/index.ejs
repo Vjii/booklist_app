@@ -14,14 +14,12 @@
 						</div>
 						<div class="profiles">
 
-							<a href="/collections/<%= collection._id%>">
-								<p>
-									<button class="button button__full vertical_margin-small">View the collection</button>
-								</p>
+							<a class="button" href="/collections/<%= collection._id%>">
+								View the collection
 							</a>
 							<p>
 								<%= collection.description%>
-								<img class="image " src="<%= collection.author.image%>">
+								<img class="profile__image " src="<%= collection.author.image%>">
 							</p>
 						</div>
 
