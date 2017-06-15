@@ -389,7 +389,6 @@ input:active {
 
 
 
-
 .profile {
 	margin-top: 2.5rem;
 	background: rgba(12, 12, 12, .5);
@@ -437,42 +436,36 @@ input:active {
 		text-align: center;
 	}
 
+	.profile__title {
+		text-align: center;
+	}
 
 
 
-.books {
+.categories {
 	margin-top: 30px;
 	background-color: rgba(12, 12, 12, .8);
 }
 
-	.books__wrapper {
+	.categories__wrapper {
 		padding: 0 0 30px 0;
 
  }
 
-	.books__ideas {
+	.categories__ideas {
 
 	}
 
-	.books__header {
+	.categories__header {
 
 	}
 
-		.books__title-wrapper {
-			padding: 30px;
-	  }
-
-  	.books__title {
-	    height: 48px;
-  		line-height: 32px;
+  	.categories__title {
+	    margin: 15px 0;
   	}
 
-	  	.books__title--ideas {
-				margin: 30px auto;
-		  }
 
-
-	.books__image-wrapper {
+	.categories__image-wrapper {
 		position: relative;
 		margin: 30px 0 30px 30px;
 		width: 60%;
@@ -480,7 +473,7 @@ input:active {
 		height: 0;
 	}
 
-	 .books__image {
+	 .categories__image {
 	 		position: absolute;
 		 	width: 100%;
 		 	height: 100%;
@@ -488,9 +481,11 @@ input:active {
 	  }
 
 
-.books__ideas--synopsis {
+.categories__ideas--synopsis {
 			padding: 30px 15px;
   	}
+
+
 
 
 
@@ -499,16 +494,9 @@ input:active {
 		padding-left: 15px;
 	}
 
-	.list__title {
-		vertical-align: top;
+	.list__container {
+		padding-top: 15px;
 	}
-
-		.list__title--align-top {
-			display: flex;
-			align-items: flex-end;
-			line-height: 52px;
-			height: 36px;
-		}
 
 		.list__item {
 			list-style: disc;

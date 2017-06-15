@@ -1,1 +1,1 @@
-Work in progress. Estimated completion date - 30.05. 
+Work in progress. Estimated completion timeline - 20.06. 

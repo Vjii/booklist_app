@@ -9,30 +9,26 @@ Category = require("./models/category"),
 Comment = require("./models/comment"),
 Collection = require("./models/collection");
 
-var data = [
+
+
+
+var seedDB = function() {
+
+	var userdata = [
 	{
-		image: "https://images.pexels.com/photos/247917/pexels-photo-247917.jpeg?h=350&auto=compress&cs=tinysrgb",
-		description: "Ideas about learning.",
-		author: {
-			username: "Monica Markowicz",
-			image: "https://images.pexels.com/photos/277088/pexels-photo-277088.jpeg?w=940&h=650&auto=compress&cs=tinysrgb"
-		}
+		username: "Monika Markowicz",
+		password: "asd",
+		image: "https://images.pexels.com/photos/277088/pexels-photo-277088.jpeg?w=940&h=650&auto=compress&cs=tinysrgb"
 	},
 	{
-		image: "https://images.pexels.com/photos/247917/pexels-photo-247917.jpeg?h=350&auto=compress&cs=tinysrgb",
-		description: "Ideas about learning.",
-		author: {
-			username: "George Weasley",
-			image: "https://images.pexels.com/photos/247917/pexels-photo-247917.jpeg?w=940&h=650&auto=compress&cs=tinysrgb"
-		}
+		username: "George Weasley",
+		password: "asd",
+		image: "https://images.pexels.com/photos/247917/pexels-photo-247917.jpeg?w=940&h=650&auto=compress&cs=tinysrgb"
 	},
 	{
-		image: "https://images.pexels.com/photos/247917/pexels-photo-247917.jpeg?h=350&auto=compress&cs=tinysrgb",
-		description: "Ideas about learning.",
-		author: {
-			username: "Au",
-			image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_QLfVbZ9MeaB6e5j-952DOayRKZodGAIuuCbh7_oW_4Ho082T_g"
-		}
+		username: "Au",
+		password: "asd",
+		image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_QLfVbZ9MeaB6e5j-952DOayRKZodGAIuuCbh7_oW_4Ho082T_g"
 	}
 ]
 
@@ -41,9 +37,14 @@ var categorydata = [
 		name: "Learning",
 		sources: [
 			{
-				name: "Josh Waitzkin - The Art of Learning",
+				name: "The Art of Learning - Josh Waitzkin",
 				kind: "Book",
 				image: "http://images.gr-assets.com/books/1348688766l/857333.jpg"
+			},
+				{
+				name: "Tim Ferriss Podcast",
+				kind: "Podcast",
+				image: "http://is1.mzstatic.com/image/thumb/Music127/v4/00/aa/e9/00aae9d6-1484-0d65-c70b-11132773bcae/source/600x600bb.jpg"
 			}
 		]
 	},
@@ -79,7 +80,6 @@ var categorydata = [
 	}
 ]
 
-
 var ideasdata = [
 {
 	name: "Making smaller circles",
@@ -96,47 +96,92 @@ var ideasdata = [
 ]
 
 
-var seedDB = function() {
 
-	User.remove({}, function(err) {
+	removeCollection(User);
+	removeCollection(Collection);
+	removeCollection(Category);
+
+
+	userdata.forEach(function(userdata) {
+		fillCollection(userdata)
+
 	});
 
 
-	Collection.remove({}, function(err) {
-	});
+	function removeCollection(Name) {
+			Name.remove({}, function(err) {
+			});
+	}
 
-	Category.remove({}, function(err) {
-	});
+	function fillCategory(category) {
+		for (var j = 0; j < ideasdata.length; j++) {
+			category.sources.forEach(function(source) {
+				source.ideas.push(ideasdata[j]);
+			});
+		}
+	}
 
+	function createCategory(categorydata) {
+		var category = new Category(categorydata);
+		return category;
+	}
 
-	data.forEach(function(collection) {
+	function saveCategory(category) {
+		category.save(function(err, category){
+			if(err) {return console.log(err)}
+		});
+	}
 
-		Collection.create(collection, function(err, collection) {
-			if (err) {return console.log(err);}
-
+	function collectionInsertCategories(collection) {
 			for (var i = 0; i < categorydata.length; i++) {
-				var category = new Category(categorydata[i]);
-
-				for (var j = 0; j < ideasdata.length; j++) {
-					category.sources.forEach(function(source) {
-						source.ideas.push(ideasdata[j]);
-					})
-				}
-
-				category.save(function(err, category){
-					if(err) {return console.log(err)}
-				});
+				var category = createCategory(categorydata[i])
+				fillCategory(category);
+				saveCategory(category);
 
 				collection.categories.push(category);
 			}
+	}
 
+	function saveCollection(collection) {
 			collection.save(function(err, collection) {
 				if(err) {return console.log(err)}
 			});
+	}
+
+	function setCollectionData(user, userdata) {
+		var collection = {
+				description: "Essential Ideas",
+				author: {
+					id: user.id,
+					username: user.username,
+					image: userdata.image
+				}
+			}
+
+			return collection;
+	}
+
+	function createCollection(collection) {
+		Collection.create(collection, function(err, collection) {
+				if (err) {return console.log(err);}
+
+				collectionInsertCategories(collection);
+				saveCollection(collection);
+				console.log(collection)
+			});
+	}
+
+	function fillCollection(userdata, collection) {
+		User.register(new User({username: userdata.username}), userdata.password, function(err, user) {
+				if (err) {return console.log(err)}
+
+			var collection = setCollectionData(user, userdata);
+
+			createCollection(collection)
+
 
 		});
-	});
-
+	}
 }
 
 module.exports = seedDB;
