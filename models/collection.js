@@ -1,21 +1,27 @@
 var mongoose = require("mongoose");
 var User = require("./user");
 var Idea = require("./idea");
-var Book = require("./book");
+var Category = require("./category");
 var Comment = require("./comment");
 
 
 var CollectionSchema = new mongoose.Schema({
 	title: String,
+	description: String,
 	author: {
 		id: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "User"
 		},
-	username: String,
-	image: String
+		username: String,
+		image: String
 	},
-	books: [Book.schema],
+	categories: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "Category"
+		}
+	],
 	comments: [
 		{
 			type: mongoose.Schema.Types.ObjectId,

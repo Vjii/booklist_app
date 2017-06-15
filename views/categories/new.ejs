@@ -3,7 +3,7 @@
 		<div class="col">
 			<a class="button" href="/collections/<%= id%>">Go back</a>
 			<div class="form__container">
-				<% if (!book_id) { %>
+				<% if (!categoriesId) { %>
 				<h1 class="heading__title vertical_margin-small">Add book to your collection</h1>
 				<form class="form form_rounded form padding-small" action="/collections/<%= id%>/books" method="POST">
 					<input class="form__input form_rounded vertical_margin-small" type="text" name="book[title]" placeholder="Title of the book">

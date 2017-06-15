@@ -3,7 +3,7 @@ router = express.Router(),
 passport = require("passport"),
 Collection = require("../models/collection"),
 User = require("../models/user"),
-Book = require("../models/book"),
+Category = require("../models/category"),
 middleware = require("../middleware/index");
 
 

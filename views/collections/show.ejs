@@ -15,12 +15,12 @@
 
 				<div class="grid__col grid__col--desktop-flex-3 grid__col--no-padding">
 					<div class="profile__body">
-						<h2 class="list__title--align-top">Essential books: <%= collection.title %></h2>
-						<% if (collection.books !== null) { %>
+						<h2 class="list__title--align-top">Categories of interest</h2>
+						<% if (collection.categories!== null) { %>
 							<ul class="list">
-								<% collection.books.forEach(function(book) {%>
+								<% collection.categories.forEach(function(category) {%>
 										<li class="list__item">
-											<h4 class="list-item--content"><%= book.title %> - <%= book.authors %></h4>
+											<h4 class="list-item--content"><%= category.name %> </h4>
 										</li>
 								<% })%>
 							</ul>
@@ -31,24 +31,17 @@
 		</section>
 
 		<section class="books">
-			<% collection.books.forEach(function(book) { %>
 
+			<% collection.categories.forEach(function(category) { %>
 				<article class="books__wrapper">
 					<header class="books__header">
 						<div class="grid__row ">
 							<div class="grid__col grid__col--desktop-flex-1 grid__col--no-padding">
-								<div class="books__image-wrapper">
-									<img class="books__image" src="<%= book.image %>">
-								</div>
+
 							</div>
 							<div class="grid__col grid__col--desktop-flex-3 grid__col--no-padding">
 								<div class="books__title-wrapper">
-
-
-									<h1 class="books__title"> - collection of essential ideas</h1>
-									<h2>Source: </h2>
-									<h2>Source type: </h2>
-									<h2>Category: </h2>
+									<h1 class="books__title"> <%= category.name %> - collection of essential ideas</h1>
 								</div>
 							</div>
 						</div>
@@ -60,26 +53,33 @@
 									<h2 class="books__title--ideas">
 										Idea descriptions:
 									</h2>
-									<% if (book.ideas) { %>
-										<% book.ideas.forEach(function(idea) {%>
-											<div class="book__ideas">
-												<h3 class=""><%= idea.name%></h3>
-												<p class=""><%= idea.description%></p>
-												<% if (currentUser && collection.author.id.equals(currentUser._id)) { %>
-													<div class="">
-														<a class="" href="/collections/<%= collection._id %>/books/<%= book._id%>/ideas/<%= idea._id%>/edit">
-															<button class="button">Edit
-															</button>
-														</a>
-														<form class="form" action="/collections/<%= collection._id%>/books/<%= book._id%>/ideas/<%= idea._id%>?_method=DELETE" method="POST">
-															<button class="button">Delete
-															</button>
-														</form>
-													</div>
-												<% } %>
+										<% category.sources.forEach(function(source) {%>
+											<h2>Source: <%= source.name %></h2>
+											<h2>Source type: <%= source.kind %></h2>
+												<div class="books__image-wrapper">
+													<img class="books__image" src="<%= source.image %>">
 											</div>
+
+												<% source.ideas.forEach(function(idea) { %>
+
+										<div class="book__ideas">
+											<h3 class=""><%= idea.name%></h3>
+											<p class=""><%= idea.description%></p>
+											<% if (currentUser && collection.author.id.equals(currentUser._id)) { %>
+												<div class="">
+													<a class="" href="/collections/<%= collection._id %>/categories/<%= source._id%>/ideas/<%= idea._id%>/edit">
+														<button class="button">Edit
+														</button>
+													</a>
+													<form class="form" action="/collections/<%= collection._id%>/books/<%= source._id%>/ideas/<%= idea._id%>?_method=DELETE" method="POST">
+														<button class="button">Delete
+														</button>
+													</form>
+												</div>
+											<% } %>
+										</div>
 										<% }) %>
-									<% } %>
+									<% })%>
 								</div>
 							</div>
 						</div>
@@ -87,17 +87,17 @@
 
 					<div class="book__buttons">
 						<% if (currentUser && collection.author.id.equals(currentUser._id)) { %>
-						<a class="link link--equal" href="/collections/<%= collection._id%>/books/new">
+						<a class="link link--equal" href="/collections/<%= collection._id%>/categories/new">
 							Add book
 						</a>
 					<% } %>
-						<a class="link link--equal" href="/collections/<%= collection._id%>/books/<%= book._id%>/ideas/new">
+						<a class="link link--equal" href="/collections/<%= collection._id%>/categories/<%= category._id%>/ideas/new">
 							Add ideas
 						</a>
-						<a class="link link--equal" href="/collections/<%= collection._id%>/books/<%= book._id%>/edit">
+						<a class="link link--equal" href="/collections/<%= collection._id%>/categories/<%= category._id%>/edit">
 							Edit book
 						</a>
-						<form class="form--delete" action="/collections/<%= collection._id%>/books/<%= book._id%>?_method=DELETE" method="POST">
+						<form class="form--delete" action="/collections/<%= collection._id%>/categories/<%= category._id%>?_method=DELETE" method="POST">
 							<button class="button button--delete">Delete book</button>
 						</form>
 					</div>

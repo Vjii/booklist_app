@@ -1,6 +1,7 @@
 var express = require("express"),
 router = express.Router(),
 User = require("../models/user"),
+Category = require("../models/category"),
 Collection = require("../models/collection"),
 middleware = require("../middleware/index");
 
@@ -36,18 +37,23 @@ router.post("/", middleware.checkLoggedIn, function(req, res) {
 			image: req.user.image
 		}
 
-		collection.save();
-		res.redirect("/collections/" + collection.id);
+		collection.save(function(err, user) {
+			if(err) {return console.log(err)}
+
+			res.redirect("/collections/" + collection.id);
+		});
 	});
 });
 
 //Collections - Show Route
 router.get("/:id", function(req, res) {
 
-	Collection.findById(req.params.id).populate("books comments").exec(function(err, collection) {
-		if(err) {return console.log(err);}
+	Collection.findById(req.params.id)
+		.populate("categories comments")
+		.exec(function(err, collection) {
+			if(err) {return console.log(err);}
 
-		res.render("collections/show", {collection: collection});
+			res.render("collections/show", {collection: collection});
 	});
 
 });

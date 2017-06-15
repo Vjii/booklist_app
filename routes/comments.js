@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 Collection = require("../models/collection"),
 User = require("../models/user"),
-Book = require("../models/book"),
+Category = require("../models/category"),
 Comment = require("../models/comment"),
 middleware = require("../middleware/index");
 
