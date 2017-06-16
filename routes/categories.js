@@ -1,93 +1,93 @@
 var express = require("express"),
 app = require("../app"),
 router = express.Router(),
-CategorySchema = require("../models/category"),
+Category = require("../models/category"),
 Collection = require("../models/collection"),
 middleware = require("../middleware/index");
 
 // New route - show form to add a new book
 router.get("/:id/categories/new", middleware.checkOwnership, function(req, res) {
 
-	var categoryId;
-	res.render("categories/new", {id: req.params.id, categoryId: categoryId});
+	var category_id;
+	res.render("categories/new", {id: req.params.id, category_id: category_id});
 });
 
 
 
-// // Create route - add a new book to books collection
-// router.post("/:id/books", middleware.checkOwnership, function(req, res) {
+// Create route - add a new category to the categories collection
+router.post("/:id/categories", middleware.checkOwnership, function(req, res) {
 
-// 	Collection.findById(req.params.id, function(err, collection) {
-// 		if (err) {
-// 			console.log(err);
-// 			res.redirect("/collections/" + req.params.id + "/books/new");
-// 		} else {
-// 				Book.model.create(req.body.book, function(err, book) {
-// 					if (err) {
-// 						console.log(err);
-// 						res.redirect("/collections/" + req.params.id + "/books/new");
-// 					} else {
-// 						console.log(book);
-// 						collection.books.push(book);
-// 						collection.save();
+	Collection.findById(req.params.id, function(err, collection) {
+		if (err) {
+			console.log(err);
+			return res.redirect("/collections/" + req.params.id + "/categories/new");
+		}
 
-// 						res.redirect("/collections/" + req.params.id + "/books/" + book._id + "/ideas/new");
-// 					};
-// 				})
-// 		};
-// 	});
-// });
+		Category.create(req.body.category, function(err, category) {
+			if (err) {
+				console.log(err);
+				return res.redirect("/collections/" + req.params.id + "/categories/new");
+			}
+				console.log(category);
+				collection.categories.push(category);
+				collection.save();
 
-// // Edit route - show form to edit a book
-// router.get("/:id/books/:book_id/edit", middleware.checkOwnership, function(req, res) {
-// 	var id = req.params.id
-// 	var book_id = req.params.book_id
+				res.redirect("/collections/" + req.params.id + "/categories/" + category._id + "/ideas/new");
+		})
 
-// 	Collection.findById(id, function(err, collection) {
-// 		if (err) { return console.log(err) };
+	});
+});
 
-// 		var book = collection.books.id(book_id);
-// 		res.render("books/edit", {id: id, book: book});
-// 	})
+// Edit route - show form to edit a book
+router.get("/:id/categories/:category_id/edit", middleware.checkOwnership, function(req, res) {
+	var id = req.params.id
+	var category_id = req.params.category_id
 
-// });
+	Collection.findById(id, function(err, collection) {
+		if (err) { return console.log(err) };
 
-// // Update route - modify a book in the collection
-// router.put("/:id/books/:book_id",  middleware.checkOwnership, function(req, res) {
-// 	var id = req.params.id
-// 	var book_id = req.params.book_id;
-// 	var book = req.body.book;
+		var category = collection.books.id(category_id);
+		res.render("books/edit", {id: id, category: category});
+	})
 
-// 	Collection.findById(id, function(err, collection) {
-// 		if (err) {return console.log(err); }
-// 		var bookFound = collection.books.id(book_id);
-// 		console.log(req.body.title);
-// 		bookFound.title = req.body.book.title
-// 		bookFound.image = req.body.book.image
-// 		bookFound.save();
-// 		collection.save();
-// 	});
-// });
+});
 
-// // Destroy route - delete a book from the collection
-// router.delete("/:id/books/:book_id",  middleware.checkOwnership, function(req, res) {
+// Update route - modify a book in the collection
+router.put("/:id/categories/:category_id",  middleware.checkOwnership, function(req, res) {
+	var id = req.params.id
+	var category_id = req.params.category_id;
+	var category = req.body.book;
 
-// 	var id = req.params.id
-// 	var book_id = req.params.book_id
+	Collection.findById(id, function(err, collection) {
+		if (err) {return console.log(err); }
+		var bookFound = collection.books.id(category_id);
+		console.log(req.body.title);
+		bookFound.title = req.body.category.title
+		bookFound.image = req.body.category.image
+		bookFound.save();
+		collection.save();
+	});
+});
 
-// 	Collection.findById(id, function(err, collection) {
-// 		if (err) {return console.log(err); }
+// Destroy route - delete a book from the collection
+router.delete("/:id/categories/:category_id",  middleware.checkOwnership, function(req, res) {
 
+	var id = req.params.id
+	var category_id = req.params.category_id
 
-// 		var book = collection.books.id(book_id);
-// 		collection.books.pull(book);
-// 		collection.save();
-
-// 		res.redirect("/collections/" + id);
-
-// 	});
+	Collection.findById(id, function(err, collection) {
+		if (err) {return console.log(err); }
 
 
-// });
+		var category = collection.books.id(category_id);
+		collection.books.pull(category);
+		collection.save();
+
+		res.redirect("/collections/" + id);
+
+	});
+
+
+});
 
 module.exports = router;

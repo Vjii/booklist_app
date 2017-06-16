@@ -2,10 +2,10 @@
 
 	<div class="row">
 		<div class="col">
-	  	<h1 class="heading__title vertical_margin-small">Add ideas to "<%= book.title%>"</h1>
+	  	<h1 class="heading__title vertical_margin-small">Add ideas to "<%= category.title%>"</h1>
 
 			<div class="form__ideas__container">
-				<form class="form form_rounded" action="/collections/<%= collection._id %>/books/<%= book._id %>/ideas" method="POST">
+				<form class="form form_rounded" action="/collections/<%= collection._id %>/categories/<%= category._id %>/ideas" method="POST">
 					<input class="form__input form_rounded vertical_margin-small" type="text" name="idea[name]" placeholder="Name the idea">
 					<textarea class="form__textarea form_rounded vertical_margin-small" name="idea[description]" placeholder="Make notes about the idea"></textarea>
 					<button class="">Submit</button>
@@ -15,7 +15,7 @@
 				</a>
 			</div>
 
-			<% if (book.ideas) { %>
+			<% if (category.ideas) { %>
 
 			<div class="row">
 				<div class="grid__col">
@@ -23,14 +23,14 @@
 				</div>
 
 
-				<% book.ideas.forEach(function(idea) { %>
+				<% category.ideas.forEach(function(idea) { %>
 
 
 						<div class="grid__col">
 					  	<h1 class="heading__title vertical_margin-small">Edit idea notes</h1>
 
 							<div class="form__ideas__container">
-									<form class="form form_rounded" action="/collections/<%= collection._id%>/books/<%= book._id %>/ideas/<%= idea._id%>?_method=PUT" method="POST">
+									<form class="form form_rounded" action="/collections/<%= collection._id%>/books/<%= category._id %>/ideas/<%= idea._id%>?_method=PUT" method="POST">
 										<input class="form__input form_rounded vertical_margin-small" type="text" name="idea[name]" value="<%= idea.name%>">
 										<textarea class="form__textarea form_rounded vertical_margin-small" name="idea[description]"><%= idea.description %></textarea>
 										<button class="button button__add vertical_margin-small">Submit changes</button>
@@ -40,7 +40,7 @@
 									</a>
 								</div>
 
-							<a href="/collections/<%= collection._id %>/books/<%= book._id%>/ideas/<%= idea._id%>">
+							<a href="/collections/<%= collection._id %>/categories/<%= category._id%>/ideas/<%= idea._id%>">
 								<button class="">Submit changes</button>
 							</a>
 

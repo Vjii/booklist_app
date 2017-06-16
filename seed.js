@@ -37,7 +37,7 @@ var categorydata = [
 		name: "Learning",
 		sources: [
 			{
-				name: "The Art of Learning - Josh Waitzkin",
+				name: "The Art of Learning by Josh Waitzkin",
 				kind: "Book",
 				image: "http://images.gr-assets.com/books/1348688766l/857333.jpg"
 			},
