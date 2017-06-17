@@ -10,75 +10,83 @@ Comment = require("./models/comment"),
 Collection = require("./models/collection");
 
 
-
-
-var seedDB = function() {
-
-	var userdata = [
+var userdata = [
 	{
 		username: "Monika Markowicz",
-		password: "asd",
+		password: "a",
 		image: "https://images.pexels.com/photos/277088/pexels-photo-277088.jpeg?w=940&h=650&auto=compress&cs=tinysrgb"
 	},
 	{
 		username: "George Weasley",
-		password: "asd",
+		password: "a",
 		image: "https://images.pexels.com/photos/247917/pexels-photo-247917.jpeg?w=940&h=650&auto=compress&cs=tinysrgb"
 	},
 	{
-		username: "Au",
-		password: "asd",
+		username: "a",
+		password: "a",
 		image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_QLfVbZ9MeaB6e5j-952DOayRKZodGAIuuCbh7_oW_4Ho082T_g"
 	}
 ]
 
+
+
 var categorydata = [
 	{
 		name: "Learning",
-		sources: [
+		clusters: [
 			{
-				name: "The Art of Learning by Josh Waitzkin",
-				kind: "Book",
-				image: "http://images.gr-assets.com/books/1348688766l/857333.jpg"
+				source: {
+					name: "The Art of Learning by Josh Waitzkin",
+					label: "Book",
+					image: "http://images.gr-assets.com/books/1348688766l/857333.jpg"
+				}
 			},
-				{
-				name: "Tim Ferriss Podcast",
-				kind: "Podcast",
-				image: "http://is1.mzstatic.com/image/thumb/Music127/v4/00/aa/e9/00aae9d6-1484-0d65-c70b-11132773bcae/source/600x600bb.jpg"
+			{
+				source: {
+					name: "Tim Ferriss Podcast",
+					kind: "Podcast",
+					image: "http://is1.mzstatic.com/image/thumb/Music127/v4/00/aa/e9/00aae9d6-1484-0d65-c70b-11132773bcae/source/600x600bb.jpg"
+				}
 			}
 		]
 	},
 	{
 		name: "Mindset & Psychology",
-		sources: [
-			{
-				name: "Tim Ferriss",
-				kind: "Podcast",
-				image: "http://is1.mzstatic.com/image/thumb/Music127/v4/00/aa/e9/00aae9d6-1484-0d65-c70b-11132773bcae/source/600x600bb.jpg"
+		clusters: [
+			{ source: {
+					name: "Tim Ferriss",
+					label: "Podcast",
+					image: "http://is1.mzstatic.com/image/thumb/Music127/v4/00/aa/e9/00aae9d6-1484-0d65-c70b-11132773bcae/source/600x600bb.jpg"
+				}
+			},
+			{ source: {
+					name: "Josh Waitzkin - The Art of Learning",
+					label: "Book",
+					image: "http://images.gr-assets.com/books/1348688766l/857333.jpg"
+				}
 			},
 			{
-				name: "Josh Waitzkin - The Art of Learning",
-				kind: "Book",
-				image: "http://images.gr-assets.com/books/1348688766l/857333.jpg"
-			},
-			{
-				name: "Extreme Ownership - Jocko Willink",
-				kind: "Book",
-				image: "https://images-na.ssl-images-amazon.com/images/I/41cmM6UedGL._SX331_BO1,204,203,200_.jpg"
+				source: {
+					name: "Extreme Ownership - Jocko Willink",
+					label: "Book",
+					image: "https://images-na.ssl-images-amazon.com/images/I/41cmM6UedGL._SX331_BO1,204,203,200_.jpg"
+				}
 			}
 		]
 	},
 	{
 		name: "Effectiveness",
-		sources: [
-			{
-				name: "Tim Ferriss",
-				kind: "Podcast",
-				image: "http://is1.mzstatic.com/image/thumb/Music127/v4/00/aa/e9/00aae9d6-1484-0d65-c70b-11132773bcae/source/600x600bb.jpg"
+		clusters: [
+			{ source: {
+					name: "Tim Ferriss",
+					label: "Podcast",
+					image: "http://is1.mzstatic.com/image/thumb/Music127/v4/00/aa/e9/00aae9d6-1484-0d65-c70b-11132773bcae/source/600x600bb.jpg"
+				}
 			}
 		]
 	}
 ]
+
 
 var ideasdata = [
 {
@@ -96,6 +104,7 @@ var ideasdata = [
 ]
 
 
+var seedDB = function() {
 
 	removeCollection(User);
 	removeCollection(Collection);
@@ -104,7 +113,6 @@ var ideasdata = [
 
 	userdata.forEach(function(userdata) {
 		fillCollection(userdata)
-
 	});
 
 
@@ -115,8 +123,8 @@ var ideasdata = [
 
 	function fillCategory(category) {
 		for (var j = 0; j < ideasdata.length; j++) {
-			category.sources.forEach(function(source) {
-				source.ideas.push(ideasdata[j]);
+			category.clusters.forEach(function(cluster) {
+				cluster.ideas.push(ideasdata[j]);
 			});
 		}
 	}
@@ -167,7 +175,6 @@ var ideasdata = [
 
 				collectionInsertCategories(collection);
 				saveCollection(collection);
-				console.log(collection)
 			});
 	}
 

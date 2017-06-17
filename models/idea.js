@@ -1,8 +1,8 @@
 var mongoose = require("mongoose");
 
 var IdeaSchema = new mongoose.Schema({
-		name: String,
-		description: String
+	name: String,
+	description: String
 });
 
 

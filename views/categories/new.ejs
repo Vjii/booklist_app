@@ -4,35 +4,12 @@
 			<a class="button" href="/collections/<%= id%>">Go back</a>
 			<div class="form__container">
 				<% if (!category_id) { %>
-				<h1 class="heading__title vertical_margin-small">Add book to your collection</h1>
-				<form class="form form_rounded form padding-small" action="/collections/<%= id%>/categories" method="POST">
-					<input class="form__input form_rounded vertical_margin-small" type="text" name="category[name]" placeholder="Title of the book">
-					<button class="button button__add vertical_margin-small">Add book</button>
-			  </form>
-
-			  <%} else { %>
-			  	<% var ideaCount = 0 %>
-			  	<h1 class="heading__title vertical_margin-small">Add idea notes</h1>
-			  	<% book.ideas.forEach(function(idea) { %>
-			  		<h3>Idea #<%= ideaCount%></h3>
-			  		<% ideaCount++%>
-						<div class="form__ideas__container">
-						<form class="form form_rounded" action="/collections/<%= id%>/books/<%= book_id %>/ideas" method="POST">
-							<input class="form__input form_rounded vertical_margin-small" type="text" name="idea[name]" placeholder value="<%= idea.name%>">
-							<textarea class="form__textarea form_rounded vertical_margin-small" name="idea[description]"><%= idea.description%></textarea>
-							<button class="button button__add vertical_margin-small">Edit idea note</button>
-						</form>
-					</div>
-			  	<% }) %>
-			  	<h3>Idea #<%= ideaCount%></h3>
-					<div class="form__ideas__container">
-						<form class="form form__rounded" action="/collections/<%= id%>/books/<%= book_id %>/ideas" method="POST">
-							<input class="form__input form_rounded vertical_margin-small" type="text" name="idea[name]" placeholder="Name of the idea">
-							<textarea class="form__textarea form_rounded vertical_margin-small" name="idea[description]" placeholder="Description of the idea - what is its value? How can it be used?"></textarea>
-							<button class="button button__add vertical_margin-small">Add idea note</button>
-						</form>
-					</div>
-				<% } %>
+					<h1 class="">Add a category to your collection</h1>
+					<form class="form form_rounded form padding-small" action="/collections/<%= id %>/categories" method="POST">
+						<input class="form__input form_rounded vertical_margin-small" type="text" name="category[name]" placeholder="Name of the category">
+						<button class="button button__add vertical_margin-small">Add the category</button>
+				  </form>
+			  <%} %>
 
 			</div>
 		</div>

@@ -12,6 +12,7 @@ back = require("express-back"),
 // SETUP - Models
 User = require("./models/user"),
 IdeaSchema = require("./models/idea"),
+ClusterSchema = require("./models/cluster"),
 Category = require("./models/category"),
 Comment = require("./models/comment"),
 Collection = require("./models/collection"),
@@ -21,7 +22,6 @@ seedDB = require("./seed");
 
 //CONFIG
 mongoose.connect("mongodb://localhost/booklist_app");
-console.log("X TIMES")
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
@@ -57,13 +57,15 @@ seedDB();
 //REQUIRE ROUTES
 var commentsRoutes = require("./routes/comments");
 var usersRoutes = require("./routes/users");
-var ideaRoutes = require("./routes/ideas");
+var clustersRoutes = require("./routes/clusters");
+var ideasRoutes = require("./routes/ideas");
 var categoriesRoutes = require("./routes/categories");
 var collectionsRoutes = require("./routes/collections");
 var indexRoutes = require("./routes/index");
 
 //ROUTES
-app.use("/collections", ideaRoutes);
+app.use("/collections", ideasRoutes);
+app.use("/collections", clustersRoutes);
 app.use("/collections", categoriesRoutes);
 app.use("/collections", collectionsRoutes);
 app.use("/collections", commentsRoutes);

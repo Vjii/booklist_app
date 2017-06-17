@@ -1,16 +1,10 @@
 var mongoose = require("mongoose");
 var IdeaSchema = require("./idea");
+var ClusterSchema = require("./cluster");
 
 var CategorySchema = new mongoose.Schema({
 	name: String,
-	sources: [
-		{
-			name: String,
-			kind: String,
-			image: String,
-			ideas: [IdeaSchema]
-		}
-	]
+	clusters: [ClusterSchema]
 });
 
 

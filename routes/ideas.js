@@ -2,102 +2,94 @@ var express = require("express"),
 app = require("../app"),
 router = express.Router(),
 User = require("../models/user"),
-Idea = require("../models/idea"),
+IdeaSchema = require("../models/idea"),
+ClusterSchema = require("../models/cluster"),
+Category = require("../models/category"),
 Collection = require("../models/collection"),
 middleware = require("../middleware/index");
 
 // REMOVE ALL THESE VARS LATER, IT LOOKS MESSY AF
 
-//Index route
-router.get("/:id/categories/:category_id/ideas", middleware.checkOwnership, function(req, res) {
-
-
-	Idea.find({}, function(err, ideas) {
-		if (err){
-			console.log(err);
-			return res.back();
-		}
-
-		Category.findById(req.params.category_id, function(err, category) {
-			if(err) {
-				return console.log(err);
-			}
-			res.render("categories/new", {id: req.params.id, category: category});
-		});
-	});
-});
-
 
 // New Route
-router.get("/:id/categories/:category_id/ideas/new", middleware.checkOwnership, function(req, res) {
+router.get("/:id/categories/:category_id/clusters/:cluster_id/ideas/new", middleware.checkOwnership, function(req, res) {
 
-		Collection.findById(req.params.id, function(err, collection) {
-			if (err) {return console.log(err);}
+		Category.findById(req.params.category_id, function(err, category) {
+			if (err) {
+		   	console.log(err);
+			}
 
-			var book = collection.books.id(req.params.category_id);
+			var ideasCluster = category.clusters.id(req.params.cluster_id);
+			res.render("ideas/new", {id: req.params.id, category_id: req.params.category_id, cluster: ideasCluster})
 
-			res.render("ideas/new", {collection: collection, book: book});
 		});
 });
 
 
 // Create Route
-router.post("/:id/categories/:category_id/ideas", middleware.checkOwnership, function(req, res) {
-	var id = req.params.id
-	var category_id = req.params.category_id;
-	var idea = req.body.idea;
+router.post("/:id/categories/:category_id/clusters/:cluster_id/ideas", middleware.checkOwnership, function(req, res) {
 
-	Collection.findById(id, function(err, collection) {
+	Category.findById(req.params.category_id, function(err, category) {
+		if(err) {	return console.log(err);}
+
+		var idea = req.body.idea;
+		var ideasCluster = category.clusters.id(req.params.cluster_id);
+		ideasCluster.ideas.push(idea);
+
+		category.save();
+		res.redirect("/collections/" + req.params.id);
+	});
+});
+
+// Edit an idea Route
+router.get("/:id/categories/:category_id/clusters/:cluster_id/ideas/:idea_id/edit", middleware.checkOwnership, function(req, res) {
+
+	Category.findById(req.params.category_id, function(err, category) {
 		if(err) {
-			return console.log(err);
+			console.log(err);
+			return res.back();
 		}
-		var book = collection.books.id(category_id);
-		book.ideas.push(idea);
-		book.save();
-		collection.save();
-		res.redirect("/collections/" + id + /categories/ + category_id + "/ideas/new");
+
+		var ideasCluster = category.clusters.id(req.params.cluster_id);
+		var idea = ideasCluster.ideas.id(req.params.idea_id);
+
+		res.render("ideas/edit", {id: req.params.id, category_id: req.params.category_id, cluster_id: req.params.cluster_id, idea: idea});
 	});
 });
 
-// Edit Route
-router.get("/:id/categories/:category_id/ideas/:idea_id/edit", middleware.checkOwnership,  function(req, res) {
 
-	Collection.findById(req.params.id, function(err, collection) {
-		if(err) {return console.log(err);}
-		var book = collection.books.id(req.params.category_id);
-		var idea = book.ideas.id(req.params.idea_id);
-		res.render("ideas/edit", {id: req.params.id, book: book, idea: idea});
-	});
-});
+// Update an idea route
+router.put("/:id/categories/:category_id/clusters/:cluster_id/ideas/:idea_id", middleware.checkOwnership, function(req, res) {
+	var ideaEdited = req.body.idea;
 
-// Update Route
-router.put("/:id/categories/:category_id/ideas/:idea_id", middleware.checkOwnership, function(req, res) {
+	Category.findById(req.params.category_id, function(err, category) {
+		if(err) {return console.log(err)}
 
-	Collection.findById(req.params.id, function(err, collection) {
-		if(err) { return console.log(err); }
-		var book = collection.books.id(req.params.category_id);
-		var idea = book.ideas.id(req.params.idea_id);
-		idea.name = req.body.idea.name;
-		idea.description = req.body.idea.description;
-		idea.save();
-		book.save();
-		collection.save();
+		var ideasCluster = category.clusters.id(req.params.cluster_id);
+		var idea = ideasCluster.ideas.id(req.params.idea_id);
+		idea.name = ideaEdited.name;
+		idea.description = ideaEdited.description;
+
+		category.save();
+
+		res.redirect("/collections/" + req.params.id);
 	});
 });
 
 
 // Delete Route
-router.delete("/:id/categories/:category_id/ideas/:idea_id", middleware.checkOwnership, function(req, res) {
+router.delete("/:id/categories/:category_id/clusters/:cluster_id/ideas/:idea_id", middleware.checkOwnership, function(req, res) {
+	console.log("ROUTE DELETE")
+	Category.findById(req.params.category_id, function(err, category) {
+		if(err) {return console.log(err)}
 
-	Collection.findById(req.params.id, function(err, collection) {
-		if (err) { return console.log(err); }
+		var ideasCluster = category.clusters.id(req.params.cluster_id);
+		var idea = ideasCluster.ideas.id(req.params.idea_id);
 
-		var book = collection.books.id(req.params.category_id);
-		var idea = book.ideas.id(req.params.idea_id);
-		book.ideas.pull(idea);
-		book.save();
-		collection.save();
-		res.back();
+		ideasCluster.ideas.pull(idea);
+		category.save();
+
+		res.redirect("/collections/" + req.params.id);
 	});
 });
 

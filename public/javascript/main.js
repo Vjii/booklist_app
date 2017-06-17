@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	}
 
 
-	var buttonsDelete = document.getElementsByClassName("form--delete");
+	var buttonsDelete = document.getElementsByClassName("-js-buttons--delete");
 
 	if(buttonsDelete.length > 0) {
 

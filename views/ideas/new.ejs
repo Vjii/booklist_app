@@ -2,66 +2,45 @@
 
 	<div class="row">
 		<div class="col">
-	  	<h1 class="heading__title vertical_margin-small">Add ideas to "<%= category.title%>"</h1>
+	  	<h1 class="heading__title vertical_margin-small">Add ideas to cluser from the source: "<%= cluster.source.name %>"</h1>
 
 			<div class="form__ideas__container">
-				<form class="form form_rounded" action="/collections/<%= collection._id %>/categories/<%= category._id %>/ideas" method="POST">
+				<form class="form form_rounded" action="/collections/<%= id %>/categories/<%= category_id %>/clusters/<%= cluster._id %>/ideas" method="POST">
 					<input class="form__input form_rounded vertical_margin-small" type="text" name="idea[name]" placeholder="Name the idea">
 					<textarea class="form__textarea form_rounded vertical_margin-small" name="idea[description]" placeholder="Make notes about the idea"></textarea>
 					<button class="">Submit</button>
 				</form>
-				<a class="vertical_margin-small" href="/collections/<%= collection._id %>">
+				<a class="vertical_margin-small" href="/collections/<%= id %>">
 					<button class="">Done</button>
 				</a>
 			</div>
 
-			<% if (category.ideas) { %>
-
+			<% if (cluster.ideas) { %>
 			<div class="row">
 				<div class="grid__col">
 					<h1>Edit existing ideas: </h1>
 				</div>
-
-
-				<% category.ideas.forEach(function(idea) { %>
-
-
+				<% cluster.ideas.forEach(function(idea) { %>
 						<div class="grid__col">
 					  	<h1 class="heading__title vertical_margin-small">Edit idea notes</h1>
-
 							<div class="form__ideas__container">
-									<form class="form form_rounded" action="/collections/<%= collection._id%>/books/<%= category._id %>/ideas/<%= idea._id%>?_method=PUT" method="POST">
-										<input class="form__input form_rounded vertical_margin-small" type="text" name="idea[name]" value="<%= idea.name%>">
-										<textarea class="form__textarea form_rounded vertical_margin-small" name="idea[description]"><%= idea.description %></textarea>
-										<button class="button button__add vertical_margin-small">Submit changes</button>
-									</form>
-									<a class="vertical_margin-small" href="/collections/<%= collection._id%>">
-										<button class="button button__add">Done</button>
-									</a>
-								</div>
-
-							<a href="/collections/<%= collection._id %>/categories/<%= category._id%>/ideas/<%= idea._id%>">
+								<form class="form form_rounded" action="/collections/<%= id%>/categories/<%= category_id %>/clusters/<%= cluster._id%>/ideas/<%= idea._id%>?_method=PUT" method="POST">
+									<input class="form__input form_rounded vertical_margin-small" type="text" name="idea[name]" value="<%= idea.name%>">
+									<textarea class="form__textarea form_rounded vertical_margin-small" name="idea[description]"><%= idea.description %></textarea>
+									<button class="button button__add vertical_margin-small">Submit changes</button>
+								</form>
+								<a class="vertical_margin-small" href="/collections/<%= id%>">
+									<button class="button button__add">Done</button>
+								</a>
+							</div>
+							<a href="/collections/<%= id %>/categories/<%= category_id%>/ideas/<%= idea._id%>">
 								<button class="">Submit changes</button>
 							</a>
-
 						</div>
 					</div>
-
-
-
-
-
-
-
-
-
-
-
-
 				<% }) %>
-			<% } %>
-
-		</div>
+			</div>
+		<% } %>
 	</div>
 
 <% include ../partials/footer %>
