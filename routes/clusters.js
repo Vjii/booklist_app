@@ -43,13 +43,15 @@ router.post("/:id/categories/:category_id/clusters", middleware.checkOwnership, 
 					return res.back();
 				}
 
-				var cluster = {
+				var ideasCluster = {
 					source: req.body.source
 				}
 
-				category.clusters.push(cluster);
+				category.clusters.push(ideasCluster);
 				category.save();
-				res.redirect("/collections/" + req.params.id);
+				var clusterId = category.clusters[category.clusters.length - 1].id;
+
+				res.redirect("/collections/" + req.params.id + "/categories/" + category.id + "/clusters/" + clusterId + "/ideas/new" );
 			});
 		})
 });
@@ -87,12 +89,12 @@ router.put("/:id/categories/:category_id/clusters/:cluster_id", middleware.check
 				return res.back();
 			}
 
-			var ideaCluster = category.clusters.id(req.params.cluster_id);
-			ideaCluster.source = req.body.source;
+			var ideasCluster = category.clusters.id(req.params.cluster_id);
+			ideasCluster.source = req.body.source;
 			category.save();
-			console.log(ideaCluster)
+			console.log(ideasCluster)
 
-			res.redirect("/collections/" + req.params.id);
+			res.redirect("/collections/" + req.params.id + "/categories/" + category.id + "/clusters/" + ideasCluster.id + "/ideas/new" );
 		});
 });
 

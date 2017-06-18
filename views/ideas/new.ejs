@@ -1,46 +1,47 @@
 <% include ../partials/header %>
-
-	<div class="row">
-		<div class="col">
-	  	<h1 class="heading__title vertical_margin-small">Add ideas to cluser from the source: "<%= cluster.source.name %>"</h1>
-
-			<div class="form__ideas__container">
-				<form class="form form_rounded" action="/collections/<%= id %>/categories/<%= category_id %>/clusters/<%= cluster._id %>/ideas" method="POST">
-					<input class="form__input form_rounded vertical_margin-small" type="text" name="idea[name]" placeholder="Name the idea">
-					<textarea class="form__textarea form_rounded vertical_margin-small" name="idea[description]" placeholder="Make notes about the idea"></textarea>
-					<button class="">Submit</button>
+<div class="container">
+	<div class="grid__row">
+		<div class="grid__col grid__col--no-padding">
+			<div class="form">
+				<form class="form__inner" action="/collections/<%= id %>/categories/<%= category._id %>/clusters/<%= cluster._id %>/ideas" method="POST">
+					<a class="link" href="/collections/<%= id %>">Go back</a>
+					<h2 class="">Add ideas to the cluster originating from the source "<%= cluster.source.name %>"</h2>
+					<p><strong>Category:</strong> <%= category.name %></p>
+					<p>This is the place to add positions for the specified cluster of ideas. Provide name of the idea and its description.</p>
+					<fieldset class="form__fieldset">
+						<legend>New idea</legend>
+						<label class="form__item form__item--label for="idea[name]">Name:</label>
+						<input class="form__item form__item--input" type="text" name="idea[name]" placeholder="Name the idea">
+						<label class="form__item form__item--label for="idea[description]">Description:</label>
+						<textarea class="form__item form__item--textarea" name="idea[description]" placeholder="Notes about the idea"></textarea>
+					</fieldset>
+					<button class="form__item form__item--button">Submit</button>
 				</form>
-				<a class="vertical_margin-small" href="/collections/<%= id %>">
-					<button class="">Done</button>
-				</a>
 			</div>
-
-			<% if (cluster.ideas) { %>
-			<div class="row">
-				<div class="grid__col">
-					<h1>Edit existing ideas: </h1>
-				</div>
-				<% cluster.ideas.forEach(function(idea) { %>
-						<div class="grid__col">
-					  	<h1 class="heading__title vertical_margin-small">Edit idea notes</h1>
-							<div class="form__ideas__container">
-								<form class="form form_rounded" action="/collections/<%= id%>/categories/<%= category_id %>/clusters/<%= cluster._id%>/ideas/<%= idea._id%>?_method=PUT" method="POST">
-									<input class="form__input form_rounded vertical_margin-small" type="text" name="idea[name]" value="<%= idea.name%>">
-									<textarea class="form__textarea form_rounded vertical_margin-small" name="idea[description]"><%= idea.description %></textarea>
-									<button class="button button__add vertical_margin-small">Submit changes</button>
-								</form>
-								<a class="vertical_margin-small" href="/collections/<%= id%>">
-									<button class="button button__add">Done</button>
-								</a>
-							</div>
-							<a href="/collections/<%= id %>/categories/<%= category_id%>/ideas/<%= idea._id%>">
-								<button class="">Submit changes</button>
-							</a>
-						</div>
-					</div>
-				<% }) %>
-			</div>
-		<% } %>
+		</div>
 	</div>
+	<% if (cluster.ideas) { %>
+		<% cluster.ideas.forEach(function(idea) { %>
+			<div class="grid__row">
+				<div class="grid__col grid__col--no-padding">
+					<div class="form">
+						<form class="form__inner" action="/collections/<%= id%>/categories/<%= category._id %>/clusters/<%= cluster._id%>/ideas/<%= idea._id%>?_method=PUT" method="POST">
+							<a class="link" href="/collections/<%= id %>">Go back</a>
+							<h2><%= idea.name %></h2>
+							<p>This idea has already been added to the cluster.</p>
+							<p>You can edit it below.</p>
+							<fieldset class="form__fieldset">
+								<legend>Edit idea notes</legend>
+								<input class="form__item form__item--input" type="text" name="idea[name]" value="<%= idea.name%>">
+								<textarea class="form__item form__item--textarea" name="idea[description]"><%= idea.description %></textarea>
+							</fieldset>
+							<button class="form__item form__item--button">Submit</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		<% }) %>
+	<% } %>
+</div>
 
 <% include ../partials/footer %>

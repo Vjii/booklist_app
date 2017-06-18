@@ -20,7 +20,7 @@ router.get("/:id/categories/:category_id/clusters/:cluster_id/ideas/new", middle
 			}
 
 			var ideasCluster = category.clusters.id(req.params.cluster_id);
-			res.render("ideas/new", {id: req.params.id, category_id: req.params.category_id, cluster: ideasCluster})
+			res.render("ideas/new", {id: req.params.id, category: category, cluster: ideasCluster})
 
 		});
 });
@@ -37,7 +37,7 @@ router.post("/:id/categories/:category_id/clusters/:cluster_id/ideas", middlewar
 		ideasCluster.ideas.push(idea);
 
 		category.save();
-		res.redirect("/collections/" + req.params.id);
+		res.redirect("/collections/" + req.params.id + "/categories/" + category.id + "/clusters/" + ideasCluster.id + "/ideas/new" );
 	});
 });
 
@@ -72,7 +72,7 @@ router.put("/:id/categories/:category_id/clusters/:cluster_id/ideas/:idea_id", m
 
 		category.save();
 
-		res.redirect("/collections/" + req.params.id);
+		res.redirect("/collections/" + req.params.id + "/categories/" + category.id + "/clusters/" + ideasCluster.id + "/ideas/new" );
 	});
 });
 

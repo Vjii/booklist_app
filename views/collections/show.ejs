@@ -1,184 +1,173 @@
 <% include ../partials/header %>
 
-	<main>
-		<section class="profile">
-			<div class="grid__row">
-
-				<div class="grid__col grid__col--desktop-flex-1 grid__col--no-padding">
-					<header class="profile__header">
-						<div class="profile__image-wrapper">
-							<img class="profile__image" src="<%= collection.author.image %>">
+	<div class="container">
+		<main>
+			<section class="profile">
+				<div class="grid__row">
+					<div class="grid__col grid__col--desktop-flex-1 grid__col--no-padding">
+						<header class="profile__header">
+							<div class="profile__image-wrapper">
+								<img class="profile__image" src="<%= collection.author.image %>">
+							</div>
+							<h2 class="profile__name"><%= collection.author.username %></h2>
+						</header>
+					</div>
+					<div class="grid__col grid__col--desktop-flex-3 grid__col--no-padding">
+						<div class="profile__body">
+							<h1 class="profile__title">Essential ideas</h1>
+							<div class="list__container">
+								<h3 class="list__title">Categories:</h3>
+								<% if (collection.categories!== null) { %>
+									<ul class="list">
+										<% collection.categories.forEach(function(category) {%>
+												<li class="list__item">
+													<%= category.name %>
+												</li>
+										<% })%>
+									</ul>
+								<% } %>
+							</div>
 						</div>
-						<h2 class="profile__name"><%= collection.author.username %></h2>
-					</header>
+					</div>
 				</div>
+			</section>
 
-				<div class="grid__col grid__col--desktop-flex-3 grid__col--no-padding">
-					<div class="profile__body">
-						<h1 class="profile__title">Essential ideas</h1>
-						<div class="list__container">
-							<h3 class="list__title">Categories:</h3>
-							<% if (collection.categories!== null) { %>
-								<ul class="list">
-									<% collection.categories.forEach(function(category) {%>
-											<li class="list__item">
-												<%= category.name %>
-											</li>
-									<% })%>
-								</ul>
+			<section class="categories">
+				<% collection.categories.forEach(function(category) { %>
+					<article class="categories__item">
+						<header class="categories__header">
+							<div class="grid__row">
+								<div class="grid__col grid__col--no-padding grid__col--flex-1">
+									<h2 class="categories__marker">Category</h2>
+								</div>
+								<div class="grid__col grid__col--no-padding grid__col--flex-4	">
+
+									<% if (currentUser && collection.author.id.equals(currentUser._id)) { %>
+										<div class="buttons buttons--padding-top buttons--justify-end">
+											<a class="buttons__item button--equal" href="/collections/<%= collection._id%>/categories/new">
+											Add new
+											</a>
+
+											<a class="buttons__item" href="/collections/<%= collection._id%>/categories/<%= category._id%>/edit">
+												Edit
+											</a>
+
+											<form class="buttons__item--form -js-buttons--delete" action="/collections/<%= collection._id%>/categories/<%= category._id%>?_method=DELETE" method="POST">
+												<button class="buttons__item buttons__item--delete">Delete</button>
+											</form>
+										</div>
+									<% } %>
+
+								</div>
+							</div>
+							<div class="grid__row ">
+								<div class="grid__col">
+									<h1 class="categories__title"> <%= category.name %></h1>
+								</div>
+							</div>
+						</header>
+						<% category.clusters.forEach(function(cluster) {%>
+							<section class="ideas">
+								<div class="grid__row">
+									<div class="grid__col grid__col--desktop-flex-1">
+										<header class="ideas__header">
+											<h2>Idea cluster</h2>
+											<img class="ideas__image" src="<%= cluster.source.image %>">
+											<div>
+												<h3>Source type: <span class="ideas__source"><%= cluster.source.label %></span></h3>
+												<h3>Source: <span class="ideas__source"><%= cluster.source.name %></span><h3>
+											</div>
+
+											<% if (currentUser && collection.author.id.equals(currentUser._id)) { %>
+												<div class="buttons buttons--padding-top">
+													<a class="buttons__item button--equal" href="/collections/<%= collection._id%>/categories/<%= category._id%>/clusters/new">
+													Add new cluster
+													</a>
+													<a class="buttons__item button--equal" href="/collections/<%= collection._id%>/categories/<%= category._id%>/clusters/<%= cluster._id%>/ideas/new"">
+													Manage ideas
+													</a>
+													<a class="buttons__item button--equal" href="/collections/<%= collection._id%>/categories/<%= category._id%>/clusters/<%= cluster._id%>/edit">
+														Edit
+													</a>
+													<form class="buttons__item--form -js-buttons--delete" action="/collections/<%= collection._id%>/categories/<%= category._id%>/clusters/<%= cluster._id %>?_method=DELETE" method="POST">
+														<button class="buttons__item buttons__item--delete">Delete</button>
+													</form>
+												</div>
+											<% } %>
+
+										</header>
+										<div class="ideas__body">
+											<% cluster.ideas.forEach(function(idea) { %>
+												<div class="ideas__item">
+													<h3 class=""><%= idea.name%></h3>
+													<p class=""><%= idea.description%></p>
+													<% if (currentUser && collection.author.id.equals(currentUser._id)) { %>
+														<div class="buttons">
+															<a class="buttons__item" href="/collections/<%= collection._id %>/categories/<%= category._id%>/clusters/<%= cluster._id%>/ideas/<%= idea._id%>/edit">
+																Edit
+															</a>
+															<form class="buttons__item--form -js-buttons--delete" action="/collections/<%= collection._id %>/categories/<%= category._id%>/clusters/<%= cluster._id%>/ideas/<%= idea._id%>?_method=DELETE" method="POST">
+																<button class="buttons__item buttons__item--delete">Delete
+																</button>
+															</form>
+														</div>
+													<% } %>
+												</div>
+											<% }) %>
+										</div>
+								</div>
+							</section>
+						<% })%>
+					</article>
+
+				<% }); %>
+			</section> <!-- <section class="categories"> -->
+
+
+			<div class="layout__row comment__title">
+				<div class="col">
+					<h1 class="heading__title">Comment</h1>
+				</div>
+			</div>
+
+			<% collection.comments.forEach(function(comment) { %>
+				<div class="layout__row">
+					<div class="layout__col">
+					<div>
+
+
+					</div>
+		<!-- 			profile__presentation profile-theme-light
+		 -->				<div class="image__container image__container--size-thumbnail">
+							<!-- <img class="image image_rounded" src="<%= comment.author.image%>"> -->
+						</div>
+						<h3 class="profile__name"><%= comment.author.username%></h3>
+					</div>
+
+					<div class="layout__col">
+						<div class="comment__content">
+							<p class="comment__date">Posted on
+							<%= comment.date.toUTCString() %>
+							</p>
+							<p class="comment__text"><%= comment.text%></p>
+
+							<% if (currentUser && collection.author.id.equals(currentUser._id)) { %>
+								<div class="comment__buttons">
+									<a href="/collections/<%= collection._id%>/comment/<%= comment._id%>/edit">
+									<button class="button button__edit button_margin-horizontal">Edit</button>
+									</a>
+									<form class="-js-buttons--delete" action="/collections/<%= collection._id%>/comment/<%= comment._id%>?_method=DELETE" method="POST">
+										<button class="button button__delete  button--delete button--delete">Delete</button>
+									</form>
+								</div>
 							<% } %>
 						</div>
 					</div>
 				</div>
-			</div>
-		</section>
+			<% })%>
 
-		<section class="categories">
-			<% collection.categories.forEach(function(category) { %>
-
-				<article class="categories__item">
-					<header class="categories__header">
-						<div class="grid__row">
-							<div class="grid__col grid__col--no-padding grid__col--flex-1">
-								<h2 class="categories__marker">Category</h2>
-							</div>
-							<div class="grid__col grid__col--no-padding grid__col--flex-4	">
-
-								<% if (currentUser && collection.author.id.equals(currentUser._id)) { %>
-									<div class="buttons buttons--justify-end">
-										<a class="buttons__item button--equal" href="/collections/<%= collection._id%>/categories/new">
-										Add new
-										</a>
-
-										<a class="buttons__item button--equal" href="/collections/<%= collection._id%>/categories/<%= category._id%>/edit">
-											Edit
-										</a>
-
-										<form class="buttons__item--form -js-buttons--delete" action="/collections/<%= collection._id%>/categories/<%= category._id%>?_method=DELETE" method="POST">
-											<button class="buttons__item buttons__item--delete">Delete</button>
-										</form>
-									</div>
-								<% } %>
-
-							</div>
-						</div>
-						<div class="grid__row ">
-							<div class="grid__col">
-								<h1 class="categories__title"> <%= category.name %></h1>
-							</div>
-						</div>
-					</header>
-
-
-
-					<% category.clusters.forEach(function(cluster) {%>
-						<section class="ideas">
-							<div class="grid__row">
-								<div class="grid__col grid__col--desktop-flex-1">
-									<header class="ideas__header">
-										<h2>Idea cluster</h2>
-										<img class="ideas__image" src="<%= cluster.source.image %>">
-										<div>
-											<h3>Source type: <span class="ideas__source"><%= cluster.source.label %></span></h3>
-											<h3>Source: <span class="ideas__source"><%= cluster.source.name %></span><h3>
-										</div>
-
-										<% if (currentUser && collection.author.id.equals(currentUser._id)) { %>
-											<div class="buttons">
-												<a class="buttons__item button--equal" href="/collections/<%= collection._id%>/categories/<%= category._id%>/clusters/new">
-												Add new cluster
-												</a>
-												<a class="buttons__item button--equal" href="/collections/<%= collection._id%>/categories/<%= category._id%>/clusters/<%= cluster._id%>/ideas/new"">
-												Add ideas
-												</a>
-
-												<a class="buttons__item button--equal" href="/collections/<%= collection._id%>/categories/<%= category._id%>/clusters/<%= cluster._id%>/edit">
-													Edit
-												</a>
-
-												<form class="buttons__item--form -js-buttons--delete" action="/collections/<%= collection._id%>/categories/<%= category._id%>/clusters/<%= cluster._id %>?_method=DELETE" method="POST">
-													<button class="buttons__item buttons__item--delete">Delete</button>
-												</form>
-											</div>
-										<% } %>
-
-									</header>
-									<div class="ideas__body">
-										<% cluster.ideas.forEach(function(idea) { %>
-											<div class="ideas__item">
-												<h3 class=""><%= idea.name%></h3>
-												<p class=""><%= idea.description%></p>
-
-												<% if (currentUser && collection.author.id.equals(currentUser._id)) { %>
-													<div class="buttons">
-														<a class="buttons__item" href="/collections/<%= collection._id %>/categories/<%= category._id%>/clusters/<%= cluster._id%>/ideas/<%= idea._id%>/edit">
-															Edit
-														</a>
-														<form class="buttons__item--form -js-buttons--delete" action="/collections/<%= collection._id %>/categories/<%= category._id%>/clusters/<%= cluster._id%>/ideas/<%= idea._id%>?_method=DELETE" method="POST">
-															<button class="buttons__item buttons__item--delete">Delete
-															</button>
-														</form>
-													</div>
-												<% } %>
-
-											</div>
-										<% }) %>
-									</div>
-							</div>
-						</section>
-					<% })%>
-
-
-				</article>
-
-			<% }); %>
-		</section> <!-- <section class="books"> -->
-
-
-		<div class="layout__row comment__title">
-			<div class="col">
-				<h1 class="heading__title">Comment</h1>
-			</div>
-		</div>
-
-		<% collection.comments.forEach(function(comment) { %>
-			<div class="layout__row">
-				<div class="layout__col">
-				<div>
-
-
-				</div>
-	<!-- 			profile__presentation profile-theme-light
-	 -->				<div class="image__container image__container--size-thumbnail">
-						<!-- <img class="image image_rounded" src="<%= comment.author.image%>"> -->
-					</div>
-					<h3 class="profile__name"><%= comment.author.username%></h3>
-				</div>
-
-				<div class="layout__col">
-					<div class="comment__content">
-						<p class="comment__date">Posted on
-						<%= comment.date.toUTCString() %>
-						</p>
-						<p class="comment__text"><%= comment.text%></p>
-
-						<% if (currentUser && collection.author.id.equals(currentUser._id)) { %>
-							<div class="comment__buttons">
-								<a href="/collections/<%= collection._id%>/comment/<%= comment._id%>/edit">
-								<button class="button button__edit button_margin-horizontal">Edit</button>
-								</a>
-								<form class="-js-buttons--delete" action="/collections/<%= collection._id%>/comment/<%= comment._id%>?_method=DELETE" method="POST">
-									<button class="button button__delete  button--delete button--delete">Delete</button>
-								</form>
-							</div>
-						<% } %>
-					</div>
-				</div>
-
-
-			</div>
-		<% })%>
-</main>
+		</main>
+	</div>
 
 
 <% include ../partials/footer %>

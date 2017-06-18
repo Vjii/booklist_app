@@ -1,23 +1,27 @@
 <% include ../partials/header %>
-
-	<div class="row">
-		<div class="col">
-	  	<h2 class="heading__title vertical_margin-small"> Edit source in ideas cluster about: <%= category.name%></h2>
-	  	<p>Before writing down a set of ideas, provide their source.</p>
-	  	<p>Each set or cluster of ideas corresponds to a source - a book, person, theory, whatever the origin is.</p>
-			<div class="form__ideas__container">
-				<form class="form form_rounded" action="/collections/<%= collection._id %>/categories/<%= category._id %>/clusters/<%= cluster._id%>?_method=PUT" method="POST">
-					<input class="form__input form_rounded vertical_margin-small" type="text" name="source[name]" value="<%= cluster.source.name%>"></input>
-					<input class="form__textarea form_rounded vertical_margin-small" type="text" name="source[label]" value="<%= cluster.source.label%>"></input>
-					<input class="form__textarea form_rounded vertical_margin-small" type="text" name="source[image]" value="<%= cluster.source.image%>"></input>
-					<button class="">Submit</button>
+<div class="container">
+	<div class="grid__row">
+		<div class="grid__col">
+			<div class="form">
+				<form class="form__inner" action="/collections/<%= collection._id %>/categories/<%= category._id %>/clusters/<%= cluster._id%>?_method=PUT" method="POST">
+					<a class="link" href="/collections/<%= collection.id %>">Go back</a>
+					<h2 class="heading__title vertical_margin-small"> Edit ideas source in the cluster about <%= category.name%></h2>
+			  	<p>Before writing down a set of ideas, provide their source.</p>
+			  	<p>Each set or cluster of ideas corresponds to a source - a book, person, theory, whatever the origin is.</p>
+					<fieldset class="form__fieldset">
+						<legend></legend>
+						<legend> Source of the ideas for new cluster </legend>
+						<label class="form__item form__item--label" for="source[name]">Name of the source:</label>
+						<input class="form__item form__item--input" type="text" name="source[name]" value="<%= cluster.source.name %>">
+						<label class="form__item form__item--label" for="source[name]">Label for the source:</label>
+						<input class="form__item form__item--input" type="text" name="source[label]" value="<%= cluster.source.label %>"></input>
+						<label class="form__item form__item--label" for="source[name]">Image of the source</label>
+						<input class="form__item form__item--input" type="text" name="source[image]" value="<%= cluster.source.image %> "></input>
+					</fieldset>
+					<button class="form__item form__item--button">Submit</button>
 				</form>
-				<a class="vertical_margin-small" href="/collections/<%= collection._id %>">
-					<button class="">Done</button>
-				</a>
 			</div>
-
 		</div>
 	</div>
-
+</div>
 <% include ../partials/footer %>
