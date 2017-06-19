@@ -7,13 +7,16 @@ Comment = require("../models/comment"),
 middleware = require("../middleware/index");
 
 
+
+// New comment route
 router.get("/:id/comments/new", middleware.checkLoggedIn,  function(req, res) {
 	var id = req.params.id;
 	res.render("comments/new", {id: id});
 });
 
 
-router.post("/:id/comments", middleware.checkOwnership,  function(req, res) {
+// Create comment roue
+router.post("/:id/comments",  function(req, res) {
 
 	var id = req.params.id
 
@@ -27,6 +30,14 @@ router.post("/:id/comments", middleware.checkOwnership,  function(req, res) {
 					console.log(err);
 					res.redirect("back");
 				} else {
+
+					var date = new Date();
+					comment.date = date.toDateString();
+					comment.author.id = req.user.id;
+					comment.author.username = req.user.username;
+					comment.author.image = req.user.image;
+					comment.save();
+
 					collection.comments.push(comment);
 					collection.save();
 					res.redirect("/collections/" + id)
@@ -36,7 +47,7 @@ router.post("/:id/comments", middleware.checkOwnership,  function(req, res) {
 	})
 });
 
-
+// Edit comment route
 router.get("/:id/comments/:comment_id/edit", middleware.checkOwnership,  function(req, res) {
 	var id = req.params.id
 	var comment_id = req.params.comment_id
@@ -51,7 +62,7 @@ router.get("/:id/comments/:comment_id/edit", middleware.checkOwnership,  functio
 	})
 })
 
-
+// Update comment route
 router.put("/:id/comments/:comment_id", middleware.checkOwnership, function(req, res) {
 	var id = req.params.id;
 	var comment_id = req.params.comment_id;
@@ -66,6 +77,8 @@ router.put("/:id/comments/:comment_id", middleware.checkOwnership, function(req,
 	})
 });
 
+
+// Delete comment route
 router.delete("/:id/comments/:comment_id", middleware.checkOwnership, function(req, res) {
 	var id = req.params.id;
 	var comment_id = req.params.comment_id;

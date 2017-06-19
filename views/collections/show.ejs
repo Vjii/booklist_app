@@ -124,47 +124,36 @@
 			</section> <!-- <section class="categories"> -->
 
 
-			<div class="layout__row comment__title">
-				<div class="col">
-					<h1 class="heading__title">Comment</h1>
-				</div>
-			</div>
-
-			<% collection.comments.forEach(function(comment) { %>
-				<div class="layout__row">
-					<div class="layout__col">
-					<div>
-
-
-					</div>
-		<!-- 			profile__presentation profile-theme-light
-		 -->				<div class="image__container image__container--size-thumbnail">
-							<!-- <img class="image image_rounded" src="<%= comment.author.image%>"> -->
-						</div>
-						<h3 class="profile__name"><%= comment.author.username%></h3>
-					</div>
-
-					<div class="layout__col">
-						<div class="comment__content">
-							<p class="comment__date">Posted on
-							<%= comment.date.toUTCString() %>
-							</p>
-							<p class="comment__text"><%= comment.text%></p>
-
-							<% if (currentUser && collection.author.id.equals(currentUser._id)) { %>
-								<div class="comment__buttons">
-									<a href="/collections/<%= collection._id%>/comment/<%= comment._id%>/edit">
-									<button class="button button__edit button_margin-horizontal">Edit</button>
-									</a>
-									<form class="-js-buttons--delete" action="/collections/<%= collection._id%>/comment/<%= comment._id%>?_method=DELETE" method="POST">
-										<button class="button button__delete  button--delete button--delete">Delete</button>
-									</form>
-								</div>
-							<% } %>
+			<section class="comments">
+				<header class="comments__header">
+					<div class="grid__row">
+						<div class="grid__col">
+							<h2>Comments</h2>
+							<a class="link" href="/collections/<%= collection._id%>/comments/new">Add new comment</a>
 						</div>
 					</div>
-				</div>
-			<% })%>
+				</header>
+
+				<% collection.comments.forEach(function(comment) {%>
+					<div class="comments__item">
+						<div class="grid__row">
+							<div class="grid__col grid__col--flex-1	 grid__col--padding-left">
+								<img class="comments__image"src="<%= comment.author.image %>" alt="Comment author's Image">
+							</div>
+							<div class="grid__col grid__col--flex-100 grid__col--padding-left">
+								<h3><%= comment.author.username%></h3>
+								<p>Posted on <%= comment.date.toLocaleString()%> </p>
+							</div>
+						</div>
+						<div class="grid__row">
+							<div class="grid__col">
+								<p><%= comment.text %></p>
+							</div>
+						</div>
+					</div>
+
+				<% }) %>
+
 
 		</main>
 	</div>
