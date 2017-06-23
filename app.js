@@ -8,6 +8,7 @@ passport = require("passport"),
 LocalStrategy = require("passport-local"),
 passportLocalMongoose = require("passport-local-mongoose"),
 session = require("express-session"),
+whitelist = require("walter-whitelist"),
 back = require("express-back"),
 // SETUP - Models
 User = require("./models/user"),
@@ -29,7 +30,7 @@ app.use(methodOverride("_method"));
 app.use(express.static("public"));
 
 app.use(session({
-	secret: "Non-trivially gray cat on roads of random",
+	secret: "Shades of grey",
 	resave: false,
 	saveUninitialized: false
 }));
@@ -38,9 +39,18 @@ app.use(back());
 app.use(passport.initialize());
 app.use(passport.session());
 
+passport.serializeUser(function(user, done) {
+	done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+	User.findById(user._id, function(err, user) {
+		user.image = user.image
+		done(err, user);
+	});
+});
+
 passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
 
 //LOCALS
 app.use(function(req, res, next) {

@@ -2,7 +2,7 @@ var mongoose = require("mongoose");
 var User = require("./user");
 var Idea = require("./idea");
 var Category = require("./category");
-var Comment = require("./comment");
+var CommentSchema = require("./comment");
 
 
 var CollectionSchema = new mongoose.Schema({
@@ -22,12 +22,7 @@ var CollectionSchema = new mongoose.Schema({
 			ref: "Category"
 		}
 	],
-	comments: [
-		{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: "Comment"
-		}
-	]
+	comments: [CommentSchema]
 });
 
 module.exports = mongoose.model("Collection", CollectionSchema);

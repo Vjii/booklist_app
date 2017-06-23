@@ -2,8 +2,8 @@
 <div class="container">
 	<div class="grid__row">
 		<div class="grid__col">
-			<form class="form form--margin-top" action="/collections/<%= id %>/categories/<%= category._id %>?_method=PUT" method="POST">
-				<a class="link" href="/collections/<%= id %>">Go back</a>
+			<form class="form form--standalone" action="/collections/<%= id %>/categories/<%= category._id %>?_method=PUT" method="POST">
+				<a class="link" href="/collections/<%= id %>">Go to collection</a>
 				<h2>Category - <%= category.name%></h2>
 				<p>You can edit this category below.</p>
 				<fieldset class="form__fieldset">

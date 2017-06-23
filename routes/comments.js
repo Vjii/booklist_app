@@ -1,5 +1,9 @@
 var express = require("express");
-var router = express.Router();
+var router = express.Router(),
+passport = require("passport"),
+LocalStrategy = require("passport-local"),
+passportLocalMongoose = require("passport-local-mongoose"),
+session = require("express-session"),
 Collection = require("../models/collection"),
 User = require("../models/user"),
 Category = require("../models/category"),
@@ -15,90 +19,35 @@ router.get("/:id/comments/new", middleware.checkLoggedIn,  function(req, res) {
 });
 
 
-// Create comment roue
-router.post("/:id/comments",  function(req, res) {
+// Create comment route
+router.post("/:id/comments", middleware.checkLoggedIn, function(req, res) {
 
-	var id = req.params.id
+	Collection.findById(req.params.id, function(err, collection) {
+		if (err) { console.log(err); }
 
-	Collection.findById(id, function(err, collection) {
-		if (err) {
-			console.log(err)
-			res.redirect("back");
-		} else {
-			Comment.create({text: req.body.comment}, function(err, comment) {
-				if (err) {
-					console.log(err);
-					res.redirect("back");
-				} else {
+		comment = { text: req.body.comment, author: req.user }
 
-					var date = new Date();
-					comment.date = date.toDateString();
-					comment.author.id = req.user.id;
-					comment.author.username = req.user.username;
-					comment.author.image = req.user.image;
-					comment.save();
+		collection.comments.push(comment);
+		collection.save();
 
-					collection.comments.push(comment);
-					collection.save();
-					res.redirect("/collections/" + id)
-				}
-			})
-		}
+		res.redirect("/collections/" + req.params.id);
 	})
 });
 
 // Edit comment route
 router.get("/:id/comments/:comment_id/edit", middleware.checkOwnership,  function(req, res) {
-	var id = req.params.id
-	var comment_id = req.params.comment_id
 
-	Comment.findById(comment_id, function(err, comment) {
-		if (err) {
-			console.log(err)
-			res.redirect("back");
-		} else {
-			res.render("comments/edit", {comment: comment, id: id});
-		}
-	})
 })
 
 // Update comment route
 router.put("/:id/comments/:comment_id", middleware.checkOwnership, function(req, res) {
-	var id = req.params.id;
-	var comment_id = req.params.comment_id;
-	var text = req.body.comment;
-	Comment.findByIdAndUpdate(comment_id, {text: text}, function(err, comment) {
-		if (err) {
-			console.log(err);
-			res.redirect("/collections/" + id + "comments/" + comment_id + "/edit");
-		} else {
-			res.redirect("/collections/" + id);
-		}
-	})
+
 });
 
 
 // Delete comment route
 router.delete("/:id/comments/:comment_id", middleware.checkOwnership, function(req, res) {
-	var id = req.params.id;
-	var comment_id = req.params.comment_id;
 
-	Collection.findById(id, function(err) {
-		if (err) {
-			console.log(err);
-			res.redirect("/collections/" + id);
-		} else {
-			Comment.findByIdAndRemove(comment_id, function(err) {
-				if (err) {
-
-				} else {
-					res.redirect("/collections/" + id)
-				}
-			})
-		}
-	})
 });
-
-
 
 module.exports = router;

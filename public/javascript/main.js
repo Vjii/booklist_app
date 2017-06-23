@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function(event) {
 
+	// add mobile dropdown menu behaviors
 	var buttonMobileMenu = document.getElementsByClassName("navigation__mobile-switch");
 
 	if (buttonMobileMenu[0]) {
@@ -9,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		});
 	}
 
-
+	// add delete button confirmation pop up
 	var buttonsDelete = document.getElementsByClassName("-js-buttons--delete");
 
 	if(buttonsDelete.length > 0) {
@@ -27,5 +28,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 
 
-
 });
+
+
+

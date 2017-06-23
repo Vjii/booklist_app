@@ -1,5 +1,9 @@
 var express = require("express"),
 router = express.Router(),
+passport = require("passport"),
+LocalStrategy = require("passport-local"),
+passportLocalMongoose = require("passport-local-mongoose"),
+session = require("express-session"),
 User = require("../models/user"),
 Category = require("../models/category"),
 Collection = require("../models/collection"),
@@ -8,12 +12,12 @@ middleware = require("../middleware/index");
 
 //Collections Index Route
 router.get("/", function(req, res) {
+
 	Collection.find({}, function(err, collections) {
-		if(err) {
-			console.log(err);
-		} else {
-			res.render("collections/index", {collections: collections});
-		}
+		if(err) { return console.log(err); }
+
+		res.render("collections/index", {collections: collections});
+
 	});
 });
 

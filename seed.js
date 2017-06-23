@@ -182,31 +182,17 @@ var seedDB = function() {
 
 	function collectionInsertComments(collection) {
 
-			var author =  {
-				username: "Jason M.",
-			  password: "a",
-			  image: "http://images2.wikia.nocookie.net/bleach/es/images/thumb/6/6f/Renji123.jpg/275px-Renji123.jpg"
+			var user = data.users[0];
+
+			for (var i = 0; i < 8; i++) {
+
+				var comment = {
+					text: "This is some great, amazing, fantastic, awesome sample comment which contains so little information that it's actually nothing, which actually is a whole lot, which means this is a random cluster of letters that doesn't mean anything but is meaningful precisely because of that because it's only purpose is to be a random cluster of letters on the screen. A truly great comment. Now how about three dots at the end...",
+					author: user
 				}
 
-			for (var i = 0; i < 2; i++) {
+				collection.comments.push(comment);
 
-				User.register(new User({username: author.username}), author.password, function(err, user) {
-						if(err) {return console.log(err);}
-
-						user.image = author.image;
-						user.save();
-
-
-						var comment = {
-							text: "This is some great, amazing, fantastic, awesome sample comment which contains so little information that it's actually nothing, which actually is a whole lot, which means this is a random cluster of letters that doesn't mean anything but is meaningful precisely because of that because it's only purpose is to be a random cluster of letters on the screen. A truly great comment. Now how about three dots at the end...",
-							author: user
-						}
-
-						var comment = new Comment(comment);
-						comment.save();
-						collection.comments.push(comment);
-						collection.save();
-				});
 			}
 	}
 
@@ -227,13 +213,13 @@ var seedDB = function() {
 			});
 	}
 
-	function setCollectionData(user, userdata) {
+	function setCollectionData(user) {
 		var collection = {
 			description: "Essential Ideas",
 			author: {
 				id: user.id,
 				username: user.username,
-				image: userdata.image
+				image: user.image
 			}
 		}
 
@@ -241,10 +227,12 @@ var seedDB = function() {
 	}
 
 	function fillCollection(userdata) {
-		User.register(new User({username: userdata.username}), userdata.password, function(err, user) {
+
+
+		User.register(new User({username: userdata.username, image: userdata.image}), userdata.password, function(err, user) {
 				if (err) {return console.log(err)}
 
-			var collection = setCollectionData(user, userdata);
+			var collection = setCollectionData(user);
 			createCollection(collection);
 
 		});

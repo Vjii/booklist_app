@@ -2,7 +2,8 @@ var User = require("../models/user"),
 session = require("express-session"),
 mongoose = require("mongoose"),
 passport = require("passport"),
-passportLocalMongoose = require("passport-local-mongoose");
+passportLocalMongoose = require("passport-local-mongoose"),
+Collection = require("../models/collection");
 
 var middleware = {
 	checkLoggedIn: function(req, res, next) {

@@ -1,24 +1,20 @@
 <% include ../partials/header %>
-<div class="container">
 	<div class="grid__row">
 		<div class="grid__col">
-			<a class="links__item" href="/collections/<%= id%>">Go back</a>
-			<div class="form form--margin-top">
-				<% if (!category_id) { %>
-					<form class="form__inner" action="/collections/<%= id %>/categories" method="POST">
-						<a class="link" href="/collections/<%= id %>">Go back</a>
-						<h2>Name new category of ideas</h2>
-						<p>Ideas are initially organized into the category to which they belong. What will these ideas be about?</p>
-						<fieldset class="form__fieldset">
-							<legend>Add a category of ideas</legend>
-							<label class="form__item form__item--label" for="category[name]">Category name:</label>
-							<input class="form__item form__item--input" type="text" name="category[name]" placeholder="Name">
-						</fieldset>
-						<button class="form__item form__item--button">Submit</button>
-				  </form>
-		 		 <%} %>
+			<div class="form form--standalone">
+				<form class="form__inner -js-form--submit" action="/collections/<%= id %>/categories" method="POST">
+					<h2>Add ideas<h2>
+					<h3>Step 1</h3>
+					<h3>Name new category</h3>
+					<p>What will these ideas be about?</p>
+					<fieldset class="form__fieldset">
+						<legend>Add a category of ideas</legend>
+						<label class="form__item form__item--label" for="category[name]">Category name:</label>
+						<input class="form__item form__item--input" type="text" name="category[name]" placeholder="Name">
+					</fieldset>
+					<button class="form__item form__item--button">Submit</button>
+			  </form>
 			</div>
 		</div>
 	</div>
-</div>
 <% include ../partials/footer %>

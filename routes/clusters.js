@@ -23,7 +23,7 @@ router.get("/:id/categories/:category_id/clusters/new", middleware.checkOwnershi
 					return res.back();
 				}
 
-				res.render("clusters/new", {collection: collection, category: category})
+				res.render("clusters/new", {id: req.params.id, category: category})
 
 			});
 		})
@@ -51,7 +51,7 @@ router.post("/:id/categories/:category_id/clusters", middleware.checkOwnership, 
 				category.save();
 				var clusterId = category.clusters[category.clusters.length - 1].id;
 
-				res.redirect("/collections/" + req.params.id + "/categories/" + category.id + "/clusters/" + clusterId + "/ideas/new" );
+				res.render("clusters/new", {id: req.params.id, category: category});
 			});
 		})
 });
@@ -92,9 +92,9 @@ router.put("/:id/categories/:category_id/clusters/:cluster_id", middleware.check
 			var ideasCluster = category.clusters.id(req.params.cluster_id);
 			ideasCluster.source = req.body.source;
 			category.save();
-			console.log(ideasCluster)
+			console.log(category + " CATEGORY")
 
-			res.redirect("/collections/" + req.params.id + "/categories/" + category.id + "/clusters/" + ideasCluster.id + "/ideas/new" );
+			res.render("clusters/new", {id: req.params.id, category: category});
 		});
 });
 

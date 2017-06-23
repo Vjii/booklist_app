@@ -28,13 +28,31 @@ router.post("/:id/categories", middleware.checkOwnership, function(req, res) {
 				console.log(err);
 				return res.redirect("/collections/" + req.params.id + "/categories/new");
 			}
-				console.log(category);
+
 				collection.categories.push(category);
 				collection.save();
 
-				res.redirect("/collections/" + req.params.id + "/categories/" + category._id + "/clusters/new");
+				res.render("clusters/new", {id: req.params.id, category: category});
 		})
 	});
+});
+
+
+//Categories - Show Route
+router.get("/:id/categories/:category_id", function(req, res) {
+
+	Collection.findById(req.params.id, function(err, collection) {
+
+		Category.findById(req.params.category_id, function(err, category) {
+			if(err) {
+				console.log(err)
+				return res.back();
+			}
+
+			res.render("categories/show", {collection: collection, category: category});
+		});
+	});
+
 });
 
 // Edit category route

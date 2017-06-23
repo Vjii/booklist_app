@@ -16,10 +16,11 @@ router.post("/register", middleware.alreadyLoggedIn,  function(req, res) {
 
 	User.register(new User({username: req.body.username, image: req.body.image}), req.body.password, function(err, user) {
 		if(err) {
-			console.log("Error during registration process: " + err);
-			return res.render("authentication/register")
+			console.log("Add flash message for registration error");
+			return res.render("authentication/register");
 		}
-			console.log("User registered: " + user)
+
+			console.log("User registered");
 
 			passport.authenticate('local')(req, res, function() {
 				res.redirect("/collections");
