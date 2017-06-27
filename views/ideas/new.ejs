@@ -5,9 +5,14 @@
 			<div class="form form--standalone">
 				<form class="form__inner" action="/collections/<%= id %>/categories/<%= category._id %>/clusters/<%= cluster._id %>/ideas" method="POST">
 					<a class="link" href="/collections/<%= id %>">Go to collection</a>
-					<h2 class="">Add ideas to the cluster originating from the source "<%= cluster.source.name %>"</h2>
+					<h2 class="">Add ideas</h2>
+					<h3>Step 3</h3>
+					<h3>Add ideas to the selected source</h3>
 					<p><strong>Category:</strong> <%= category.name %></p>
-					<p>This is the place to add positions for the specified cluster of ideas. Provide name of the idea and its description.</p>
+					<p><strong>Source:</strong> <%= cluster.source.name %></p>
+					<p>You can add as many ideas as you want.</p>
+					<p>Newly added ideas will appear below.</p>
+					<p><em>Click "Done" when you're finished.</em></p>
 					<fieldset class="form__fieldset">
 						<legend>New idea</legend>
 						<label class="form__item form__item--label for="idea[name]">Name:</label>

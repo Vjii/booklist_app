@@ -12,20 +12,40 @@
 							<h2 class="profile__name"><%= collection.author.username %></h2>
 						</header>
 					</div>
+
 					<div class="grid__col grid__col--desktop-flex-3 grid__col--no-padding">
 						<div class="profile__body">
 							<h1 class="profile__title">Essential ideas</h1>
-							<div class="list__container">
-								<h3 class="list__title">Categories:</h3>
-								<% if (collection.categories !== null) { %>
-									<ul class="list">
-										<% collection.categories.forEach(function(category) {%>
-												<li class="list__item">
-													<%= category.name %>
-												</li>
-										<% })%>
-									</ul>
-								<% } %>
+							<p class="profile__ui-info"><em>Click a category below to display its contents</em></p>
+							<div class="profile__lists">
+								<div class="list list--half">
+									<h3 class="list__title">Categories:</h3>
+									<% if (collection.categories !== null) { %>
+										<ul class="list__container">
+											<% collection.categories.forEach(function(category) {%>
+													<li class="list__item">
+														<button class="list__item--button js-hook--category-triggers"  data-name="<%= category.name %>" >
+															<%= category.name %>
+														</button>
+													</li>
+											<% })%>
+										</ul>
+									<% } %>
+								</div>
+								<div class="list list--half">
+									<h3 class="list__title">Sources:</h3>
+									<% if (collection.categories !== null) { %>
+										<ul class="list__container">
+											<% collection.categories.forEach(function(category) {%>
+													<% category.clusters.forEach(function(cluster) { %>
+														<li class="list__item js-hook--clusters js-state--hidden" data-name="<%= category.name %>">
+															<%= cluster.source.name %>
+														</li>
+													<% }) %>
+											<% })%>
+										</ul>
+									<% } %>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -47,18 +67,17 @@
 						</div>
 						<div class="grid__row">
 							<div class="grid__col">
-								<p class="categories__arrow">Ideas are initially sorted into <strong>categories</strong>. Then, within a category, ideas are grouped into <strong>clusters</strong>.</p>
-								<p class="categories__arrow"><strong>Cluster</strong> is a group of ideas with the same source or author.</p>
-							  <p class="categories__arrow"><strong>You can add a category, its clusters and ideas in three, simple steps</strong> - just click the " + " button above.</p>
-							  <p class="categories__arrow"><strong>To edit or delete individual categories</strong> - use buttons in the top section of the given category.</p>
-							  <p class="categories__arrow"><strong>To edit or delete individual idea clusters or ideas</strong> - use buttons in the section beneath them.</p>
+								<p class="categories__pointer">Ideas are initially sorted into <strong>categories</strong>. Then, within a category, ideas are grouped by their <strong>sources.</strong>.</p>
+							  <p class="categories__pointer categories__pointer--border-bottom"><strong>You can add a category, sources of ideas and ideas themselves in three, simple steps.</strong> Just click the " + " button above.</p>
+							  <p class="categories__pointer"><strong>To edit or delete individual categories</strong> - use buttons in the top section of the given category.</p>
+							  <p class="categories__pointer"><strong>To edit or delete individual idea sources or ideas</strong> - use buttons in the section beneath them.</p>
 							</div>
 						</div>
 					</div>
 				<% } %>
 
 				<% collection.categories.forEach(function(category) { %>
-					<article class="categories__item">
+					<article class="categories__item js-hook--categories js-state--hidden" data-name="<%= category.name %>">
 						<header class="categories__header">
 							<div class="grid__row">
 								<div class="grid__col grid__col--no-padding grid__col--flex-1">
@@ -71,7 +90,7 @@
 											<a class="buttons__item" href="/collections/<%= collection._id%>/categories/<%= category._id%>/edit">
 												Edit
 											</a>
-											<form class="buttons__item--form -js-buttons--delete" action="/collections/<%= collection._id%>/categories/<%= category._id%>?_method=DELETE" method="POST">
+											<form class="buttons__item--form js-buttons--delete" action="/collections/<%= collection._id%>/categories/<%= category._id%>?_method=DELETE" method="POST">
 												<button class="buttons__item buttons__item--delete">Delete</button>
 											</form>
 										</div>
@@ -103,7 +122,7 @@
 													<a class="buttons__item button--equal" href="/collections/<%= collection._id%>/categories/<%= category._id%>/clusters/<%= cluster._id%>/edit">
 														Edit
 													</a>
-													<form class="buttons__item--form -js-buttons--delete" action="/collections/<%= collection._id%>/categories/<%= category._id%>/clusters/<%= cluster._id %>?_method=DELETE" method="POST">
+													<form class="buttons__item--form js-buttons--delete" action="/collections/<%= collection._id%>/categories/<%= category._id%>/clusters/<%= cluster._id %>?_method=DELETE" method="POST">
 														<button class="buttons__item buttons__item--delete">Delete</button>
 													</form>
 												</div>
@@ -119,7 +138,7 @@
 															<a class="buttons__item" href="/collections/<%= collection._id %>/categories/<%= category._id%>/clusters/<%= cluster._id%>/ideas/<%= idea._id%>/edit">
 																Edit
 															</a>
-															<form class="buttons__item--form -js-buttons--delete" action="/collections/<%= collection._id %>/categories/<%= category._id%>/clusters/<%= cluster._id%>/ideas/<%= idea._id%>?_method=DELETE" method="POST">
+															<form class="buttons__item--form js-buttons--delete" action="/collections/<%= collection._id %>/categories/<%= category._id%>/clusters/<%= cluster._id%>/ideas/<%= idea._id%>?_method=DELETE" method="POST">
 																<button class="buttons__item buttons__item--delete">Delete
 																</button>
 															</form>

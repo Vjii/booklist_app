@@ -10,7 +10,7 @@ middleware = require("../middleware/index");
 
 
 // New ideas cluster Route
-router.get("/:id/categories/:category_id/clusters/new", middleware.checkOwnership, function(req, res) {
+router.get("/:id/categories/:category_id/clusters/new", middleware.checkOwnership, middleware.checkClustersLimit, function(req, res) {
 		console.log("ROUTE?")
 		Collection.findById(req.params.id, function(err, collection) {
 			if (err) {
@@ -30,7 +30,7 @@ router.get("/:id/categories/:category_id/clusters/new", middleware.checkOwnershi
 });
 
 // Create ideas cluster Route
-router.post("/:id/categories/:category_id/clusters", middleware.checkOwnership, function(req, res) {
+router.post("/:id/categories/:category_id/clusters", middleware.checkOwnership, middleware.checkClustersLimit, function(req, res) {
 
 		Collection.findById(req.params.id, function(err, collection) {
 			if (err) {

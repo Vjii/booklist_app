@@ -6,7 +6,7 @@ Collection = require("../models/collection"),
 middleware = require("../middleware/index");
 
 // New category route
-router.get("/:id/categories/new", middleware.checkOwnership, function(req, res) {
+router.get("/:id/categories/new", middleware.checkOwnership, middleware.checkCategoriesLimit, function(req, res) {
 
 	var category_id;
 	res.render("categories/new", {id: req.params.id, category_id: category_id});
@@ -15,7 +15,7 @@ router.get("/:id/categories/new", middleware.checkOwnership, function(req, res) 
 
 
 // Create a category route
-router.post("/:id/categories", middleware.checkOwnership, function(req, res) {
+router.post("/:id/categories", middleware.checkOwnership, middleware.checkCategoriesLimit, function(req, res) {
 
 	Collection.findById(req.params.id, function(err, collection) {
 		if (err) {

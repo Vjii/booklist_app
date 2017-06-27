@@ -12,7 +12,7 @@ middleware = require("../middleware/index");
 
 
 // New Route
-router.get("/:id/categories/:category_id/clusters/:cluster_id/ideas/new", middleware.checkOwnership, function(req, res) {
+router.get("/:id/categories/:category_id/clusters/:cluster_id/ideas/new", middleware.checkOwnership, middleware.checkIdeasLimit, function(req, res) {
 
 		Category.findById(req.params.category_id, function(err, category) {
 			if (err) {
@@ -27,7 +27,7 @@ router.get("/:id/categories/:category_id/clusters/:cluster_id/ideas/new", middle
 
 
 // Create Route
-router.post("/:id/categories/:category_id/clusters/:cluster_id/ideas", middleware.checkOwnership, function(req, res) {
+router.post("/:id/categories/:category_id/clusters/:cluster_id/ideas", middleware.checkOwnership, middleware.checkIdeasLimit, function(req, res) {
 
 	Category.findById(req.params.category_id, function(err, category) {
 		if(err) {	return console.log(err);}

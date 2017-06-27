@@ -53,6 +53,11 @@ a:visited {
 	color: inherit;
 }
 
+a:active {
+	color: #fff;
+}
+
+
 ul,
 ol,
 li {
@@ -495,8 +500,21 @@ input {
 }
 
 	.profile__body {
-		padding: 20px 15px;
+		padding: 20px;
 	}
+
+	@media only screen and (min-width: 800px) {
+		.profile__lists {
+			display: flex;
+			justify-content: space-between;
+		}
+	}
+
+		.profile__ui-info {
+			margin: 15px -20px;
+			padding: 5px 20px;
+			background-color: rgba(60, 60, 60, .4);
+		}
 
 	.profile__header {
 		padding: 20px;
@@ -547,12 +565,13 @@ input {
 	}
 
 
-	.categories__arrow {
+	.categories__pointer {
 		position: relative;
 		padding-left: 40px;
-		
+
 	}
-	.categories__arrow:before {
+
+	.categories__pointer:before {
 		content: " ";
 		position: absolute;
 		top: 8px;
@@ -568,23 +587,26 @@ input {
 		border-color: #eaeaea;
 	}
 
-		.categories__arrow:after {
-		  content: "";
-		  position: absolute;
-		  top: 12px;
-		  left: 0;
-		  bottom: calc(50% - 8px);
-		  display: block;
-		  height: 5px;
-		  width: 20px;
-		  border-top: 1px solid #eaeaea;
-		}
-	
+	.categories__pointer:after {
+	  content: "";
+	  position: absolute;
+	  top: 12px;
+	  left: 0;
+	  bottom: calc(50% - 8px);
+	  display: block;
+	  height: 5px;
+	  width: 20px;
+	  border-top: 1px solid #eaeaea;
+	}
 
 
 
 
-	
+
+
+
+
+
 	.categories__header {
 		padding: 0 20px;
 	}
@@ -624,6 +646,7 @@ input {
 		}
 
 	.categories__item {
+		display: none;
 		margin-top: 60px;
 		background-color: rgba(12, 12, 12, .8);
 	}
@@ -745,11 +768,12 @@ input {
 
 
 .list {
-		padding-left: 15px;
-	}
+	padding-top: 15px;
+}
 
 	.list__container {
-		padding-top: 15px;
+		margin: 0;
+		padding-left: 15px;
 	}
 
 		.list__title {
@@ -759,9 +783,17 @@ input {
 		.list__item {
 			margin: 12.5px;
 			list-style: disc;
-			font-weight: bold;
 		}
 
+		.list__item--display-none {
+			display: none;
+		}
+
+		.list__item--button {
+			font-family: inherit;
+			font-weight: normal;
+			outline: none;
+		}
 
 
 		.list__item:after {
@@ -777,8 +809,12 @@ input {
 		@media only screen and (min-width: 800px) {
 			.list {
 				display: flex;
-				flex-wrap: wrap;
-				justify-content: space-between;
+				flex-direction: column;
+				justify-content: flex-start;
+			}
+
+			.list--half {
+				width: calc(50% - 20px);
 			}
 
 			.list__item {
@@ -959,7 +995,6 @@ input {
 	width: 100%;
 	height: 1px;
 	background: linear-gradient(to left, #717171, #eaeaea);
-
 }
 
 
@@ -1055,5 +1090,19 @@ input {
 
 
 
+/* Javascript hooks
+================================================================================== */
+
+
+.js-state--hidden {
+	display: none;
+}
+.js-state--visible {
+	display: block;
+}
+
+.js-state--active {
+	font-weight: bold;
+}
 
 
