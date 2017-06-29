@@ -1,12 +1,15 @@
 <% include ../partials/header %>
+<div class="container">
 	<div class="grid__row">
 		<div class="grid__col">
 			<div class="form form--standalone">
 			<a class="link" href="/collections/<%= id %>">Go to collection</a>
+			<header class="form__header">
+				<h1 class="form__title">Add ideas / step 1.</h1>
+				<h2 class="form__subtitle">Create new category of ideas</h2>
+
+			</header>
 				<form class="form__inner -js-form--submit" action="/collections/<%= id %>/categories" method="POST">
-					<h2>Add ideas<h2>
-					<h3>Step 1</h3>
-					<h3>Name new category</h3>
 					<p>What will these ideas be about?</p>
 					<fieldset class="form__fieldset">
 						<legend>Add a category of ideas</legend>
@@ -18,4 +21,5 @@
 			</div>
 		</div>
 	</div>
+</div>
 <% include ../partials/footer %>

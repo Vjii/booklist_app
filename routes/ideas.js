@@ -37,6 +37,8 @@ router.post("/:id/categories/:category_id/clusters/:cluster_id/ideas", middlewar
 		ideasCluster.ideas.push(idea);
 
 		category.save();
+
+		req.session.activeCategory = category.name;
 		res.redirect("/collections/" + req.params.id + "/categories/" + category.id + "/clusters/" + ideasCluster.id + "/ideas/new" );
 	});
 });
@@ -53,13 +55,22 @@ router.get("/:id/categories/:category_id/clusters/:cluster_id/ideas/:idea_id/edi
 		var ideasCluster = category.clusters.id(req.params.cluster_id);
 		var idea = ideasCluster.ideas.id(req.params.idea_id);
 
-		res.render("ideas/edit", {id: req.params.id, category_id: req.params.category_id, cluster_id: req.params.cluster_id, idea: idea});
+		req.session.activeCategory = category.name;
+
+		res.render("ideas/edit", {
+			id: req.params.id,
+			category_id: req.params.category_id,
+			cluster_id: req.params.cluster_id,
+			idea: idea
+		});
 	});
 });
 
 
 // Update an idea route
 router.put("/:id/categories/:category_id/clusters/:cluster_id/ideas/:idea_id", middleware.checkOwnership, function(req, res) {
+
+	backURL = req.header("Referer") || "/";
 	var ideaEdited = req.body.idea;
 
 	Category.findById(req.params.category_id, function(err, category) {
@@ -72,7 +83,7 @@ router.put("/:id/categories/:category_id/clusters/:cluster_id/ideas/:idea_id", m
 
 		category.save();
 
-		res.redirect("/collections/" + req.params.id + "/categories/" + category.id + "/clusters/" + ideasCluster.id + "/ideas/new" );
+		res.redirect("/collections/" + req.params.id);
 	});
 });
 

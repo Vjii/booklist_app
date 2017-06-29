@@ -9,7 +9,7 @@ Collection = require("../models/collection"),
 middleware = require("../middleware/index");
 
 
-// New ideas cluster Route
+// New cluster Route
 router.get("/:id/categories/:category_id/clusters/new", middleware.checkOwnership, middleware.checkClustersLimit, function(req, res) {
 		console.log("ROUTE?")
 		Collection.findById(req.params.id, function(err, collection) {
@@ -51,6 +51,8 @@ router.post("/:id/categories/:category_id/clusters", middleware.checkOwnership, 
 				category.save();
 				var clusterId = category.clusters[category.clusters.length - 1].id;
 
+				req.session.activeCategory = category.name;
+
 				res.render("clusters/new", {id: req.params.id, category: category});
 			});
 		})
@@ -73,6 +75,8 @@ router.get("/:id/categories/:category_id/clusters/:cluster_id/edit", middleware.
 			}
 
 			var ideaCluster = category.clusters.id(req.params.cluster_id);
+
+			req.session.activeCategory = category.name;
 
 			res.render("clusters/edit", {collection: collection, category: category, cluster: ideaCluster});
 		});

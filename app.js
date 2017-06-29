@@ -60,6 +60,12 @@ app.use(function(req, res, next) {
 		res.locals.currentUser = null;
 	}
 	next();
+
+	if (req.session.activeCategory) {
+		res.locals.activeCategory = req.session.activeCategory
+	} else {
+		res.locals.activeCategory = null;
+	}
 });
 
 seedDB();

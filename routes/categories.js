@@ -32,7 +32,9 @@ router.post("/:id/categories", middleware.checkOwnership, middleware.checkCatego
 				collection.categories.push(category);
 				collection.save();
 
-				res.render("clusters/new", {id: req.params.id, category: category});
+				req.session.activeCategory = category.name;
+
+				res.redirect("/collections/" + req.params.id + "/categories/" + category.id + "/clusters/new");
 		})
 	});
 });
@@ -61,6 +63,8 @@ router.get("/:id/categories/:category_id/edit", middleware.checkOwnership, funct
 		Category.findById(req.params.category_id, function(err, category) {
 			if(err) {return console.log(err)}
 
+			req.session.activeCategory = category.name;
+
 			res.render("categories/edit", {id: req.params.id, category: category});
 		})
 });
@@ -73,6 +77,9 @@ router.put("/:id/categories/:category_id",  middleware.checkOwnership, function(
 
 		category.name = req.body.name;
 		category.save();
+
+		req.session.activeCategory = category.name;
+
 		res.redirect("/collections/" + req.params.id);
 	})
 });
@@ -83,6 +90,7 @@ router.delete("/:id/categories/:category_id",  middleware.checkOwnership, functi
 	Category.findByIdAndRemove(req.params.category_id, function(err) {
 		if(err) {return console.log(err)}
 
+		req.session.activeCategory = null;
 		res.redirect("/collections/" + req.params.id);
 	})
 

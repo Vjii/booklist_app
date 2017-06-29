@@ -6,6 +6,13 @@ passportLocalMongoose = require("passport-local-mongoose"),
 Category = require("../models/category"),
 Collection = require("../models/collection");
 
+
+var parameters = {
+	categoriesLimit : 3,
+	clustersLimit: 3,
+	ideasLimit: 5
+}
+
 var middleware = {
 	checkLoggedIn: function(req, res, next) {
 
@@ -44,7 +51,7 @@ var middleware = {
 	},
 	checkCategoriesLimit: function(req, res, next) {
 		Collection.findById(req.params.id, function(err, collection) {
-			if (collection.categories.length < 3 ) {
+			if (collection.categories.length < parameters.categoriesLimit ) {
 				next();
 				return;
 			}
@@ -55,7 +62,7 @@ var middleware = {
 	},
 	checkClustersLimit: function(req, res, next) {
 		Category.findById(req.params.category_id, function(err, category) {
-			if (category.clusters.length < 3) {
+			if (category.clusters.length < parameters.clustersLimit) {
 				next();
 				return;
 			}
@@ -66,7 +73,7 @@ var middleware = {
 		Category.findById(req.params.category_id, function(err, category) {
 			var ideasCluster = category.clusters.id(req.params.cluster_id);
 
-			if (ideasCluster.ideas.length < 3) {
+			if (ideasCluster.ideas.length < parameters.ideasLimit) {
 				next();
 				return;
 			}

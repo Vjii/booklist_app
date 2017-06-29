@@ -2,7 +2,11 @@
 	<div class="container">
 		<div class="row">
 			<div class="col">
-				<a class="button" href="/collections/new">Create your own collection</a>
+				<form action="/collections" method="POST">
+					<h1>Add collection</h1>
+					<input type="text" name="collection" placeholder="Collection">
+					<button>Submit</button>
+				</form>
 			</div>
 		</div>
 
@@ -12,8 +16,6 @@
 
 					<div class="col collection">
 						<div class="names">
-
-
 
 							<h3 class="heading_margin-small"><%= collection.author.username %></h3>
 						</div>

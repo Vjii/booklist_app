@@ -35,9 +35,16 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	var categories = document.getElementsByClassName("js-hook--categories");
 	var clusters = document.getElementsByClassName("js-hook--clusters");
 
-	setStateLoop(categoryTriggers, 1, "js-state--active");
-	setStateLoop(categories, 1, "js-state--visible");
-	setStateLoop(clusters, parameters.clustersPerCategory, "js-state--visible");
+	var name = categoryTriggers[0].parentNode.dataset.active;
+
+	if (!name) {
+		name = categoryTriggers[0].dataset.name;
+	}
+
+	changeStateLoop(categoryTriggers, name, "js-state--active");
+	changeStateLoop(categories, name, "js-state--visible");
+	changeStateLoop(clusters, name, "js-state--visible");
+
 
 	for (var i = 0; i < categoryTriggers.length; i++) {
 
@@ -53,6 +60,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 });
 
 
+
 // ------------------------------ Re-usable functions
 
 // Apply state to event's active element and its corresponding content, remove from the rest
@@ -63,11 +71,5 @@ function changeStateLoop(elements, datasetName, classToToggle) {
 		} else {
 			elements[i].classList.remove(classToToggle);
 		}
-	}
-}
-
-function setStateLoop(elements, rangeNumber, classToAdd) {
-	for (var i = 0; i < rangeNumber; i++) {
-		elements[i].classList.add(classToAdd);
 	}
 }

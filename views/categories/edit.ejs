@@ -4,7 +4,7 @@
 		<div class="grid__col">
 			<form class="form form--standalone" action="/collections/<%= id %>/categories/<%= category._id %>?_method=PUT" method="POST">
 				<a class="link" href="/collections/<%= id %>">Go to collection</a>
-				<h2>Category - <%= category.name%></h2>
+				<h1 class="form__title">Edit category - <%= category.name%></h1>
 				<p>You can edit this category below.</p>
 				<fieldset class="form__fieldset">
 					<legend>Edit category name</legend>

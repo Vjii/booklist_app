@@ -5,11 +5,9 @@
 			<div class="form form--standalone">
 				<form class="form__inner" action="/collections/<%= collection._id %>/categories/<%= category._id %>/clusters/<%= cluster._id%>?_method=PUT" method="POST">
 					<a class="link" href="/collections/<%= collection.id %>">Go to collection</a>
-					<h2 class="heading__title vertical_margin-small"> Edit ideas source in the cluster about <%= category.name%></h2>
-			  	<p>Before writing down a set of ideas, provide their source.</p>
-			  	<p>Each set or cluster of ideas corresponds to a source - a book, person, theory, whatever the origin is.</p>
+					<h1 class="form__title"> Edit a source of ideas about<%= category.name%></h1>
+			  	<p>You can edit the selected source below.</p>
 					<fieldset class="form__fieldset">
-						<legend></legend>
 						<legend> Source of the ideas for new cluster </legend>
 						<label class="form__item form__item--label" for="source[name]">Name of the source:</label>
 						<input class="form__item form__item--input" type="text" name="source[name]" value="<%= cluster.source.name %>">
