@@ -87,14 +87,18 @@ router.put("/:id/categories/:category_id",  middleware.checkOwnership, function(
 // Destroy category route
 router.delete("/:id/categories/:category_id",  middleware.checkOwnership, function(req, res) {
 
-	Category.findByIdAndRemove(req.params.category_id, function(err) {
-		if(err) {return console.log(err)}
+	Collection.findById(req.params.id, function(err, collection) {
+		if (err) {return console.log(err);}
 
-		req.session.activeCategory = null;
-		res.redirect("/collections/" + req.params.id);
-	})
+		collection.categories.remove(req.params.category_id);
+		collection.save();
 
+		Category.findByIdAndRemove(req.params.category_id, function(err, removed) {
+			if(err) {return console.log(err);}
 
+			res.redirect("/collections/" + req.params.id);
+		});
+	});
 });
 
 module.exports = router;

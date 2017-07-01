@@ -13,12 +13,14 @@ middleware = require("../middleware/index");
 //Collections Index Route
 router.get("/", function(req, res) {
 
-	Collection.find({}, function(err, collections) {
-		if(err) { return console.log(err); }
+	Collection.find({}).
+	populate("categories").
+	exec(function(err, collections) {
+		if(err) {return console.log(err)}
 
 		res.render("collections/index", {collections: collections});
 
-	});
+	})
 });
 
 //Collections New Route - form to add collection
