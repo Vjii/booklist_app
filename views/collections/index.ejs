@@ -3,8 +3,8 @@
 		<div class="grid__row">
 			<div class="grid__col grid__col--no-padding">
 				<header class="greeting">
-						<h1 class="greeting__title">Welcome to Cerebrate</h1>
-						<h2 class="greeting__subtitle">Explore collections of the most influential thoughts and useful ideas. Create your own.</h2>
+						<h1>Welcome to Cerebrate</h1>
+						<h2>Explore collections of the most influential thoughts and useful ideas. Create your own.</h2>
 					<div class="form">
 						<form class="form__inner form__inner--left" action="/collections" method="POST">
 							<button class="form__item form__item--button form__item--huge form__item--left">Create your own collection</button>
@@ -14,30 +14,37 @@
 			</div>
 		</div>
 		<main>
-			<div class="grid__row grid__row--pattern-gallery">
-				<% collections.forEach(function(collection) { %>
-					<div class="grid__col grid__col--pattern-gallery grid__col--no-padding">
-						<div class="profile profile--size-equal profile--padding">
-							<div class="profile__image-wrapper">
-								<img class="profile__image" src="<%= collection.author.image %>" alt="Author's image">
+			<section>
+				<div class="grid__row grid__row--pattern-gallery">
+					<% collections.forEach(function(collection) { %>
+						<div class="grid__col grid__col--pattern-gallery grid__col--no-padding">
+							<div class="profile profile--flex profile--padding-bottom">
+								<header class="profile__header">
+									<div class="profile__image-wrapper">
+										<img class="profile__image" src="<%= collection.author.image %>" alt="Author's image">
+									</div>
+									<h2 class="profile__name"><%= collection.author.username %></h2>
+								</header>
+								<% if (collection.categories !== null) { %>
+								<div class="list list--padding">
+									<h2 >Strategic ideas</h2>
+									<ul class="list__container">
+										<% collection.categories.forEach(function(category) {%>
+												<li class="list__item list__item--no-margin	">
+														<%= category.name %>
+												</li>
+										<% })%>
+									</ul>
+								<% } %>
+								</div>
+								<a class="profile__link" href="/collections/<%= collection._id %>">
+									View the collection
+								</a>
 							</div>
-							<h2 class="profile__name"><%= collection.author.username %></h2>
-							<% if (collection.categories !== null) { %>
-								<ul class="list__container">
-									<% collection.categories.forEach(function(category) {%>
-											<li class="list__item list__item--no-margin	">
-													<%= category.name %>
-											</li>
-									<% })%>
-								</ul>
-							<% } %>
-							<a class="link--button" href="/collections/<%= collection._id %>">
-								View the collection
-							</a>
 						</div>
-					</div>
-				<% }); %>
-			</div>
+					<% }); %>
+				</div>
+			</section>
 		</main>
 	</div>
 

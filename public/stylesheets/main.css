@@ -15,39 +15,74 @@
 /* Base Styles
 ============================================================================== */
 
-.TEMPORARY-FIX {
-	max-width: 400px;
-	max-height: 400px;
-}
-
-html {
-	color: #eaeaea;
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
-	font-family: 'PT Serif', serif;
-
-}
-
 *, :before, :after {
 	-webkit-box-sizing: inherit;
 	        box-sizing: inherit;
 }
 
+html {
+	color: #dbdbdb;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+  font: 100%/1.5 'Raleway', sans-serif;
+}
+
 body {
-	padding-top: 70px;
+  padding-top: 70px;
   background: url(../images/bg-1.png) no-repeat center center fixed;
   background-size: cover;
+  color: #dbdbdb;
 }
 
 h1, h2, h3, h4, h5, h6 {
-	margin-top: 0;
-	word-wrap: break-word;
 	font-weight: normal;
 }
 
-p {
-	word-wrap: break-word;
+
+h1 {
+  font-size: 2.5000em;
+  line-height: 1.2000em;
+  margin: 1.2000em 0;
 }
+
+
+h2 {
+  font-size: 2.1250em;
+  line-height: 1.4118em;
+  margin-bottom: 0.7059em;
+  margin-top: 0;
+}
+
+h3 {
+  font-size: 1.8750em; /* 30px */
+  line-height: 1.6000em; /* 48px */
+  margin-bottom: 0.8000em;
+  margin-top: 0;
+}
+
+h4 {
+  font-size: 1.5000em; /* 24px */
+  line-height: 1.0000em; /* 24px */
+  margin-bottom: 1.0000em;
+  margin-top: 0;
+}
+
+
+p {
+  font-size: 1.2500em; /* 20px */
+  line-height: 1.2000em; /* 24px */
+  margin-bottom: 1.2000em;
+  margin-top: 0;
+}
+
+a,
+button  {
+  font-size: 1.2500em; /* 20px */
+  line-height: 1.2000em; /* 24px */
+  margin-bottom: 1.2000em;
+  margin-top: 0;
+}
+
 
 a,
 a:visited {
@@ -55,7 +90,8 @@ a:visited {
 	color: inherit;
 }
 
-a:active {
+a:active,
+a:focus {
 	color: #fff;
 }
 
@@ -65,6 +101,7 @@ ol,
 li {
 	list-style: none;
 }
+
 
 button,
 form,
@@ -190,6 +227,22 @@ input {
 
 		.grid__col--pattern-gallery {
 			flex: 1 1 100%;
+			margin: 20px 0;
+		}
+
+
+		@media only screen and (min-width: 500px) {
+
+			.grid__row--pattern-gallery {
+				margin-left: -10px;
+				margin-right: -10px;
+			}
+
+			.grid__col--pattern-gallery {
+				flex: 1 1  calc(50% - 20px);
+				max-width: calc(50% - 20px);
+				margin: 10px;
+			}
 		}
 
 		@media only screen and (min-width: 800px) {
@@ -553,25 +606,25 @@ input {
 	background-color: rgba(12, 12, 12, .8);
 }
 
-	.greeting__title {
-		font-size: 2rem;
-	}
-
-	.greeting__subtitle {
-		font-size: 1.25rem;
-	}
-
-
 .profile {
-	background: rgba(12, 12, 12, .8);
+	height: 100%;
+	background: rgba(0, 0, 0, .75);
 	border: 1px solid #717171;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 }
 
+	.profile--flex {
+		display: flex;
+		flex-direction: column;
+	}
 
 	.profile--padding {
 		padding: 20px;
+	}
+
+	.profile--padding-bottom {
+		padding-bottom: 30px;
 	}
 
 
@@ -593,14 +646,14 @@ input {
 		}
 
 	.profile__header {
-		padding: 20px;
+		padding: 20px 20px 0 20px;
 		background-color: #000;
 		box-shadow: 0 3px 3px -3px #000;
 		overflow-y: auto;
 	}
 
 	@media only screen and (min-width: 800px) {
-		.profile__header {
+		.profile__header--height-fill {
 			height: 100%;
 			box-shadow: 3px 0px 3px -3px #717171;
 		}
@@ -623,12 +676,29 @@ input {
 		}
 
 	.profile__name {
+		margin: 30px 0;
+		vertical-align: middle;
+		font-size: 1.875rem;
 		text-align: center;
 	}
+
 
 	.profile__title {
 		margin-bottom: 20px;
 		text-align: center;
+	}
+
+
+	.profile__link {
+		align-self: center;
+		margin-top: auto;
+		padding: 15px;
+		font-size: 1.25rem;
+		border: 1px solid #eaeaea;
+		border-radius: 5px;
+		line-height: 16px;
+		color: inherit;
+		font-size: 1.25rem;
 	}
 
 
@@ -637,11 +707,12 @@ input {
 	margin-top: 30px;
 }
 
-
 	.categories__panel {
 		padding: 20px 0;
-		background-color: rgba(12, 12, 12, .8);
+		background-color: rgba(0, 0, 0, .75);
 	}
+
+.categories__panel {}
 
 	.categories__heading {
 		margin: 1rem 0;
@@ -682,65 +753,37 @@ input {
 	  border-top: 1px solid #eaeaea;
 	}
 
-	.categories__header {
-		padding: 0 20px;
+
+	.categories__topbar {
+		display: flex;
+		justify-content: space-between;
+		padding: 1.5rem 1.5rem 0 1.5rem;
+		background-color: #000;
 	}
 
-	.categories__header:after {
+	.categories__marker {
+		letter-spacing: 3px;
+
+	}
+	
+	.categories__title {
+  	    text-align: center;
+  	}
+
+	.categories__title:after {
 		content: " ";
+		margin: calc(1.2em + 1px) auto 1.2em;
 		display: block;
-		margin-bottom: 20px;
-		width: calc(100% - 30px);
+		width: calc(100% - 1.5rem);
 		height: 1px;
-		background: linear-gradient(to left, #717171, #eaeaea);
+		background: #eaeaea;
 	}
-
-		.categories__marker {
-			position: relative;
-			margin: 0;
-			padding-top: 9px;
-			font-weight: normal;
-			font-size: .75rem;
-		}
-
-		.categories__marker:after {
-			position: absolute;
-			bottom: -5px;
-			content: " ";
-			display: block;
-			width: 105%;
-			height: 1px;
-			background: linear-gradient(to right, #717171,  #000);
-		}
-
-		@media only screen and (min-width: 800px) {
-			.categories__marker {
-				font-size: 1rem;
-			 }
-
-			 .categories__marker:after {
-				width: 150px;
-			 }
-			}
-
-		@media only screen and (min-width: 1200px) {
-
-			.categories__marker:after {
-				width: 175px;
-			 }
-		}
 
 	.categories__item {
 		margin-top: 60px;
 		padding-bottom: 20px;
-		background-color: rgba(12, 12, 12, .8);
+		background-color: rgba(0, 0, 0, .85);
 	}
-
-
-  	.categories__title {
-  	    text-align: center;
-  	    /* font-weight:  normal; */
-  	}
 
 	.categories__ideas--synopsis {
 		padding: 30px 15px;
@@ -817,10 +860,6 @@ input {
 		background-color: rgba(12, 12, 12, .8);
 	}
 
-	.ideas__item {
-		padding-top: 20px;
-	}
-
 	.ideas__placeholder {
 		color: #aaaaaa;
 	}
@@ -876,21 +915,24 @@ input {
 	padding-top: 15px;
 }
 
+	.list--padding {
+		padding: 20px;
+	}
+
 	.list__container {
 		margin: 0;
+		padding-top: 20px;
 		padding-left: 15px;
 	}
 
 		.list__title {
 			margin: 0;
+			font-size: 1.625rem;
 		}
 
 		.list__item {
-			margin: 20px;
-		}
-
-		.list__item--no-margin {
-			margin: 20px 0;
+			margin-bottom: 20px;
+			font-size: 1.25rem;
 		}
 
 
@@ -908,9 +950,7 @@ input {
 			outline: none;
 		}
 
-		.list__item--large {
-			font-size: 1rem;
-		}
+
 
 		.list__item:after {
 				content: " ";
@@ -918,7 +958,7 @@ input {
 				margin-top: 2.5px;
 				width: 100%;
 				height: 1px;
-				background: linear-gradient( to right, #eaeaea 40%, #000);
+				background: linear-gradient(to right, #717171, #000);
 				border-radius: 100vh;
 			}
 
@@ -965,7 +1005,7 @@ input {
 	}
 
 	.buttons--padding-top {
-		padding-top: 10px;
+		padding-top: .75rem;
 	}
 
 
@@ -979,7 +1019,7 @@ input {
 
 	.buttons__item {
 		position: relative;
-		padding-right: 20px;
+		padding-right: 1.5rem;
 		background: transparent;
 		font-size: .75rem;
 		font-family: inherit;
@@ -991,7 +1031,7 @@ input {
 	.buttons__item:before {
 		content: " ";
 		position: absolute;
-	 	left: -4px;
+		left: -4px;
 		top: 49%;
 		display: block;
 		width: calc(100% - 16px);
@@ -1003,7 +1043,7 @@ input {
 	.buttons__item:after {
 		position: absolute;
 		top: 5px;
-		right: 10px;
+		right: 9px;
 		content: " ";
 		display: inline-block;
 		vertical-align: middle;
@@ -1016,7 +1056,8 @@ input {
 
 	@media only screen and (min-width: 800px) {
 		.buttons__item {
-			font-size: 1rem;
+			font-size: 1.25em;
+			margin-bottom: .875em;
 			font-weight: normal;
 			letter-spacing: 2px;
 		}
@@ -1029,23 +1070,6 @@ input {
 	.buttons__item--large {
 		font-size: 1.25rem;
 	}
-
-
-	.buttons__item--form {
-		display: inline;
-		line-height: 16px;
-		height: 24px;
-	}
-
-	@media only screen and (min-width: 800px) {
-
-		.buttons__item--form {
-			display: inline;
-			line-height: 24px;
-			height: 24px;
-		}
-	}
-
 
 	.buttons__item:last-child:after {
 		display: none;
@@ -1122,32 +1146,7 @@ input {
 	}
 
 
-	.link--button {
-		margin-top: 5px;
-		padding: 5px;
-		border: 1px solid #eaeaea;
-		border-radius: 5px;
-	}
 
-	.link--button {
-			display: block;
-			margin: 20px auto 0;
-			padding: 5px;
-			width: 75px;
-			/* height: 30px; */
-			line-height: 16px;
-			vertical-align: middle;
-			text-align: center;
-			background-color: transparent;
-			color: #eaeaea;
-		}
-
-		.link--button {
-			padding: 15px;;
-			width: auto;
-			height: auto;
-			font-size: 1.25rem;
-		}
 
 
 @media only screen and (min-width: 800px) {
