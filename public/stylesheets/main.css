@@ -626,6 +626,10 @@ input {
 		flex-direction: column;
 	}
 
+	.profile--margin-top {
+		margin-top: 48px;
+	}
+
 	.profile--padding {
 		padding: 20px;
 	}
@@ -782,21 +786,14 @@ input {
 		background: #eaeaea;
 	}
 
-
-
-
-
-
 	.categories__item {
 		margin-top: 60px;
 		padding-bottom: 20px;
 		background-color: rgba(0, 0, 0, .85);
 	}
 
-
   	.categories__title {
   	    text-align: center;
-
   	}
 
 	.categories__ideas--synopsis {

@@ -10,6 +10,7 @@ passportLocalMongoose = require("passport-local-mongoose"),
 session = require("express-session"),
 whitelist = require("walter-whitelist"),
 back = require("express-back"),
+
 // SETUP - Models
 User = require("./models/user"),
 IdeaSchema = require("./models/idea"),
@@ -22,7 +23,8 @@ seedDB = require("./seed");
 
 
 //CONFIG
-mongoose.connect("mongodb://localhost/booklist_app");
+// mongoose.connect("mongodb://localhost/cerebrate");
+mongoose.connect("mongodb://John:lordek@ds151082.mlab.com:51082/cerebrate");
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
