@@ -1,14 +1,21 @@
 <% include ../partials/header %>
-	<div class="row">
-		<div class="col">
-			<div class="form__container">
-				<h1 class="heading__title vertical_margin-small">Log In</h1>
-				<form class="form form_rounded form padding-small" action="/login" method="POST">
-					<input class="form__input form_rounded vertical_margin-small" type="text" name="username" placeholder="user">
-					<input class="form__input form_rounded vertical_margin-small" type="password" name="password" placeholder="password">
-					<button class="button button__add vertical_margin-small">Submit</button>
+<div class="container">
+	<div class="grid__row">
+		<div class="grid__col">
+			<div class="form form--standalone">
+				<h1 class="form__title">Log In</h1>
+				<a class="link link--top-nav" href="/collections"></a>
+				<form class="form__inner" action="/login" method="POST">
+					<fieldset class="form__fieldset">
+						<label class="form__item form__item--label" for="category[name]">Username</label>
+						<input class="form__item form__item--input" type="text" name="username" placeholder="user">
+						<label class="form__item form__item--label" for="category[name]">Password</label>
+						<input class="form__item form__item--input" type="password" name="password" placeholder="password">
+					</fieldset>
+					<button class="form__item form__item--button">Submit</button>
 			  </form>
 			</div>
 		</div>
 	</div>
+</div>
 <% include ../partials/footer %>
