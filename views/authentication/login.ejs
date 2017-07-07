@@ -3,10 +3,12 @@
 	<div class="grid__row">
 		<div class="grid__col">
 			<div class="form form--standalone">
-				<h1 class="form__title">Log In</h1>
-				<a class="link link--top-nav" href="/collections"></a>
+				<header class="form__header">
+					<h1 class="form__title">Log In</h1>
+				</header>
 				<form class="form__inner" action="/login" method="POST">
 					<fieldset class="form__fieldset">
+						<legend>Account data</legend>
 						<label class="form__item form__item--label" for="category[name]">Username</label>
 						<input class="form__item form__item--input" type="text" name="username" placeholder="user">
 						<label class="form__item form__item--label" for="category[name]">Password</label>
