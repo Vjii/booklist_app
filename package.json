@@ -4,7 +4,8 @@
   "description": "Web application for sharing one's list of favorite books. ",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
   "author": "Jan Pilik",
   "license": "ISC",
