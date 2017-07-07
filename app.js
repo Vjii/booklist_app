@@ -21,6 +21,7 @@ Collection = require("./models/collection"),
 index = require("./middleware/index"),
 seedDB = require("./seed");
 
+var port = process.env.PORT || 3000;
 
 //CONFIG
 // mongoose.connect("mongodb://localhost/cerebrate");
@@ -96,7 +97,8 @@ app.get("/", function(req, res) {
 });
 
 
-app.listen(3000, function() {
+
+app.listen(port, function() {
 	console.log("Booklist app server listening.")
 });
 
